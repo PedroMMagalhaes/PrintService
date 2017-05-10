@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf0ba43ab33ac64158fee3506ce76905b
+class ComposerStaticInit9f7123053474ba579fb47d687e6c2ec0
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -296,16 +296,8 @@ class ComposerStaticInitf0ba43ab33ac64158fee3506ce76905b
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
-<<<<<<< Updated upstream
-<<<<<<< HEAD
         'CommentsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CommentsTableSeeder.php',
-=======
-=======
         'Create' => __DIR__ . '/../..' . '/database/migrations/2017_05_10_111807_create.php',
->>>>>>> Stashed changes
-        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-        'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
->>>>>>> master
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',
@@ -2571,7 +2563,6 @@ class ComposerStaticInitf0ba43ab33ac64158fee3506ce76905b
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
-        'RefactorsDb' => __DIR__ . '/../..' . '/database/migrations/2017_05_05_094023_refactors_db.php',
         'RequestsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RequestsTableSeeder.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
@@ -3248,10 +3239,10 @@ class ComposerStaticInitf0ba43ab33ac64158fee3506ce76905b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf0ba43ab33ac64158fee3506ce76905b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf0ba43ab33ac64158fee3506ce76905b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitf0ba43ab33ac64158fee3506ce76905b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitf0ba43ab33ac64158fee3506ce76905b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9f7123053474ba579fb47d687e6c2ec0::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9f7123053474ba579fb47d687e6c2ec0::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9f7123053474ba579fb47d687e6c2ec0::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9f7123053474ba579fb47d687e6c2ec0::$classMap;
 
         }, null, ClassLoader::class);
     }
