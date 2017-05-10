@@ -11,4 +11,10 @@ class PostsController extends Controller
        return view('posts.index');
 
     }
+
+    public function login()
+    {
+       return view('posts.login');
+
+    }
 }

@@ -1,17 +1,11 @@
 @extends ('layout.master')
 
-
 @section ('content')
-
-
-
 
   <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">Impressões</div>
     <div class="panel-body">
-
-
 
     <!-- Table -->
     <table class="table table-sm">
@@ -34,9 +28,6 @@
     </table>
   </div>
     </div>
-
-
-
 
 @endsection
 

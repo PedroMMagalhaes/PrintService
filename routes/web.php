@@ -1,9 +1,7 @@
 <?php
 
+//rota raiz
 Route::get('/', 'PostsController@index');
 
-
-
-//controlador
-//eloquent
-//migraton
+//rota login
+Route::get('/login', 'PostsController@login');
