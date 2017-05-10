@@ -15,12 +15,13 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/jumbotron.css" rel="stylesheet">
+      @include('layout.nav')
   </head>
 
+<br/>
+<br/>
+
   <body>
-
-@include('layout.nav')
-
 <div class="container">
 
     @yield('content')
@@ -28,5 +29,6 @@
       </div>
     </div> <!-- /container -->
   </body>
-@include ('layout.footer')
+  @include ('layout.footer')
+
 </html>
