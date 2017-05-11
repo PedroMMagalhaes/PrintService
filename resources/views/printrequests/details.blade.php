@@ -22,6 +22,8 @@
         <th>Tipo do papel</th>
         <th>Link para o ficheiro</th>
         <th>Estado do pedido</th>
+
+
       </tr>
     </thead>
     <tbody>
