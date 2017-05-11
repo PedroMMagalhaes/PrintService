@@ -7,7 +7,8 @@ Route::get('/', 'PostsController@index');
 Route::get('/login', 'PostsController@login');
 
 //rota detalhes
-Route::get('/printrequests/{id}', 'PrintRequestsController@show')->name('printrequests.show');
+Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.show');
 
 //rota impressoes
-Route::get('/printrequests')->middleware('auth');
+Route::get('/list');
+//->middleware('auth');
