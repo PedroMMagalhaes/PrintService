@@ -2,13 +2,11 @@
 use Hamcrest\Core\IsSame;
 
 //rota raiz
-Route::get('/', 'PostsController@index');
+Route::get('/', 'PostsController@index')->name('home');
 
 //rota login
-Route::get('/login', 'PostsController@login');
+//Route::get('/login', 'PostsController@login');
 
-//rota auth
-Auth::routes();
 
 //rota detalhes
 Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.show');
@@ -16,11 +14,12 @@ Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.sh
 //rota impressoes
 Route::get('/list');
 
-//->middleware('auth');
-//Auth::routes();
+
 
 //rota login
-Route::get('/register', 'RegistrationController@create' );
-Route::get('/login', 'SessionController@create');
+Route::get('/register', 'RegistrationController@create');
+Route::post('/register', 'RegistrationController@store');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login', 'SessionController@create');
+Route::post('/login', 'SessionsController@store');
+//Route::get('/home', 'HomeController@index');
