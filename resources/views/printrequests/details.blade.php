@@ -15,14 +15,12 @@
         <th>Descrição</th>
         <th>Data do pedido</th>
         <th>Cores ou Preto e Branco</th>
-        <th>Frente e Verso ou Página Única</th>
+        <th>Tipo de impressão</th>
         <th>Agravado?</th>
         <th>Dimensão do papel</th>
         <th>Tipo do papel</th>
         <th>Link para o ficheiro</th>
         <th>Estado do pedido</th>
-
-
       </tr>
     </thead>
     <tbody>

@@ -12,10 +12,10 @@ class PrintRequestsController extends Controller
 
 
 
-public function show()
+public function show($id)
 
 {
-    $dados = DB::table('requests')->find(2);
+    $dados = DB::table('requests')->find($id);
   return view('/printrequests/details', compact('dados'));
 }
 
