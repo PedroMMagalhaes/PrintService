@@ -12,7 +12,11 @@ Route::get('/', 'PostsController@index')->name('home');
 Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.show');
 
 //rota impressoes
-Route::get('/list');
+Route::get('/list', function(){
+
+    return view('/printrequests/list');
+
+});
 
 
 
