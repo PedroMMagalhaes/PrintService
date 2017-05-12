@@ -5,7 +5,7 @@
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Detalhes do pedido</div>
+  <div class="panel-heading">Detalhes do Pedido</div>
   <div class="panel-body">
 
   <!-- Table -->
@@ -25,34 +25,54 @@
     </thead>
     <tbody>
       <tr>
-        <th scope="row">{{$dados->description}}</th>
-        <td>{{$dados->created_at}}</td>
+        <th scope="row">{{$dadosImpressao->description}}</th>
+        <td>{{$dadosImpressao->created_at}}</td>
         <td><?php
-        if($dados->colored == 1)
+        if($dadosImpressao->colored == 1)
         echo("Cores");
         else echo ("Preto e Branco");
              ?></td>
         <td><?php
-        if($dados->front_back == 1)
+        if($dadosImpressao->front_back == 1)
         echo("Frente e Verso");
         else echo ("Página Unica");
              ?></td>
         <td><?php
-        if($dados->stapled == 1)
+        if($dadosImpressao->stapled == 1)
         echo("Sim");
         else echo ("Não");
-             ?>a</td>
-        <td>{{$dados->paper_size}}</td>
-        <td>{{$dados->paper_type}}</td>
-        <td>{{$dados->file}}</td>
+             ?></td>
+        <td>{{$dadosImpressao->paper_size}}</td>
+        <td>{{$dadosImpressao->paper_type}}</td>
+        <td>{{$dadosImpressao->file}}</td>
         <td><?php
-        if($dados->status == 1)
+        if($dadosImpressao->status == 1)
         echo("Completo");
         else echo ("A processar");
              ?></td>
       </tr>
     </tbody>
   </table>
+    <div class="panel-heading">Funcionário</div>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Departamento</th>
+        <th>Email</th>
+        <th>Telefone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{$dadosUtilizador->name}}</th>
+        <td>{{$departamentoUtilizador->name}}</td>
+        <td>{{$dadosUtilizador->email}}</td>
+        <td>{{$dadosUtilizador->phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </div>
   </div>
 

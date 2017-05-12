@@ -15,8 +15,10 @@ class PrintRequestsController extends Controller
 public function show($id)
 
 {
-    $dados = DB::table('requests')->find($id);
-  return view('/printrequests/details', compact('dados'));
+  $dadosImpressao = DB::table('requests')->find($id);
+  $dadosUtilizador = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
+  $departamentoUtilizador = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
+  return view('/printrequests/details', compact('dadosImpressao','dadosUtilizador','departamentoUtilizador'));
 }
 
 }
