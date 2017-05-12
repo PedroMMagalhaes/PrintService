@@ -14,7 +14,7 @@ class InitialRelations extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('department_id')->references('id')->on('departaments');
+            $table->foreign('department_id')->references('id')->on('departments');
         });
         Schema::table('comments', function (Blueprint $table) {
             $table->foreign('request_id')->references('id')->on('requests');
