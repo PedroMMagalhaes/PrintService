@@ -58,7 +58,6 @@
 
 
 
-
             <div class="checkbox checkbox-success">
                     <label for="checkbox">Blocked:</label>
                     <input name="blocked" id="blocked" type="checkbox" value="1">
