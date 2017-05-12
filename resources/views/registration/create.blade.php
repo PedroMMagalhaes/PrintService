@@ -51,7 +51,7 @@
 
 
 
-          <!--     <div class="checkbox checkbox-success">
+           <div class="checkbox checkbox-success">
                     <label for="checkbox">Admin:</label>
                     <input name="admin" id="admin" type="checkbox" value="1">
                 </div>
@@ -61,11 +61,19 @@
             <div class="checkbox checkbox-success">
                     <label for="checkbox">Blocked:</label>
                     <input name="blocked" id="blocked" type="checkbox" value="1">
-                </div>-->
+                </div>
 
 
 
                 <div class "form-group">
+
+                  <label for="department_id">Department ID:</label>
+                  <input type="number" class="form-control" id="department_id" name ="department_id">
+
+                </div>
+
+
+                <!--  <div class "form-group">
 
                   <label for="admin">Admin:</label>
                   <input type="admin" class="form-control" id="admin" name ="admin">
@@ -77,7 +85,7 @@
                   <label for="blocked">Blocked:</label>
                   <input type="blocked" class="form-control" id="blocked" name ="blocked">
 
-                </div>
+                </div>-->
 
 
 
