@@ -1,5 +1,5 @@
 <?php
-use Hamcrest\Core\IsSame;
+
 
 //rota raiz
 Route::get('/', 'PostsController@index')->name('home');
@@ -9,10 +9,10 @@ Route::get('/', 'PostsController@index')->name('home');
 
 
 //rota detalhes
-Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.show');
+Route::get('/list/{id}', 'RequestsController@show')->name('printrequests.show');
 
 //rota impressoes
-Route::get('/list');
+Route::get('/list','RequestsController@list');
 
 
 

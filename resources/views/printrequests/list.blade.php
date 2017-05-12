@@ -4,7 +4,7 @@
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Detalhes do pedido</div>
+  <div class="panel-heading"><h1>Print Requests List<h1></div>
   <div class="panel-body">
 
   <!-- Table -->
