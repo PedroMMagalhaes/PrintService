@@ -18,8 +18,8 @@ class InitialMigration extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->boolean('admin')->default(0);
-            $table->boolean('blocked')->default(0);;
+            $table->boolean('admin');
+            $table->boolean('blocked');
             $table->string('phone')->nullable();
             $table->string('profile_photo')->nullable();
             $table->string('profile_url')->nullable();
