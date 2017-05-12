@@ -26,6 +26,7 @@ class InitialMigration extends Migration
             $table->string('presentation')->nullable();
             $table->integer('print_evals');
             $table->integer('print_counts');
+            $table->boolean('activated');
             $table->integer('department_id')->unsigned();
             $table->timestamps();
         });
@@ -39,7 +40,7 @@ class InitialMigration extends Migration
             $table->string('name');
             $table->timestamps();
         });
-        Schema::create('departaments', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
