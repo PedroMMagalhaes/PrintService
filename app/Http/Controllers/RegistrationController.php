@@ -27,7 +27,6 @@ class RegistrationController extends Controller
   public function store()
   {
 
-
 //Validar a Form dos users
 
     $this->validate(request(), [
@@ -46,12 +45,14 @@ class RegistrationController extends Controller
 
       'print_counts' => 'required',
 
+      'department_id' => 'required',
+
     ]);
 
 
 //criar e guardar o user
 
-$user = User::create(request(['name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts']));
+$user = User::create(request(['name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id']));
 
 
 //iniciar sess
