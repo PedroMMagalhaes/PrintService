@@ -51,16 +51,36 @@
 
 
 
-            <div class="checkbox checkbox-success">
+          <!--     <div class="checkbox checkbox-success">
                     <label for="checkbox">Admin:</label>
-                    <input name="admin" id="admin" type="checkbox" value="true">
+                    <input name="admin" id="admin" type="checkbox" value="1">
                 </div>
+
+
 
 
             <div class="checkbox checkbox-success">
                     <label for="checkbox">Blocked:</label>
-                    <input name="blocked" id="blocked" type="checkbox" value="true">
+                    <input name="blocked" id="blocked" type="checkbox" value="1">
+                </div>-->
+
+
+
+                <div class "form-group">
+
+                  <label for="admin">Admin:</label>
+                  <input type="admin" class="form-control" id="admin" name ="admin">
+
                 </div>
+
+                <div class "form-group">
+
+                  <label for="blocked">Blocked:</label>
+                  <input type="blocked" class="form-control" id="blocked" name ="blocked">
+
+                </div>
+
+
 
 
 

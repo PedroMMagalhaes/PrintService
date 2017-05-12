@@ -38,7 +38,7 @@ class RegistrationController extends Controller
 
       'password' => 'required',
 
-      'admin' => 'required',
+      'admin' => 'required', 
 
       'blocked' => 'required',
 
