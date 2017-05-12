@@ -13,7 +13,6 @@
     <thead>
       <tr>
         <th>Descrição</th>
-        <th>Funcionário (nome, departamento, email, telefone)</th>
         <th>Data do pedido</th>
         <th>Cores ou Preto e Branco</th>
         <th>Frente e Verso ou Página Única</th>
@@ -28,17 +27,31 @@
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
-        <td>Descrição</td>
-        <td>Funcionário (nome, departamento, email, telefone)</td>
-        <td>Data do pedido</td>
-        <td>Cores ou Preto e Branco</td>
-        <td>Frente e Verso ou Página Única</td>
-        <td>Agravado?</td>
-        <td>Dimensão do papel</td>
-        <td>Tipo do papel</td>
-        <td>Link para o ficheiro</td>
-        <td>Estado do pedido</td>
+        <th scope="row">{{$dados->description}}</th>
+        <td>{{$dados->created_at}}</td>
+        <td><?php
+        if($dados->colored == 1)
+        echo("Cores");
+        else echo ("Preto e Branco");
+             ?></td>
+        <td><?php
+        if($dados->front_back == 1)
+        echo("Frente e Verso");
+        else echo ("Página Unica");
+             ?></td>
+        <td><?php
+        if($dados->stapled == 1)
+        echo("Sim");
+        else echo ("Não");
+             ?>a</td>
+        <td>{{$dados->paper_size}}</td>
+        <td>{{$dados->paper_type}}</td>
+        <td>{{$dados->file}}</td>
+        <td><?php
+        if($dados->status == 1)
+        echo("Completo");
+        else echo ("A processar");
+             ?></td>
       </tr>
     </tbody>
   </table>
