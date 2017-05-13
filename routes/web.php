@@ -27,3 +27,6 @@ Route::post('/register', 'RegistrationController@store');
 Route::get('/login', 'SessionController@create');
 Route::post('/login', 'SessionsController@store');
 //Route::get('/home', 'HomeController@index');
+
+
+Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');

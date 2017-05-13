@@ -44,7 +44,7 @@
              ?></td>
         <td>{{$dadosImpressao->paper_size}}</td>
         <td>{{$dadosImpressao->paper_type}}</td>
-        <td>{{$dadosImpressao->file}}</td>
+        <td><a href="{{action('PrintRequestsController@download',$dadosImpressao->id)}}">Download</a></td>
         <td><?php
         if($dadosImpressao->status == 1)
         echo("Completo");
