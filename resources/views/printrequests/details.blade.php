@@ -4,7 +4,7 @@
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Detalhes do Pedido</div>
+  <div class="panel-heading">Request Details</div>
   <div class="panel-body">
 
   <!-- Table -->
