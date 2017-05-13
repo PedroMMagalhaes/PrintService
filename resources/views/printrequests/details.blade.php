@@ -52,7 +52,7 @@
       </tr>
     </tbody>
   </table>
-    <div class="panel-heading">W</div>
+    <div class="panel-heading">Employee</div>
   <table class="table table-sm">
     <thead>
       <tr>
