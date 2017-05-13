@@ -11,63 +11,63 @@
   <table class="table table-sm">
     <thead>
       <tr>
-        <th>Descrição</th>
-        <th>Data do pedido</th>
-        <th>Cores ou Preto e Branco</th>
-        <th>Tipo de impressão</th>
-        <th>Agravado?</th>
-        <th>Dimensão do papel</th>
-        <th>Tipo do papel</th>
-        <th>Link para o ficheiro</th>
-        <th>Estado do pedido</th>
+        <th>Description</th>
+        <th>Request Date</th>
+        <th>Color or Black and White</th>
+        <th>Print Type</th>
+        <th>Stampled?</th>
+        <th>Paper Dimension</th>
+        <th>Paper Type</th>
+        <th>Download Link</th>
+        <th>Request State</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">{{$dadosImpressao->description}}</th>
-        <td>{{$dadosImpressao->created_at}}</td>
+        <th scope="row">{{$requestData->description}}</th>
+        <td>{{$requestData->created_at}}</td>
         <td><?php
-        if($dadosImpressao->colored == 1)
-        echo("Cores");
-        else echo ("Preto e Branco");
+        if($requestData->colored == 1)
+        echo("Color");
+        else echo ("Black and White");
              ?></td>
         <td><?php
-        if($dadosImpressao->front_back == 1)
-        echo("Frente e Verso");
-        else echo ("Página Unica");
+        if($requestData->front_back == 1)
+        echo("Double Sided");
+        else echo ("Single Sided");
              ?></td>
         <td><?php
-        if($dadosImpressao->stapled == 1)
-        echo("Sim");
-        else echo ("Não");
+        if($requestData->stapled == 1)
+        echo("Yes");
+        else echo ("No");
              ?></td>
-        <td>{{$dadosImpressao->paper_size}}</td>
-        <td>{{$dadosImpressao->paper_type}}</td>
-        <td><a href="{{action('PrintRequestsController@download',$dadosImpressao->id)}}">Download</a></td>
+        <td>{{$requestData->paper_size}}</td>
+        <td>{{$requestData->paper_type}}</td>
+        <td><a href="{{action('PrintRequestsController@download',$requestData->id)}}">Download</a></td>
         <td><?php
-        if($dadosImpressao->status == 1)
-        echo("Completo");
-        else echo ("A processar");
+        if($requestData->status == 1)
+        echo("Complete");
+        else echo ("In process");
              ?></td>
       </tr>
     </tbody>
   </table>
-    <div class="panel-heading">Funcionário</div>
+    <div class="panel-heading">W</div>
   <table class="table table-sm">
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Departamento</th>
+        <th>Name</th>
+        <th>Department</th>
         <th>Email</th>
-        <th>Telefone</th>
+        <th>Phone</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">{{$dadosUtilizador->name}}</th>
-        <td>{{$departamentoUtilizador->name}}</td>
-        <td>{{$dadosUtilizador->email}}</td>
-        <td>{{$dadosUtilizador->phone}}</td>
+        <th scope="row">{{$userData->name}}</th>
+        <td>{{$userDepartment->name}}</td>
+        <td>{{$userData->email}}</td>
+        <td>{{$userData->phone}}</td>
       </tr>
     </tbody>
   </table>
