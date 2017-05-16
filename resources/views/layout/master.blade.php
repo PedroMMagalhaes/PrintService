@@ -17,24 +17,22 @@
 <br/>
 
 @include ('layout.nav')
+@include('layout.sidebar')
 
   <body>
-<div class="container">
 
     @yield('content')
 
-      </div>
-    </div> <!-- /container -->
+
   </body>
+
+
   @include ('layout.footer')
 
-
   <!--scripts loaded here-->
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-
   <script src="js/scripts.js"></script>
 
 </html>
