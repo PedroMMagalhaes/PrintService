@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="/public/css/styles.css" />
 </head>
 
-<br/>
-<br/>
 
 @include ('layout.nav')
 @include('layout.sidebar')

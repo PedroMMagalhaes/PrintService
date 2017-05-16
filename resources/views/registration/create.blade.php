@@ -26,11 +26,11 @@
             <div class "form-group">
 
               <label for="email">Email:</label>
-<<<<<<< HEAD
+
               <input type="email" class="form-control" id="email" name ="email">
-=======
+
               <input type="email" class="form-control" id="email" name ="email" required>
->>>>>>> master
+
 
             </div>
 
@@ -38,14 +38,13 @@
             <div class "form-group">
 
               <label for="password">Password:</label>
-<<<<<<< HEAD
+
               <input type="password" class="form-control" id="password" name ="password">
-=======
+
               <input type="password" class="form-control" id="password" name ="password" required>
->>>>>>> master
+
 
             </div>
-
 
             <div class "form-group">
 
