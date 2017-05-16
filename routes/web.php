@@ -15,12 +15,6 @@ Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.sh
 
 Route::get('/list','PrintRequestsController@list');
 
-    return view('/printrequests/list');
-
-});
-
-
-
 
 //rota login
 Route::get('/register', 'RegistrationController@create');
