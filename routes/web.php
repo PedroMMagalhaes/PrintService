@@ -12,15 +12,15 @@ Route::get('/', 'PostsController@index')->name('home');
 Route::get('/list/{id}', 'RequestsController@show')->name('printrequests.show');
 
 //rota impressoes
-<<<<<<< HEAD
+
 Route::get('/list','RequestsController@list');
-=======
+
 Route::get('/list', function(){
 
     return view('/printrequests/list');
 
 });
->>>>>>> master
+
 
 
 

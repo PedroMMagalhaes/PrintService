@@ -1,5 +1,7 @@
 <footer class="footer">
-      <div class="container">
-        <span class="text-muted">Ainet 2017</span>
-      </div>
+
+  <!--/.container-->
+  <footer class="container-fluid">
+      <p class="text-right small">©2017 Ainet</p>
+  </footer>
     </footer>
