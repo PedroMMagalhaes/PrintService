@@ -21,8 +21,6 @@
         <th>Tipo do papel</th>
         <th>Link para o ficheiro</th>
         <th>Estado do pedido</th>
-
-
       </tr>
     </thead>
     <tbody>
@@ -42,6 +40,8 @@
     </tbody>
   </table>
 </div>
+
+
   </div>
 
 @endsection

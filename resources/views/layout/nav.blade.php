@@ -27,10 +27,16 @@
             <a class="nav-link" href="#"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link ml-auto" href="#">Login</a>
           </li>
-        <!-- Nav com caixas-->
-        </ul>
-        <p class="navbar-text">Signed in as NomedeUtilizador</p>
+        <!-- Nav com nome de utilizador e a sua verificaç\ao de autenticaçao-->
+          </ul>
+        @if (Auth::check())
+
+            <p class="navbar-text ml-auto">{{ Auth::user()->name }}</p>
+
+      @endif
+
     </nav>
+
   </div>
