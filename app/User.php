@@ -9,6 +9,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'users';
+
+    public function requests()
+    {
+        return $this->hasMany('App\Request');
+    }
+
+    
+
     /**
      * The attributes that are mass assignable.
      *

@@ -7,39 +7,28 @@
   <div class="panel-heading"><h1>Print Requests List<h1></div>
   <div class="panel-body">
 
-  <!-- Table -->
-  <table class="table table-sm">
-    <thead>
-      <tr>
-        <th>Descrição</th>
-        <th>Funcionário (nome, departamento, email, telefone)</th>
-        <th>Data do pedido</th>
-        <th>Cores ou Preto e Branco</th>
-        <th>Frente e Verso ou Página Única</th>
-        <th>Agravado?</th>
-        <th>Dimensão do papel</th>
-        <th>Tipo do papel</th>
-        <th>Link para o ficheiro</th>
-        <th>Estado do pedido</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Descrição</td>
-        <td>Funcionário (nome, departamento, email, telefone)</td>
-        <td>Data do pedido</td>
-        <td>Cores ou Preto e Branco</td>
-        <td>Frente e Verso ou Página Única</td>
-        <td>Agravado?</td>
-        <td>Dimensão do papel</td>
-        <td>Tipo do papel</td>
-        <td>Link para o ficheiro</td>
-        <td>Estado do pedido</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Due Date</th>
+          <th>Employee</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($fetchRequests as $request)
+          <tr>
+            <td>{{ $request->description }}</td>
+            <td>{{ $request->due_date }}</td>
+            <td>{{ $request->users->name}}</td>
+            <td><a class="btn btn-primary" href={{ route('printrequests.show', $request) }}>More</a></td>
+          </tr>
+        @endforeach
+
+      </tbody>
+    </table>
+    {{$fetchRequests->links()}}
 
 
   </div>

@@ -9,13 +9,11 @@ Route::get('/', 'PostsController@index')->name('home');
 
 
 //rota detalhes
-Route::get('/list/{id}', 'RequestsController@show')->name('printrequests.show');
+Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.show');
 
 //rota impressoes
 
-Route::get('/list','RequestsController@list');
-
-Route::get('/list', function(){
+Route::get('/list','PrintRequestsController@list');
 
     return view('/printrequests/list');
 
