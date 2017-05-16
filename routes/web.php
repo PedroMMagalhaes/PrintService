@@ -12,7 +12,15 @@ Route::get('/', 'PostsController@index')->name('home');
 Route::get('/list/{id}', 'RequestsController@show')->name('printrequests.show');
 
 //rota impressoes
+<<<<<<< HEAD
 Route::get('/list','RequestsController@list');
+=======
+Route::get('/list', function(){
+
+    return view('/printrequests/list');
+
+});
+>>>>>>> master
 
 
 
@@ -21,5 +29,8 @@ Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 
 Route::get('/login', 'SessionController@create');
-Route::post('/login', 'SessionsController@store');
+Route::get('/logout', 'SessionsController@destroy');
 //Route::get('/home', 'HomeController@index');
+
+
+Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
