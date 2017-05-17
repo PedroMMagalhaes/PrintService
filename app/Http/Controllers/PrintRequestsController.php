@@ -26,10 +26,11 @@ class PrintRequestsController extends Controller
 
     public function show($id)
     {
+        $request=Request::find($id);
         $requestData = DB::table('requests')->find($id);
         $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
         $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
-        return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment'));
+        return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment','request'));
     }
 
     public function download($id)

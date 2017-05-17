@@ -15,9 +15,6 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Request');
     }
-
-    
-
     /**
      * The attributes that are mass assignable.
      *
