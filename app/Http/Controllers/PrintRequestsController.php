@@ -8,20 +8,18 @@ use Illuminate\Support\Facades\DB;
 
 class PrintRequestsController extends Controller
 {
-  public function __construct()
-  {
-      $this->middleware('guest');
-  }
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
 
+    public function list()
+    {
+        $search = \Request::get('search');
+        $requests = Request::where('description','like','%'.$search.'%')->orderBy('id')->paginate(5);
 
-  public function list()
-  {
-      //$fetchrequests = DB::table('requests')->latest()->get();
-      $fetchRequests = Request::all();
-      $fetchRequests = Request::paginate(10);
-
-      return view('printrequests.list', compact('fetchRequests'));
-  }
+        return view('printrequests.list', compact('requests'));
+    }
 
 
     public function show($id)
@@ -30,11 +28,12 @@ class PrintRequestsController extends Controller
         $requestData = DB::table('requests')->find($id);
         $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
         $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
-        return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment','request'));
+        return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment', 'request'));
     }
 
     public function download($id)
     {
         return response()->download(storage_path('app/print-jobs/3/566153ff-f7a4-3e2e-b02f-833589ad32a0.odt'));
     }
+
 }
