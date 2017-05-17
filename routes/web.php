@@ -20,7 +20,7 @@ Route::get('/list','PrintRequestsController@list');
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 
-Route::get('/login', 'SessionController@create');
+Route::get('/login', 'SessionsController@create');
 Route::get('/logout', 'SessionsController@destroy');
 //Route::get('/home', 'HomeController@index');
 
