@@ -15,7 +15,8 @@
 </head>
 
 
-@include ('layout.nav') @include('layout.sidebar')
+@include ('layout.nav')
+@include('layout.sidebar')
 
 <body>
 
