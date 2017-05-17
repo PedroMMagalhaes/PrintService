@@ -23,7 +23,7 @@ class RegistrationController extends Controller
     return view('registration.create');
   }
 
-  public function store() 
+  public function store()
   {
 
 //Validar a Form dos users
