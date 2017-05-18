@@ -37,6 +37,7 @@
         <li class="nav-item">
         <a class="nav-link" href="{{ url('/logout') }}">Logout<span class="sr-only">Register</span></a>
 
+        <!-- UPPER para o username-->
         <li class="nav-item">
         <p class="navbar-text ml-auto">{{ Auth::user()->name }}</p>
 
