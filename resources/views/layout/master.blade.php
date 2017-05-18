@@ -19,7 +19,7 @@
 @include('layout.sidebar')
 
 <body>
-
+  
   @yield('content')
 
 

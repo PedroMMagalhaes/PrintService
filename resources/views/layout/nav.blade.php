@@ -34,17 +34,17 @@
       <a class="nav-link" href="{{ url('/register') }}">Register<span class="sr-only">Register</span></a>
       @else (Auth::check())
 
-        <li class="nav-item">
-        <a class="nav-link" href="{{ url('/logout') }}">Logout<span class="sr-only">Register</span></a>
+          <li class="nav-item">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ Auth::user()->name }}
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
+    <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
 
-        <!-- UPPER para o username-->
-        <li class="nav-item">
-        <p class="navbar-text ml-auto">{{ Auth::user()->name }}</p>
-
-
+  </ul>
+</div>
 
         @endif
-
       </li>
     </ul>
 
