@@ -5,21 +5,27 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading"><h1>Print Requests List<h1></div>
-    <div class="col-md-6">
-      {!! Form::open(['method'=>'GET','url'=>'printrequests','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
-      <div class="input-group custom-search-form">
-          <input type="text" class="form-control" name="search" placeholder="Search...">
-          <span class="input-group-btn">
-              <button class="btn btn-default-sm" type="submit">
-                  <i class="fa fa-search"></i>
-              </button>
-          </span>
-      </div>
-      {!! Form::close() !!}
-    </div>
   <div class="panel-body">
 
-    <table class="table table-striped">
+    <div class="row">
+      <div class="col-md-8">
+       {!! Form::open(['method'=>'GET','url'=>'request','class'=>'navbar-form navbar-left','role'=>'search']) !!}
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" name="search" placeholder="Search...">
+            <span class="input-group-btn">
+                <button class="btn btn-default-sm" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+        {!! Form::close() !!}
+      </div>
+      <div class="col-md-4 ">
+        <a class="btn btn-success" href="">Create new</a>
+      </div>
+    </div>
+
+    <table class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Description</th>
@@ -40,7 +46,9 @@
 
       </tbody>
     </table>
-    {!! $requests->links() !!}
+    <div class="pagination">
+          {{ $requests->render() }}
+    </div>
 
   </div>
 

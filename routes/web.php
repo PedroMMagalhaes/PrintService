@@ -13,7 +13,7 @@ Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.sh
 
 //rota impressoes
 
-Route::get('/list','PrintRequestsController@list');
+Route::get('/list','PrintRequestsController@list')->name('printrequests.list');
 
 
 //rota login
