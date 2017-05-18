@@ -23,6 +23,7 @@ class RegistrationController extends Controller
     return view('registration.create');
   }
 
+
   public function store()
   {
 
@@ -51,9 +52,18 @@ class RegistrationController extends Controller
 
 //criar e guardar o user
 
-$user = User::create(request(['name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id']));
+//$user = User::create(request(['name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id']));
 
-
+$user = User::create([
+			'name' => request('name'),
+			'email' => request('email'),
+			'password' => bcrypt(request('password')),
+      'admin' => request('admin'),
+      'blocked' => request('blocked'),
+      'print_evals' => request('print_evals'),
+      'print_counts' => request('print_counts'),
+      'department_id' => request('department_id')
+		]);
 //iniciar sess
 
 auth()->login($user);
@@ -62,8 +72,8 @@ auth()->login($user);
 
 return redirect()->home();
 
+}
 
 
-    }
 
 }
