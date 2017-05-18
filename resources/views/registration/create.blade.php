@@ -66,8 +66,20 @@
 
                 <div class "form-group">
 
-                  <label for="department_id">Department ID:</label>
-                  <input type="number" class="form-control" id="department_id" name ="department_id" required>
+                  <label for="department_id">Department:</label>
+                  <!--<input type="number" class="form-control" id="department_id" name ="department_id" required> -->
+
+                  <select name="department_id">
+                    <option value="1">Ciências Jurídicas</option>
+                    <option value="2">Ciências da Linguagem</option>
+                    <option value="3">Engenharia do Ambiente</option>
+                    <option value="4">Engenharia Civil</option>
+                    <option value="5">Engenharia Eletrotécnica</option>
+                    <option value="6">Engenharia Informática</option>
+                    <option value="7">Engenharia Mecânica</option>
+                    <option value="8">Gestão e Economia</option>
+                    <option value="9">Matemática</option>
+                  </select>
 
                 </div>
 
