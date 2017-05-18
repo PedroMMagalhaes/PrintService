@@ -36,7 +36,7 @@ class SessionsController extends Controller
       ]);
     }
 
-    return redirect()->home;
+    return redirect()->home();
   }
 
 
