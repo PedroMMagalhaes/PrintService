@@ -26,9 +26,9 @@ class Request extends Model
     {
         if ($keyword!='') {
             $query->where(function ($query) use ($keyword) {
-                $query->where("description", "LIKE","%$keyword%")
-                    ->orWhere("due-date", "LIKE", "%$keyword%")
-                    ->orWhere("users->name", "LIKE", "%$keyword%");
+                $query->where("description", "like","%$keyword%")
+                    ->orWhere("due-date", "like", "%$keyword%")
+                    ->orWhere("users->name", "like", "%$keyword%");
             });
         }
         return $query;
