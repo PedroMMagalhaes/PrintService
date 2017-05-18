@@ -4,9 +4,6 @@
 //rota raiz
 Route::get('/', 'PostsController@index')->name('home');
 
-//rota login
-//Route::get('/login', 'PostsController@login');
-
 
 //rota detalhes
 Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.show');
@@ -25,6 +22,8 @@ Route::post('/login','SessionsController@store');
 
 Route::get('/logout', 'SessionsController@destroy');
 //Route::get('/home', 'HomeController@index');
+
+Route::get('/profile', 'SessionsController@profile')->name('profile');;
 
 
 Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');

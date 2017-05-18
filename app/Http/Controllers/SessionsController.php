@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
+use Auth;
 
 use Illuminate\Http\Request;
 
@@ -39,6 +41,16 @@ class SessionsController extends Controller
     return redirect()->home();
   }
 
+
+  public function profile()
+
+  {
+
+    //auth()->login($user);
+
+    return view('user.profile', array('user' => Auth::user()) );
+
+  }
 
   public function destroy()
 
