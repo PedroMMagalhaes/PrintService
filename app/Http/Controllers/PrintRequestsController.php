@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class PrintRequestsController extends Controller
 {
@@ -13,10 +14,18 @@ class PrintRequestsController extends Controller
         $this->middleware('guest');
     }
 
+
     public function list()
     {
-        $search = \Request::get('search');
-        $requests = Request::where('description','like','%'.$search.'%')->orderBy('id')->paginate(5);
+
+        //$search = \Request::get('search');
+        //$requests = Request::where('description','like','%'.$search.'%')->orderBy('id')->paginate(20);
+
+        //$requests = Request::all();
+        //$requests = Request::paginate(5);
+
+        $keyword = Input::get('keyword', '');
+        $requests = Request::SearchByKeyword($keyword)->paginate(5);
 
         return view('printrequests.list', compact('requests'));
     }
