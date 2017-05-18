@@ -42,7 +42,9 @@ class PrintRequestsController extends Controller
 
     public function download($id)
     {
-        return response()->download(storage_path('app/print-jobs/3/566153ff-f7a4-3e2e-b02f-833589ad32a0.odt'));
+        $ownerID=Request::find($id)->owner_id;
+        $requestFile = (string)Request::find($id)->file;
+        return response()->download(storage_path("app/print-jobs/$ownerID/$requestFile"));
     }
 
 }

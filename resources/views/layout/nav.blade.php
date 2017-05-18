@@ -3,7 +3,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
   <div class="flex-row d-flex">
-    <a class="navbar-brand mb-1" href="#">PrintIT</a>
+    <a class="navbar-brand mb-1" href="{{ url('/') }}">PrintIT</a>
     <button type="button" class="hidden-md-up navbar-toggler" data-toggle="offcanvas" title="Toggle responsive left sidebar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,7 +14,7 @@
         <a class="nav-link" href="{{ url('/') }}">Home<span class="sr-only">Home</span></a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="{{ url('/') }}">Print Request<span class="sr-only">Print Request</span></a>
+          <a class="nav-link" href="{{ url('/list') }}">Print Request<span class="sr-only">Print Request</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/') }}">Create Request<span class="sr-only">Create Request</span></a>

@@ -44,11 +44,12 @@
         <td>{{$requestData->paper_size}}</td>
         <td>{{$requestData->paper_type}}</td>
         <td><a href="{{action('PrintRequestsController@download',$requestData->id)}}">Download</a></td>
-        <td><?php
-        if($requestData->status == 1)
-        echo("Complete");
-        else echo ("In process");
-             ?></td>
+        <td>
+        @if($requestData->status == 1)
+    {{"Complete"}};
+        @else {{"In process"}};
+        @endif
+             </td>
       </tr>
     </tbody>
   </table>
@@ -83,7 +84,7 @@
 
       <li class="list-group-item">
           <strong>
-             
+
               {{$comment->created_at}}
           </strong>
           {{$comment->comment}}
