@@ -9,7 +9,6 @@
 
   <h1>Sign In </h1>
 
-</div>
 
   <div class="col-sm-8">
 <form method="POST" action="/login">
