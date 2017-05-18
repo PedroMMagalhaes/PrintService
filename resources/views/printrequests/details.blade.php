@@ -70,14 +70,17 @@
         <td>{{$userDepartment->name}}</td>
         <td>{{$userData->email}}</td>
         <td>{{$userData->phone}}</td>
-        <td><a class="btn btn-primary" href="{{action('PrintRequestsController@setComplete',$requestData->id)}}">Complete Request</a></td>
+        <td>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
 </div>
   </div>
-
+  @if ($request->status == "0")
+      <a class="btn btn-primary" href="{{action('PrintRequestsController@setComplete',$requestData->id)}}">Complete Request</a>
+      @endif
   <div class="comments">
       <ul class="list-group">
       @foreach ($request->comments as $comment)
@@ -90,6 +93,8 @@
       @endforeach
         </ul>
   </div>
+
+
 
 @endsection
 
