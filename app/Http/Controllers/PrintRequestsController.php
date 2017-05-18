@@ -47,4 +47,12 @@ class PrintRequestsController extends Controller
         return response()->download(storage_path("app/print-jobs/$ownerID/$requestFile"));
     }
 
+    public function getCommentName($userID){
+        return DB::table('users')->find($userID)->name;
+    }
+
+    public function setComplete($id){
+        DB::table('requests')->where('id',$id)->update(['status'=>1]);
+    }
+
 }

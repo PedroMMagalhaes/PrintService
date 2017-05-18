@@ -27,3 +27,5 @@ Route::get('/profile', 'SessionsController@profile')->name('profile');;
 
 
 Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
+
+Route::get('/list/{id}/complete', 'PrintRequestsController@setComplete')->name('printrequests.complete');

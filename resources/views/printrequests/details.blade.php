@@ -26,28 +26,29 @@
       <tr>
         <th scope="row">{{$requestData->description}}</th>
         <td>{{$requestData->created_at}}</td>
-        <td><?php
-        if($requestData->colored == 1)
-        echo("Color");
-        else echo ("Black and White");
-             ?></td>
-        <td><?php
-        if($requestData->front_back == 1)
-        echo("Double Sided");
-        else echo ("Single Sided");
-             ?></td>
-        <td><?php
-        if($requestData->stapled == 1)
-        echo("Yes");
-        else echo ("No");
-             ?></td>
+        <td>@if($requestData->colored == 1)
+            {{"Color"}}
+        @else
+            {{"Black and White"}}
+        @endif</td>
+        <td>@if($requestData->front_back == 1)
+            {{"Double Sided"}}
+        @else
+            {{"Single Sided"}}
+        @endif</td>
+        <td>
+        @if($requestData->stapled == 1)
+            {{"Yes"}}
+        @else {{"No"}}
+        @endif
+             </td>
         <td>{{$requestData->paper_size}}</td>
         <td>{{$requestData->paper_type}}</td>
         <td><a href="{{action('PrintRequestsController@download',$requestData->id)}}">Download</a></td>
         <td>
         @if($requestData->status == 1)
-    {{"Complete"}};
-        @else {{"In process"}};
+    {{"Complete"}}
+        @else {{"In process"}}
         @endif
              </td>
       </tr>
@@ -69,6 +70,7 @@
         <td>{{$userDepartment->name}}</td>
         <td>{{$userData->email}}</td>
         <td>{{$userData->phone}}</td>
+        <td><a class="btn btn-primary" href="{{action('PrintRequestsController@setComplete',$requestData->id)}}">Complete Request</a></td>
       </tr>
     </tbody>
   </table>
@@ -78,13 +80,9 @@
 
   <div class="comments">
       <ul class="list-group">
-
-
       @foreach ($request->comments as $comment)
-
       <li class="list-group-item">
           <strong>
-
               {{$comment->created_at}}
           </strong>
           {{$comment->comment}}

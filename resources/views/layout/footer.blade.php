@@ -1,4 +1,5 @@
-  <!--/.container-->
-  <footer class="container-fluid">
-      <p class="text-right small">©2017 Ainet</p>
-  </footer>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">©2017 Ainet</p>
+    </div>
+</footer>
