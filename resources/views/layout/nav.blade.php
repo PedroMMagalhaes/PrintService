@@ -11,22 +11,28 @@
   <div class="navbar-collapse collapse" id="collapsingNavbar">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home<span class="sr-only">Home</span></a>
+        <a class="nav-link" href="{{ url('/') }}">Home<span class="sr-only">Home</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#features">Print Requests</a>
+          <a class="nav-link" href="{{ url('/') }}">Print Request<span class="sr-only">Print Request</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#myAlert" data-toggle="collapse">Create Request</a>
+        <a class="nav-link" href="{{ url('/') }}">Create Request<span class="sr-only">Create Request</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#myAlert" data-toggle="collapse">Dashboard</a>
+        <a class="nav-link" href="{{ url('/') }}">Dashboard<span class="sr-only">Dashboard</span></a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto">
+
+<ul class="navbar-nav ml-auto">
+      @if(Auth::guest())
+
       <li class="nav-item">
-        <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">Login</a>
-        @if (Auth::check())
+      <a class="nav-link" href="{{ url('/login') }}">Login<span class="sr-only">Login</span></a>
+
+      <li class="nav-item">
+      <a class="nav-link" href="{{ url('/register') }}">Register<span class="sr-only">Register</span></a>
+      @else (Auth::check())
 
         <p class="navbar-text ml-auto">{{ Auth::user()->name }}</p>
 
@@ -34,6 +40,9 @@
 
       </li>
     </ul>
+
+
+
   </div>
 
 
