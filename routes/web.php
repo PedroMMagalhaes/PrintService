@@ -25,7 +25,8 @@ Route::post('/login','SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 //Route::get('/home', 'HomeController@index');
 
-Route::get('/profile', 'SessionsController@profile')->name('profile');;
+Route::get('/profile', 'SessionsController@profile')->name('profile');
+Route::post('/profile', 'SessionsController@update_avatar')->name('update_avatar');
 
 
 Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
