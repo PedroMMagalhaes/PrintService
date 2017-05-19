@@ -4,6 +4,7 @@
 
 @section('content')
 
+<div class = "col-md-8">
 
   <div class = "container">
     <div class="row">
@@ -22,6 +23,7 @@
       </div>
     </div>
   </div>
+</div>
 
   @include('layout.errors')
 

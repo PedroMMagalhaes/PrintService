@@ -10,7 +10,6 @@
   <h1>Sign In </h1>
 
 
-  <div class="col-sm-8">
 <form method="POST" action="/login">
 
 {{ csrf_field() }}
@@ -36,6 +35,6 @@
 
   </form>
 </div>
-</div>
+
 
 @endsection
