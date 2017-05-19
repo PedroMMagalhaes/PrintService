@@ -1,4 +1,7 @@
-@extends ('layout.master') @section ('content')
+@extends ('layout.master')
+
+
+@section ('content')
 
 <div class="row placeholders mb-3">
   <div class="col-6 col-sm-3 placeholder text-center">
@@ -105,7 +108,7 @@
     </table>
   </div>
 </div>
-</div>
+
 
 
 @endsection
