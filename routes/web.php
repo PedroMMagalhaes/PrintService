@@ -9,8 +9,10 @@ Route::get('/', 'PostsController@index')->name('home');
 Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.show');
 
 //rota impressoes
+Route::get('/list','PrintRequestsController@list')->name('list');
 
-Route::get('/list','PrintRequestsController@list')->name('printrequests.list');
+//rota criar request
+Route::post('/create','PrintRequestsController@create')->name('create');
 
 
 //rota login

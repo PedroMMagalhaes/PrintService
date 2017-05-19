@@ -34,4 +34,15 @@ class Request extends Model
         return $query;
     }
 
+    public function typeToStrState()
+    {
+        switch ($this->status) {
+            case 0:
+                return 'In process';
+            case 1:
+                return 'Closed';
+        }
+
+        return 'Unknown';
+    }
 }

@@ -18,18 +18,18 @@ class PrintRequestsController extends Controller
     public function list()
     {
 
-        //$search = \Request::get('search');
-        //$requests = Request::where('description','like','%'.$search.'%')->orderBy('id')->paginate(20);
-
-        //$requests = Request::all();
-        //$requests = Request::paginate(5);
-
         $keyword = Input::get('keyword', '');
         $requests = Request::SearchByKeyword($keyword)->paginate(5);
 
         return view('printrequests.list', compact('requests'));
     }
 
+    public function create()
+    {
+
+
+        return view('create');
+    }
 
     public function show($id)
     {
