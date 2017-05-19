@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PostsController extends Controller
+class InicialController extends Controller
 {
     public function __contruct()
     {
@@ -14,7 +14,7 @@ class PostsController extends Controller
 
     public function index()
     {
-        return view('posts.index');
+        return view('home.index');
     }
 
     public function login()

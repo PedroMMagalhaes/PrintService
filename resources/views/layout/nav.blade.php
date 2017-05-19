@@ -25,7 +25,9 @@
     </ul>
   </div>
 
+
 <ul class="navbar-nav ml-auto">
+
       @if(Auth::guest())
 
       <li class="nav-item">
@@ -33,9 +35,12 @@
 
       <li class="nav-item">
       <a class="nav-link" href="{{ url('/register') }}">Register<span class="sr-only">Register</span></a>
+      </ul>
+
       @else (Auth::check())
-</ul>
+
   <img src ="/img/profile_photo{{ Auth::user()->profile_photo }}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%">
+
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ Auth::user()->name }}
   <span class="caret"></span></button>
 
@@ -43,7 +48,6 @@
     <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
     <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
   </ul>
-</div>
 
         @endif
 

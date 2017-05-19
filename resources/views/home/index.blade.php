@@ -3,6 +3,9 @@
 
 @section ('content')
 
+
+<div class="col-sm-8">
+
 <div class="row placeholders mb-3">
   <div class="col-6 col-sm-3 placeholder text-center">
     <img src="//placehold.it/200/dddddd/fff?text=1" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail">
@@ -108,7 +111,7 @@
     </table>
   </div>
 </div>
-
+</div>
 
 
 @endsection

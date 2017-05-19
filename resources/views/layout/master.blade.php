@@ -18,6 +18,8 @@
 @include ('layout.nav')
 @include('layout.sidebar')
 
+<body>
+
 <!--<body>-->
 
 @yield('content')

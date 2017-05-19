@@ -1,7 +1,6 @@
 @extends ('layout.master')
 
 
-
 @section('content')
 
 <div class = "col-md-8">

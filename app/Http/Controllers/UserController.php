@@ -8,7 +8,7 @@ use Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class SessionsController extends Controller
+class UserController extends Controller
 {
 
 
@@ -24,7 +24,7 @@ class SessionsController extends Controller
   public function create()
 
   {
-    return view ('sessions.create');
+    return view ('user.login');
 
   }
 

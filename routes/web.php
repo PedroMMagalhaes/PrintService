@@ -2,7 +2,7 @@
 
 
 //rota raiz
-Route::get('/', 'PostsController@index')->name('home');
+Route::get('/', 'InicialController@index')->name('home');
 
 
 //rota detalhes
@@ -19,14 +19,14 @@ Route::post('/create','PrintRequestsController@create')->name('create');
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 
-Route::get('/login', 'SessionsController@create');
-Route::post('/login','SessionsController@store');
+Route::get('/login', 'UserController@create');
+Route::post('/login','UserController@store');
 
-Route::get('/logout', 'SessionsController@destroy');
+Route::get('/logout', 'UserController@destroy');
 //Route::get('/home', 'HomeController@index');
 
-Route::get('/profile', 'SessionsController@profile')->name('profile');
-Route::post('/profile', 'SessionsController@update_avatar')->name('update_avatar');
+Route::get('/profile', 'UserController@profile')->name('profile');
+Route::post('/profile', 'UserController@update_avatar')->name('update_avatar');
 
 
 Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');

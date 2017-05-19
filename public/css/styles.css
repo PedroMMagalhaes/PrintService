@@ -1,3 +1,5 @@
+/*NAVbar erro na foto tem de se alterar a css */
+
 body, html {
   height:100%;
 }
@@ -57,7 +59,7 @@ body.modal-open {
     left: 45%;
     margin-left: -6px;
   }
-  
+
   .sidebar-offcanvas {
     width: 45%;
   }
