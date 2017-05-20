@@ -11,7 +11,7 @@ class PrintRequestsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
 
@@ -55,6 +55,11 @@ class PrintRequestsController extends Controller
     public function setComplete($id)
     {
         DB::table('requests')->where('id',$id)->update(['status'=>1]);
+        return back();
+    }
+
+    public function setRating($id){
+        DB::table('requests')->where('id',$id)->update(['satisfaction_grade'=>request('satisfaction')]);
         return back();
     }
 

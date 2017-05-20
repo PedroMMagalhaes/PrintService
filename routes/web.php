@@ -33,3 +33,5 @@ Route::post('/profile', 'UserController@update_avatar')->name('update_avatar');
 Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
 
 Route::get('/list/{id}/complete', 'PrintRequestsController@setComplete')->name('printrequests.complete');
+
+Route::post('/list/{id}/rate', 'PrintRequestsController@setRating')->name('printrequests.setRating');

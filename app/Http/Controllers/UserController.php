@@ -93,8 +93,8 @@ class UserController extends Controller
   {
     //composer require intervention/image || tratar o avatar - handling de imagens em php
 
-    //$user = Auth::user();
-    //$this->authorize('update', $user);
+    $user = Auth::user();
+    $this->authorize('update', $user);
 
     if($request->hasFile('profile_photo')){
     		$profile_photo = $request->file('profile_photo');
