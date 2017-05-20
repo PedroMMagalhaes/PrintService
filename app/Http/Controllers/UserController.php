@@ -98,7 +98,6 @@ class UserController extends Controller
 
 
 
-
   public function create()
   {
       //$this->authorize('create', User::class);
@@ -117,6 +116,9 @@ class UserController extends Controller
       if (!$user->save()) {
           $message = ['message_error' => 'Failed to create user'];
       }
+
+      auth()->login($user);
+
       return redirect()->route('home');
   }
 
