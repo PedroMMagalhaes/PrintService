@@ -27,7 +27,7 @@ Route::get('/logout', 'UserController@logout')->name('logout');;
 
 Route::get('/profile', 'UserController@profile')->name('profile');
 Route::post('/profile', 'UserController@update_avatar')->name('update_avatar');
-Route::post('/profile', 'UserController@update_profile')->name('update_profile');
+//Route::post('/profile', 'UserController@update_profile')->name('update_profile');
 
 
 Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');

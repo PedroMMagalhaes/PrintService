@@ -89,21 +89,21 @@ class UserController extends Controller
   }
 
 
-  public function update_avatar(Request $request)
+  public function update_avatar(UpdateUserRequest $request)
   {
     //composer require intervention/image || tratar o avatar - handling de imagens em php
 
-    $user = Auth::user();
-    $this->authorize('update', $user);
-    
+    //$user = Auth::user();
+    //$this->authorize('update', $user);
 
     if($request->hasFile('profile_photo')){
     		$profile_photo = $request->file('profile_photo');
     		$filename = time() . '.' . $profile_photo->getClientOriginalExtension();
     		Image::make($profile_photo)->resize(300, 300)->save( public_path('/img/profile_photo' . $filename ) );
-    		//$user = Auth::user();
+    		$user = Auth::user();
     		$user->profile_photo = $filename;
-    		$user->save();
+        //$user->fill($request->input());
+        $user->save();
     	}
     	return view('user.profile', array('user' => Auth::user()) );
     }

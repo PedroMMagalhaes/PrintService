@@ -34,6 +34,34 @@ class User extends Authenticatable
     ];
 
     protected $guarded = [
-        'id',
+
     ];
+
+
+    public function typeToStr()
+    {
+        switch ($this->admin) {
+            case 1:
+                return 'Administrator';
+            case 0:
+                return 'Publisher';
+        }
+
+        return 'Unknown';
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin == 1;
+    }
+
+    public function isPublisher()
+    {
+        return $this->admin == 0;
+    }
+
+
+
+
+
 }
