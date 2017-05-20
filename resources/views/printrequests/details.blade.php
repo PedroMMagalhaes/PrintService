@@ -81,6 +81,15 @@
   @if ($request->status == "0")
       <a class="btn btn-primary" href="{{action('PrintRequestsController@setComplete',$requestData->id)}}">Complete Request</a>
       @endif
+      @if ($request->status == "1")
+      <p>
+          How satisfacted are you with the printing quality?
+      </p>
+      {{ Form::radio('satisfaction', '1') }}1<br/>
+              {{ Form::radio('satisfaction', '2') }}2<br/>
+               {{ Form::radio('satisfaction', '3',true) }}3<br/>
+    <a class="btn btn-primary" href="{{action('PrintRequestsController@setComplete',$requestData->id)}}">Submit Ranking</a>
+          @endif
   <div class="comments">
       <ul class="list-group">
       @foreach ($request->comments as $comment)

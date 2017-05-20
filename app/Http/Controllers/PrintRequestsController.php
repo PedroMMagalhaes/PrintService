@@ -55,6 +55,7 @@ class PrintRequestsController extends Controller
     public function setComplete($id)
     {
         DB::table('requests')->where('id',$id)->update(['status'=>1]);
+        return back();
     }
 
 }
