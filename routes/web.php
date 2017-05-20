@@ -12,12 +12,14 @@ Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.sh
 Route::get('/list','PrintRequestsController@list')->name('list');
 
 //rota criar request
-Route::post('/create','PrintRequestsController@create')->name('create');
+Route::get('/create','PrintRequestsController@create')->name('create');
+Route::post('/store','PrintRequestsController@store')->name('printrequests.store');
+
 
 
 //rota users
-Route::get('/register', 'RegistrationController@create');
-Route::post('/register', 'RegistrationController@store');
+Route::get('/register', 'UserController@create')->name('register');
+Route::post('/register', 'UserController@store')->name('register');
 
 Route::get('/login', 'UserController@login_get');
 Route::post('/login','UserController@login_post');

@@ -20,8 +20,8 @@ class UserController extends Controller
 
   {
 
-    //$this->middleware('guest', ['except' => 'destroy']);
-    $this->middleware('auth');
+  //  $this->middleware('guest', ['except' => 'destroy']);
+    $this->middleware('guest');
 
   }
 
@@ -36,27 +36,91 @@ class UserController extends Controller
 
 
 
-    public function create()
+/*    public function create()
+
     {
-        $this->authorize('create', User::class);
-        $title = 'Add user';
-        $user = new User();
-        return view('users.add', compact('title', 'user'));
+      //return view('sessions.create');
+      return view('registration.create');
     }
 
 
-    public function store(CreateUserPostRequest $request)
+    public function store()
     {
-        $this->authorize('create', User::class);
-        $title = 'Add user';
-        $user = User::create($request->input());
-        $user->password = password_hash($user->password, PASSWORD_DEFAULT);
-                $message = ['message_success' => 'User created successfully'];
-        if (!$user->save()) {
-            $message = ['message_error' => 'Failed to create user'];
-        }
-        return redirect()->route('users.index')->with($message);
-    }
+
+  //Validar a Form dos users
+
+      $this->validate(request(), [
+
+        'name' => 'required',
+
+        'email' => 'required|email',
+
+        'password' => 'required|confirmed',
+
+        'admin' => 'required',
+
+        'blocked' => 'required',
+
+        'print_evals' => 'required',
+
+        'print_counts' => 'required',
+
+        'department_id' => 'required',
+
+      ]);
+
+
+  //criar e guardar o user
+
+  //$user = User::create(request(['name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id']));
+
+  $user = User::create([
+        'name' => request('name'),
+        'email' => request('email'),
+        'password' => bcrypt(request('password')),
+        'admin' => request('admin'),
+        'blocked' => request('blocked'),
+        'print_evals' => request('print_evals'),
+        'print_counts' => request('print_counts'),
+        'department_id' => request('department_id')
+      ]);
+  //iniciar sess
+
+  auth()->login($user);
+
+  //redirecionar para a pagina Admins (no inicio sera testado o redirect para a pagina Home)
+
+  return redirect()->home();
+
+  }
+
+  */
+
+
+
+  public function create()
+  {
+      //$this->authorize('create', User::class);
+      //$title = 'Add user';
+      $user = new User();
+      return view('registration.create');
+  }
+
+  public function store(CreateUserPostRequest $request)
+  {
+    //  $this->authorize('create', User::class);
+    //  $title = 'Add user';
+      $user = User::create($request->input());
+      $user->password = password_hash($user->password, PASSWORD_DEFAULT);
+              $message = ['message_success' => 'User created successfully'];
+      if (!$user->save()) {
+          $message = ['message_error' => 'Failed to create user'];
+      }
+
+      auth()->login($user);
+
+      return redirect()->route('home');
+  }
 
 
     public function destroy(User $user)
@@ -89,12 +153,12 @@ class UserController extends Controller
   }
 
 
-  public function update_avatar(UpdateUserRequest $request)
+  public function update_avatar(Request $request)
   {
     //composer require intervention/image || tratar o avatar - handling de imagens em php
 
     $user = Auth::user();
-    $this->authorize('update', $user);
+    //$this->authorize('update', $user);
 
     if($request->hasFile('profile_photo')){
     		$profile_photo = $request->file('profile_photo');
@@ -102,8 +166,9 @@ class UserController extends Controller
     		Image::make($profile_photo)->resize(300, 300)->save( public_path('/img/profile_photo' . $filename ) );
     		$user = Auth::user();
     		$user->profile_photo = $filename;
-        //$user->fill($request->input());
+        $user->fill($request->input());
         $user->save();
+
     	}
     	return view('user.profile', array('user' => Auth::user()) );
     }
