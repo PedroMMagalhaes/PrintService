@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Request extends Model
 {
 
+    protected $fillable = [
+        'description', 'due_date', 'quantity', 'colored', 'stapled'
+    ];
+
+
     public function users()
     {
       return $this->belongsTo('App\User', 'owner_id');

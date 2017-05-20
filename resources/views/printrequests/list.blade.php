@@ -22,7 +22,7 @@
             <!--{!! Form::close() !!}-->
             </div>
             <div class="col-sm-8 ">
-                <a class="btn btn-success" href="">Create new</a>
+                <a class="btn btn-success" href="{{ route('create')}}">Create new</a>
             </div>
         </div>
 

@@ -12,7 +12,9 @@ Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.sh
 Route::get('/list','PrintRequestsController@list')->name('list');
 
 //rota criar request
-Route::post('/create','PrintRequestsController@create')->name('create');
+Route::get('/create','PrintRequestsController@create')->name('create');
+Route::post('/store','PrintRequestsController@store')->name('printrequests.store');
+
 
 
 //rota users

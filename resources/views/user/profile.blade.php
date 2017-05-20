@@ -12,6 +12,8 @@
         <img src ="/img/profile_photo{{ $user->profile_photo }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
         <h2>{{ $user->name}}'s Profile </h2>
 
+        {{ dd($user->toArray()) }}
+
         <form enctype="multipart/form-data" action="{{ route('update_avatar') }} "method="post">
                 <label>Update Profile Image</label>
                 <input type="file" name="profile_photo">
