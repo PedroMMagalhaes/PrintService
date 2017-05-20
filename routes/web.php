@@ -15,18 +15,19 @@ Route::get('/list','PrintRequestsController@list')->name('list');
 Route::post('/create','PrintRequestsController@create')->name('create');
 
 
-//rota login
+//rota users
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 
-Route::get('/login', 'UserController@create');
-Route::post('/login','UserController@store');
+Route::get('/login', 'UserController@login_get');
+Route::post('/login','UserController@login_post');
 
-Route::get('/logout', 'UserController@destroy');
+Route::get('/logout', 'UserController@logout')->name('logout');;
 //Route::get('/home', 'HomeController@index');
 
 Route::get('/profile', 'UserController@profile')->name('profile');
 Route::post('/profile', 'UserController@update_avatar')->name('update_avatar');
+Route::post('/profile', 'UserController@update_profile')->name('update_profile');
 
 
 Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
