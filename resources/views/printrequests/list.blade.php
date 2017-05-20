@@ -9,7 +9,7 @@
         <div class="col-sm-8">
             <div class="row">
             <!--{!! Form::open(['method'=>'GET','url'=>'request','class'=>'navbar-form navbar-left','role'=>'search']) !!}-->
-                <form method="get" action="{{ route('printrequests.list') }}">
+                <form method="get" action="{{ route('list') }}">
                     <div class="input-group custom-search-form">
                         <input type="text" class="form-control" name="search" placeholder="Search..." value="{{old('query')}}" required autofocous>
                         <span class="input-group-btn">
