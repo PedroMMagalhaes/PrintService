@@ -9,7 +9,7 @@
 
         <h1> Register</h1>
 
-         <form method="POST" action="/register">
+         <form method="POST" action="{{route('register')}}">
 
             {{ csrf_field() }}
 

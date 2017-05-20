@@ -16,8 +16,8 @@ Route::post('/create','PrintRequestsController@create')->name('create');
 
 
 //rota users
-Route::get('/register', 'RegistrationController@create');
-Route::post('/register', 'RegistrationController@store');
+Route::get('/register', 'UserController@create')->name('register');
+Route::post('/register', 'UserController@store')->name('register');
 
 Route::get('/login', 'UserController@login_get');
 Route::post('/login','UserController@login_post');
