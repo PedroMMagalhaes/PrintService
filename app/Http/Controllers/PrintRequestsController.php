@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Request;
-use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use App\Http\Requests\CreatePrintRequest;
 
 class PrintRequestsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
 
@@ -26,10 +27,54 @@ class PrintRequestsController extends Controller
 
     public function create()
     {
-
-
-        return view('create');
+        return view('printrequests.create');
     }
+
+    public function store(CreatePrintRequest $request)
+    {
+
+        $newRequest = new Request;
+
+        $newRequest->description = Input::get('description');
+        $newRequest->due_date = Input::get('due_date');
+        $newRequest->quantity = Input::get('quantity');
+        $newRequest->colored = Input::get('print_type');
+        $newRequest->stapled = Input::get('stapled');
+        $newRequest->owner_id = Auth::user()->id;
+
+        if (!$newRequest->save()) {
+            $message = ['message_error' => 'Failed to create request'];
+        }
+        else{
+            $message = ['message_success' => 'Request created successfully'];
+        }
+        return redirect()->route('create')->with($message);
+    }
+
+    /*/{1}/edit*/
+    /*public function store(CreatePrintRequest $request, $id)
+    {
+
+    $newRequest = Request::findOrFaiil($id);
+        $newRequest = new Request;
+
+        $newRequest->description = Input::get('description');
+        $newRequest->due_date = Input::get('due_date');
+        $newRequest->quantity = Input::get('quantity');
+        $newRequest->colored = Input::get('print_type');
+        $newRequest->stapled = Input::get('stapled');
+        $newRequest->owner_id = Auth::user()->id;
+
+        if (!$newRequest->save()) {
+            $message = ['message_error' => 'Failed to create request'];
+        }
+        else{
+            $message = ['message_success' => 'Request created successfully'];
+        }
+        return redirect()->route('create')->with($message);
+    }*/
+
+
 
     public function show($id)
     {
@@ -55,6 +100,11 @@ class PrintRequestsController extends Controller
     public function setComplete($id)
     {
         DB::table('requests')->where('id',$id)->update(['status'=>1]);
+        return back();
+    }
+
+    public function setRating($id){
+        DB::table('requests')->where('id',$id)->update(['satisfaction_grade'=>request('satisfaction')]);
         return back();
     }
 

@@ -81,15 +81,24 @@
   @if ($request->status == "0")
       <a class="btn btn-primary" href="{{action('PrintRequestsController@setComplete',$requestData->id)}}">Complete Request</a>
       @endif
-      @if ($request->status == "1")
+      @if ($request->status == "1" && is_null($request->satisfaction_grade))
       <p>
           How satisfacted are you with the printing quality?
       </p>
+      {{Form::open(array('route' => array('printrequests.setRating', $requestData->id), 'method' => 'POST'))}}
+
+          <div class="form-group">
       {{ Form::radio('satisfaction', '1') }}1<br/>
               {{ Form::radio('satisfaction', '2') }}2<br/>
                {{ Form::radio('satisfaction', '3',true) }}3<br/>
-    <a class="btn btn-primary" href="{{action('PrintRequestsController@setComplete',$requestData->id)}}">Submit Ranking</a>
+    {{Form::submit('Click Me!')}}
+</div>
+    @else
+    @if (is_null($request->satisfaction_grade)==false)
+    {{"You rated this printing as $requestData->satisfaction_grade, thank you for your feedback."}}
+{{ Form::close() }}
           @endif
+    @endif
   <div class="comments">
       <ul class="list-group">
       @foreach ($request->comments as $comment)

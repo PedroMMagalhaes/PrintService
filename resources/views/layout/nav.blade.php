@@ -13,12 +13,11 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ url('/') }}">Home<span class="sr-only">Home</span></a>
       </li>
+        @if(!Auth::guest())
       <li class="nav-item">
           <a class="nav-link" href="{{ url('/list') }}">Print Request<span class="sr-only">Print Request</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/') }}">Create Request<span class="sr-only">Create Request</span></a>
-      </li>
+        @endif
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/') }}">Dashboard<span class="sr-only">Dashboard</span></a>
       </li>
