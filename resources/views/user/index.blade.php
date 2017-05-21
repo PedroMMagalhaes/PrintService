@@ -58,5 +58,8 @@
       @else
           <h2>No users found</h2>
       @endif
+    <div class="text-center">
+        {{ $users->links() }}
+    </div>
 
       @endsection
