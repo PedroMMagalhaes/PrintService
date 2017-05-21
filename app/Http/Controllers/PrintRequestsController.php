@@ -82,7 +82,8 @@ class PrintRequestsController extends Controller
         $requestData = DB::table('requests')->find($id);
         $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
         $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
-        return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment', 'request'));
+        $printers=DB::table('printers')->distinct()->pluck('name');
+        return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment', 'request', 'printers'));
     }
 
     public function download($id)
@@ -100,12 +101,20 @@ class PrintRequestsController extends Controller
     public function setComplete($id)
     {
         DB::table('requests')->where('id',$id)->update(['status'=>1]);
+        $printerID=DB::table('printers')->distinct()->find(request('name'))->id;
+        DB::table('requests')->where('id',$id)->update(['printer_id'=>$printerID]);
         return back();
     }
 
     public function setRating($id){
         DB::table('requests')->where('id',$id)->update(['satisfaction_grade'=>request('satisfaction')]);
         return back();
+    }
+
+    public function refuseRequest($id){
+        DB::table('requests')->where('id',$id)->update(['refused_reason'=>request('refuseReason')]);
+        return back();
+
     }
 
 }
