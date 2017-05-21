@@ -34,7 +34,7 @@
                <div class "form-group">
                   {{ csrf_field() }}
 
-                 <label for="password">Password:</label>
+                 <label for="password">New Password:</label>
                  <input type="password" class="form-control" id="password" name ="password" required>
 
 

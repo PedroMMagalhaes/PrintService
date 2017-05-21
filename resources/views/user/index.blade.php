@@ -5,6 +5,8 @@
 
 <div class = "col-md-8">
 
+<h2> Users List</h2>
+<br/>
   @can('create', App\User::class)
   <div>
       <a class="btn btn-primary" href="{{route('register')}}">Add user</a>
@@ -30,7 +32,7 @@
         <tr>
             <td>{{ $user->email }}</td>
             <td>{{ $user->name }}</td>
-            <td>{{ $user->department_id }}</td>
+            <td>{{ $user->departToStr() }}</td>
             <td>{{ $user->created_at }}</td>
             <td>{{ $user->typeToStr() }}</td>
             <td>{{ $user->print_evals }}</td>
