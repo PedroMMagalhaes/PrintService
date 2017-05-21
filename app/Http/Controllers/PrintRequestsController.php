@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreatePrintRequest;
 
+
+
 class PrintRequestsController extends Controller
 {
     public function __construct()
@@ -20,9 +22,9 @@ class PrintRequestsController extends Controller
     {
         $keyword = Input::get('keyword', '');
         $requests = Request::orderBy('description','ASC')->SearchByKeyword($keyword)->paginate(5);
-        //$requests = Request::orderBy('description','DESC')->get();
+        $order='ASC';
 
-        return view('printrequests.list', compact('requests'));
+        return view('printrequests.list', compact('requests','order'));
     }
 
     public function create()
@@ -125,29 +127,34 @@ class PrintRequestsController extends Controller
         return back();
     }
 
-    public function order($criteria){
+    public function order($criteria, $order){
         //$keyword = Input::get('keyword', '');
         //$requests = Request::SearchByKeyword($keyword)->paginate(5);
+        if($order=='ASC'){
+            $order='DESC';
+        }else{
+            $order='ASC';
+        }
         $keyword = Input::get('keyword', '');
         if($criteria == "empl"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name','ASC')->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name',"$order")->SearchByKeyword($keyword)->paginate(5);
         }
         if($criteria == "date"){
-        $requests = Request::orderBy('due_date','ASC')->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::orderBy('due_date',"$order")->SearchByKeyword($keyword)->paginate(5);
         }
         if($criteria == "desc"){
-        $requests = Request::orderBy('description','ASC')->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::orderBy('description',"$order")->SearchByKeyword($keyword)->paginate(5);
         }
         if($criteria == "pape"){
-        $requests = Request::orderBy('paper_type','ASC')->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::orderBy('paper_type',"$order")->SearchByKeyword($keyword)->paginate(5);
         }
         if($criteria == "stat"){
-        $requests = Request::orderBy('status','ASC')->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::orderBy('status',"$order")->SearchByKeyword($keyword)->paginate(5);
         }
         if($criteria == "depa"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name','ASC');
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name',"$order");
         $requests = Request::join('users', 'users.department_id', '=', 'department.id')->SearchByKeyword($keyword)->paginate(5);
         }
-        return view('printrequests.list', compact('requests'));
+        return view('printrequests.list', compact('requests','order'));
     }
 }

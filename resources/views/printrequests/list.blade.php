@@ -29,12 +29,12 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th><a href={{ route('printrequests.order',$criteria='desc') }}>Description</th>
-                <th><a href={{ route('printrequests.order',$criteria='date') }}>Due Date</th>
-                <th><a href={{ route('printrequests.order',$criteria='empl') }}>Employee</th>
-                <th><a href={{ route('printrequests.order',$criteria='depa') }}>Department</th>
-                <th><a href={{ route('printrequests.order',$criteria='stat') }}>Status</th>
-                <th><a href={{ route('printrequests.order',$criteria='pape') }}>Paper Type</th>
+                <th><a href={{ route('printrequests.order',['criteria' => "desc", 'order' => $order]) }}>Description</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order]) }}>Due Date</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'empl','order' => $order]) }}>Employee</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'depa','order' => $order]) }}>Department</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'stat','order' => $order]) }}>Status</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'pape','order' => $order]) }}>Paper Type</th>
                 <th>Details</th>
             </tr>
             </thead>
