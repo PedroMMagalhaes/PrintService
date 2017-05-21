@@ -36,12 +36,14 @@ class PrintRequestsController extends Controller
     {
         $newRequest = new Request;
 
+        $newRequest->owner_id = Auth::user()->id;
         $newRequest->description = Input::get('description');
         $newRequest->due_date = Input::get('due_date');
         $newRequest->quantity = Input::get('quantity');
         $newRequest->colored = Input::get('print_type');
         $newRequest->stapled = Input::get('stapled');
-        $newRequest->owner_id = Auth::user()->id;
+        $newRequest->paper_size = Input::get('paper_size');
+        $newRequest->paper_type = Input::get('paper_type');
         $newRequest->file = $_FILES["file"]["name"];
         $name= $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
@@ -50,14 +52,12 @@ class PrintRequestsController extends Controller
         }
         move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/")."$name");
 
-
-
         if (!$newRequest->save()) {
             $message = ['message_error' => 'Failed to create request'];
         } else {
             $message = ['message_success' => 'Request created successfully'];
         }
-        return redirect()->route('create')->with($message);
+        return redirect()->route('create')->with('message', 'teste');
     }
 
     /*/{1}/edit*/

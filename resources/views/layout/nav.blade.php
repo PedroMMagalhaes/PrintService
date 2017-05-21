@@ -15,12 +15,12 @@
       </li>
         @if(!Auth::guest())
       <li class="nav-item">
-          <a class="nav-link" href="{{ url('/list') }}">Print Request<span class="sr-only">Print Request</span></a>
+          <a class="nav-link" href="{{ url('/list') }}">Print Request<span class="sr-only">Print Requests List</span></a>
       </li>
-        @endif
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/') }}">Dashboard<span class="sr-only">Dashboard</span></a>
       </li>
+        @endif
     </ul>
   </div>
 
