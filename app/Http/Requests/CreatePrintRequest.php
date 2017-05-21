@@ -25,11 +25,13 @@ class CreatePrintRequest extends FormRequest
     {
         return [
             'description' => 'bail|required|max:255',
-            'due_date' => 'required|date',
-            'quantity' => 'required|min:1',
+            'due_date' => 'date_format:Y-m-d|after:yesterday',
+            'quantity' => 'required|integer|min:1',
+            'paper_size' => 'required',
+            'paper_type' => 'required',
+            'file' => 'required',
             'print_type' => 'required',
-            'stapled' => 'required',
-
+            'stapled' => 'required'
         ];
     }
 }
