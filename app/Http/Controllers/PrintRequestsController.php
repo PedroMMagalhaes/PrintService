@@ -18,7 +18,6 @@ class PrintRequestsController extends Controller
 
     public function list()
     {
-
         $keyword = Input::get('keyword', '');
         $requests = Request::SearchByKeyword($keyword)->paginate(5);
 
@@ -32,7 +31,6 @@ class PrintRequestsController extends Controller
 
     public function store(CreatePrintRequest $request)
     {
-
         $newRequest = new Request;
 
         $newRequest->description = Input::get('description');
@@ -41,11 +39,19 @@ class PrintRequestsController extends Controller
         $newRequest->colored = Input::get('print_type');
         $newRequest->stapled = Input::get('stapled');
         $newRequest->owner_id = Auth::user()->id;
+        $newRequest->file = $_FILES["file"]["name"];
+        $name= $_FILES["file"]["name"];
+        $tmp_name = $_FILES["file"]["tmp_name"];
+        if (is_dir(storage_path("app/print-jobs/$newRequest->owner_id/")) === false) {
+            mkdir(storage_path("app/print-jobs/$newRequest->owner_id/"));
+        }
+        move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/")."$name");
+
+
 
         if (!$newRequest->save()) {
             $message = ['message_error' => 'Failed to create request'];
-        }
-        else{
+        } else {
             $message = ['message_success' => 'Request created successfully'];
         }
         return redirect()->route('create')->with($message);
@@ -100,21 +106,21 @@ class PrintRequestsController extends Controller
 
     public function setComplete($id)
     {
-        DB::table('requests')->where('id',$id)->update(['status'=>1]);
+        DB::table('requests')->where('id', $id)->update(['status'=>1]);
         $printerID=DB::table('printers')->distinct()->find(request('name'))->id;
-        DB::table('requests')->where('id',$id)->update(['printer_id'=>$printerID]);
+        DB::table('requests')->where('id', $id)->update(['printer_id'=>$printerID]);
         return back();
     }
 
-    public function setRating($id){
-        DB::table('requests')->where('id',$id)->update(['satisfaction_grade'=>request('satisfaction')]);
+    public function setRating($id)
+    {
+        DB::table('requests')->where('id', $id)->update(['satisfaction_grade'=>request('satisfaction')]);
         return back();
     }
 
-    public function refuseRequest($id){
-        DB::table('requests')->where('id',$id)->update(['refused_reason'=>request('refuseReason')]);
+    public function refuseRequest($id)
+    {
+        DB::table('requests')->where('id', $id)->update(['refused_reason'=>request('refuseReason')]);
         return back();
-
     }
-
 }

@@ -10,7 +10,7 @@
 
         <h1> Create a New Request</h1>
 
-        <form method="POST" action="{{route('printrequests.store')}}">
+        <form method="POST" action="{{route('printrequests.store')}}" enctype="multipart/form-data">
 
             {{ csrf_field() }}
 
@@ -52,7 +52,11 @@
                 <input type="radio" name="stapled" value="false">Not stapled<br>
             </div>
 
-            <br>
+            <div class="form-group">
+                <label for="file">File</label>
+                <br>
+                <input type="file" name="file" id="file">Choose File<br>
+            </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
