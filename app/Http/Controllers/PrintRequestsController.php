@@ -19,7 +19,8 @@ class PrintRequestsController extends Controller
     public function list()
     {
         $keyword = Input::get('keyword', '');
-        $requests = Request::SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::orderBy('description','ASC')->SearchByKeyword($keyword)->paginate(5);
+        //$requests = Request::orderBy('description','DESC')->get();
 
         return view('printrequests.list', compact('requests'));
     }
@@ -122,5 +123,31 @@ class PrintRequestsController extends Controller
     {
         DB::table('requests')->where('id', $id)->update(['refused_reason'=>request('refuseReason')]);
         return back();
+    }
+
+    public function order($criteria){
+        //$keyword = Input::get('keyword', '');
+        //$requests = Request::SearchByKeyword($keyword)->paginate(5);
+        $keyword = Input::get('keyword', '');
+        if($criteria == "empl"){
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name','ASC')->SearchByKeyword($keyword)->paginate(5);
+        }
+        if($criteria == "date"){
+        $requests = Request::orderBy('due_date','ASC')->SearchByKeyword($keyword)->paginate(5);
+        }
+        if($criteria == "desc"){
+        $requests = Request::orderBy('description','ASC')->SearchByKeyword($keyword)->paginate(5);
+        }
+        if($criteria == "pape"){
+        $requests = Request::orderBy('paper_type','ASC')->SearchByKeyword($keyword)->paginate(5);
+        }
+        if($criteria == "stat"){
+        $requests = Request::orderBy('status','ASC')->SearchByKeyword($keyword)->paginate(5);
+        }
+        if($criteria == "depa"){
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name','ASC');
+        $requests = Request::join('users', 'users.department_id', '=', 'department.id')->SearchByKeyword($keyword)->paginate(5);
+        }
+        return view('printrequests.list', compact('requests'));
     }
 }

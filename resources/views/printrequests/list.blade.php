@@ -29,9 +29,12 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th>Description</th>
-                <th>Due Date</th>
-                <th>Employee</th>
+                <th><a href={{ route('printrequests.order',$criteria='desc') }}>Description</th>
+                <th><a href={{ route('printrequests.order',$criteria='date') }}>Due Date</th>
+                <th><a href={{ route('printrequests.order',$criteria='empl') }}>Employee</th>
+                <th><a href={{ route('printrequests.order',$criteria='depa') }}>Department</th>
+                <th><a href={{ route('printrequests.order',$criteria='stat') }}>Status</th>
+                <th><a href={{ route('printrequests.order',$criteria='pape') }}>Paper Type</th>
                 <th>Details</th>
             </tr>
             </thead>
@@ -41,6 +44,9 @@
                     <td>{{ $request->description }}</td>
                     <td>{{ $request->due_date }}</td>
                     <td>{{ $request->users->name }}</td>
+                    <td>{{ $request->users->departToStr()}}</td>
+                    <td>{{ $request->status}}</td>
+                    <td>{{ $request->paper_type}}</td>
                     <td><a class="btn btn-primary" href={{ route('printrequests.show', $request) }}>More</a></td>
                 </tr>
             @endforeach
