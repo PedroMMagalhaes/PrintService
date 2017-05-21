@@ -2,6 +2,9 @@
 
 @section('content')
 
+
+<div class = "col-md-8">
+
   @can('create', App\User::class)
   <div>
       <a class="btn btn-primary" href="{{route('register')}}">Add user</a>
@@ -15,9 +18,11 @@
         <tr>
             <th>Email</th>
             <th>Fullname</th>
+            <th>Department</th>
             <th>Registered At</th>
             <th>Type</th>
-            <th>Actions</th>
+            <th>Print Evals</th>
+            <th>Print Count</th>
         </tr>
     </thead>
     <tbody>
@@ -25,8 +30,12 @@
         <tr>
             <td>{{ $user->email }}</td>
             <td>{{ $user->name }}</td>
+            <td>{{ $user->department_id }}</td>
             <td>{{ $user->created_at }}</td>
             <td>{{ $user->typeToStr() }}</td>
+            <td>{{ $user->print_evals }}</td>
+            <td>{{ $user->print_counts }}</td>
+
             <td>
             </td>
         </tr>
@@ -37,5 +46,7 @@
 @endif
 
  @include('layout.errors')
+
+ </div>
 
 @endsection

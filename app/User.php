@@ -44,7 +44,7 @@ class User extends Authenticatable
             case 1:
                 return 'Administrator';
             case 0:
-                return 'Publisher';
+                return 'Functionary';
         }
 
         return 'Unknown';
