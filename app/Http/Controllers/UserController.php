@@ -183,9 +183,17 @@ class UserController extends Controller
       $user = Auth::user();
       $this->authorize('update', $user);
       $user->fill($request->input());
+      $user->password = password_hash($user->password, PASSWORD_DEFAULT);
       $user->save();
 
+      $message = ['message_success' => 'User profile edited successfully'];
+      if (!$user->save()) {
+        $message = ['message_error' => 'Failed to edit user profile'];
+
+      }
+
       return view('user.profile', array('user' => Auth::user()) );
+
 
     }
 
