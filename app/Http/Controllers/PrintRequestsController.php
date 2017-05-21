@@ -87,8 +87,8 @@ class PrintRequestsController extends Controller
 
     public function show($id)
     {
-        $request=Request::find($id);
-        $requestData = DB::table('requests')->find($id);
+        $requestData=Request::find($id);
+        //$requestData = DB::table('requests')->find($id);
         $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
         $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
         $printers=DB::table('printers')->distinct()->pluck('name');
@@ -127,7 +127,8 @@ class PrintRequestsController extends Controller
         return back();
     }
 
-    public function order($criteria, $order){
+    public function order($criteria, $order)
+    {
         //$keyword = Input::get('keyword', '');
         //$requests = Request::SearchByKeyword($keyword)->paginate(5);
         if($order=='ASC'){

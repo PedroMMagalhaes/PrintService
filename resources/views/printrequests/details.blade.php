@@ -15,7 +15,7 @@
                 <th>Color or Black and White</th>
                 <th>Print Type</th>
                 <th>Stampled?</th>
-                <th>Paper Dimension</th>
+                <th>Paper Size</th>
                 <th>Paper Type</th>
                 <th>Download Link</th>
                 <th>Request State</th>
@@ -41,8 +41,8 @@
                     @else {{"No"}}
                     @endif
                 </td>
-                <td>{{$requestData->paper_size}}</td>
-                <td>{{$requestData->paper_type}}</td>
+                <td>{{$requestData->typeToStrPaperSize()}}</td>
+                <td>{{$requestData->typeToStrPaperType()}}</td>
                 <td><a href="{{action('PrintRequestsController@download',$requestData->id)}}">Download</a></td>
                 <td>
                     @if($requestData->status == 1)
@@ -75,7 +75,7 @@
             </tbody>
         </table>
 
-        @if ($request->status == "0")
+        @if ($requestData->status == "0")
             {{Form::open(array('route' => array('printrequests.complete', $requestData->id), 'method' => 'POST'))}}
             <div class="form-group">
                 {{Form::select('name', $printers, $printers[1])}}
@@ -83,7 +83,7 @@
             </div>
             {{ Form::close() }}
         @endif
-        @if ($request->status == "1" && is_null($request->satisfaction_grade))
+        @if ($requestData->status == "1" && is_null($requestData->satisfaction_grade))
             <p>
                 How satisfacted are you with the printing quality?
             </p>
@@ -98,13 +98,13 @@
             </div>
             {{ Form::close() }}
         @else
-            @if (is_null($request->satisfaction_grade)==false)
+            @if (is_null($requestData->satisfaction_grade)==false)
                 {{"You rated this printing as $requestData->satisfaction_grade, thank you for your feedback."}}
 
             @endif
         @endif
 
-        @if($request->status == "0" && is_null($request->refused_reason))
+        @if($requestData->status == "0" && is_null($requestData->refused_reason))
             {{Form::open(array('route' => array('printrequests.refuseRequest', $requestData->id), 'method' => 'POST'))}}
             {{ csrf_field() }}
             <div class="form-group{{ $errors->has('refuseReason') ? ' has-error' : '' }}">
@@ -124,7 +124,7 @@
             {{ Form::close() }}
             <div class="comments">
                 <ul class="list-group">
-                    @foreach ($request->comments as $comment)
+                    @foreach ($requestData->comments as $comment)
                         <li class="list-group-item">
                             <strong>
                                 {{$comment->created_at}}

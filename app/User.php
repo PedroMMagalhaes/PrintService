@@ -59,27 +59,26 @@ class User extends Authenticatable
             case 2:
                 return 'Ciências da Linguagem';
 
-                case 3:
-                    return 'Engenharia do Ambiente';
+            case 3:
+                return 'Engenharia do Ambiente';
 
-                    case 4:
-                        return 'Engenharia Civil';
+            case 4:
+                return 'Engenharia Civil';
 
-                        case 5:
-                            return 'Engenharia Eletrotécnica';
+            case 5:
+                return 'Engenharia Eletrotécnica';
 
-                            case 6:
-                                return 'Engenharia Informática';
+            case 6:
+                return 'Engenharia Informática';
 
-                                case 7:
-                                    return 'Engenharia Mecânica';
+            case 7:
+                return 'Engenharia Mecânica';
 
-                                    case 8:
-                                        return 'Gestão e Economia';
+            case 8:
+                return 'Gestão e Economia';
 
-                                        case 9:
-                                            return 'Matemática';
-
+            case 9:
+                return 'Matemática';
         }
 
         return 'Unknown';

@@ -50,4 +50,30 @@ class Request extends Model
 
         return 'Unknown';
     }
+
+    public function typeToStrPaperType()
+    {
+        switch ($this->paper_type) {
+            case 0:
+                return 'Draft';
+            case 1:
+                return 'Normal';
+            case 2:
+                return 'Photographic';
+        }
+
+        return 'Unknown';
+    }
+
+    public function typeToStrPaperSize()
+    {
+        switch ($this->paper_size) {
+            case 3:
+                return 'A3';
+            case 4:
+                return 'A4';
+        }
+
+        return 'Unknown';
+    }
 }
