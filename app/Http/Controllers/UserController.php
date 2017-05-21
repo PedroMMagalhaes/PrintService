@@ -132,7 +132,7 @@ class UserController extends Controller
       if (!$user->delete()) {
           $message = ['message_error' => 'Failed to remove user'];
       }
-      return redirect()->route('user.index')->with($message);
+      return redirect()->route('index')->with($message);
     }
 
 
@@ -173,6 +173,23 @@ class UserController extends Controller
 
     	}
     	return view('user.profile', array('user' => Auth::user()) );
+    }
+
+
+
+
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $this->authorize('update', $user);
+        $title = 'Edit user';
+
+        $user->fill($request->input());
+
+        $message = ['message_success' => 'User saved successfully'];
+        if (!$user->save()) {
+            $message = ['message_error' => 'Failed to save user'];
+        }
+        return redirect()->route('index')->with($message);
     }
 
 

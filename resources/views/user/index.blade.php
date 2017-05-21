@@ -37,18 +37,26 @@
             <td>{{ $user->typeToStr() }}</td>
             <td>{{ $user->print_evals }}</td>
             <td>{{ $user->print_counts }}</td>
-
             <td>
-            </td>
-        </tr>
-    @endforeach
-    </table>
-@else
-    <h2>No users found</h2>
-@endif
 
- @include('layout.errors')
+              @can('update', $user)
+                      <a class="btn btn-xs btn-primary" href="{{route('users.edit', [$user->id])}}">Edit</a>
+                  @endcan
+                  @can('delete', $user)
+                      <form action="{{route('users.destroy', [$user->id])}}" method="post" class="inline">
+                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                          <div class="form-group">
+                              <input type="hidden" name="_method" value="DELETE">
+                              <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                          </div>
+                      </form>
+                  @endcan
+                  </td>
+              </tr>
+          @endforeach
+          </table>
+      @else
+          <h2>No users found</h2>
+      @endif
 
- </div>
-
-@endsection
+      @endsection

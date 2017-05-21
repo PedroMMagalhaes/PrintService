@@ -33,6 +33,16 @@ Route::get('/profile', 'UserController@profile')->name('profile');
 Route::post('/profile_avatar', 'UserController@update_avatar')->name('update_avatar');
 Route::post('/profile', 'UserController@update_profile')->name('update_profile');
 
+//list
+Route::get('users/{user}/edit', 'UserController@edit')
+    ->name('users.edit');
+
+Route::delete('users/{user}', 'UserController@destroy')
+    ->name('users.destroy');
+
+Route::post('users/{user}/edit', 'UserController@update')
+        ->name('users.update');
+
 
 Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
 
