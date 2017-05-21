@@ -47,7 +47,7 @@
                     <td>{{ $request->users->departToStr()}}</td>
                     <td>{{ $request->status}}</td>
                     <td>{{ $request->paper_type}}</td>
-                    <td><a class="btn btn-primary" href={{ route('printrequests.show', $request) }}>More</a></td>
+                    <td><a class="btn btn-primary" href={{ route('printrequests.show', $request->id) }}>More</a></td>
                 </tr>
             @endforeach
             </tbody>
