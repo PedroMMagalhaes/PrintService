@@ -21,6 +21,8 @@ Route::post('/store','PrintRequestsController@store')->name('printrequests.store
 Route::get('/register', 'UserController@create')->name('register');
 Route::post('/register', 'UserController@store')->name('register');
 
+Route::get('/index', 'UserController@index')->name('index');
+
 Route::get('/login', 'UserController@login_get');
 Route::post('/login','UserController@login_post');
 

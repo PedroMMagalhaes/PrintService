@@ -30,8 +30,10 @@ class UserController extends Controller
   public function index()
     {
         $users = User::all();
-        //$title = 'List users';
-        return view('users.index', compact('title', 'users'));
+        $title = 'List users';
+
+        return view('user.index', compact('users'));
+        //return view('user.edit', compact('title', 'user'));
     }
 
 
@@ -130,7 +132,7 @@ class UserController extends Controller
       if (!$user->delete()) {
           $message = ['message_error' => 'Failed to remove user'];
       }
-      return redirect()->route('users.index')->with($message);
+      return redirect()->route('user.index')->with($message);
     }
 
 
@@ -140,7 +142,7 @@ class UserController extends Controller
         $title = 'Edit user';
         // Já não é necessário quando se usa Route Model Binding
         //$user = User::findOrFail($id);
-        return view('users.edit', compact('title', 'user'));
+        return view('user.edit', compact('title', 'user'));
     }
 
 
