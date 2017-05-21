@@ -89,7 +89,7 @@
             </p>
             {{Form::open(array('route' => array('printrequests.setRating', $requestData->id), 'method' => 'POST'))}}
 
-            <div class="form-group">
+            <div class="form-group ">
                 {{ Form::radio('satisfaction', '1') }}1<br/>
                 {{ Form::radio('satisfaction', '2') }}2<br/>
                 {{ Form::radio('satisfaction', '3',true) }}3<br/>
@@ -103,42 +103,39 @@
 
             @endif
         @endif
-    </div>
 
-
-    @if($request->status == "0" && is_null($request->refused_reason))
-        {{Form::open(array('route' => array('printrequests.refuseRequest', $requestData->id), 'method' => 'POST'))}}
-        {{ csrf_field() }}
-        <div class="form-group{{ $errors->has('refuseReason') ? ' has-error' : '' }}">
-            <label for="refuseReason" class="col-md-4 control-label">refuseReason</label>
-            <div class="col-md-6">
-                <input id="refuseReason" type="text" class="form-control" name="refuseReason" value="" required
-                       autofocus>
-                {{Form::submit('Refuse Request')}}
-                @if ($errors->has('refuseReason'))
-                    <span class="help-block">
+        @if($request->status == "0" && is_null($request->refused_reason))
+            {{Form::open(array('route' => array('printrequests.refuseRequest', $requestData->id), 'method' => 'POST'))}}
+            {{ csrf_field() }}
+            <div class="form-group{{ $errors->has('refuseReason') ? ' has-error' : '' }}">
+                <label for="refuseReason" class="col-md-4 control-label">Refuse Reason</label>
+                <div class="col-md-6">
+                    <input id="refuseReason" type="text" class="form-control" name="refuseReason" value="" required
+                           autofocus>
+                    {{Form::submit('Refuse Request')}}
+                    @if ($errors->has('refuseReason'))
+                        <span class="help-block">
                     <strong>{{ $errors->first('refuseReason') }}</strong>
                 </span>
-                @endif
-                @endif
+                    @endif
+                    @endif
+                </div>
             </div>
-        </div>
-
-        </div>
-        {{ Form::close() }}
-        <div class="comments">
-            <ul class="list-group">
-                @foreach ($request->comments as $comment)
-                    <li class="list-group-item">
-                        <strong>
-                            {{$comment->created_at}}
-                        </strong>
-                        {{$comment->comment}}
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-
+            {{ Form::close() }}
+            <div class="comments">
+                <ul class="list-group">
+                    @foreach ($request->comments as $comment)
+                        <li class="list-group-item">
+                            <strong>
+                                {{$comment->created_at}}
+                            </strong>
+                            {{$comment->comment}}
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+    </div>
+    </div>
 
 
 @endsection
