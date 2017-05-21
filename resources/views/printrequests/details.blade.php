@@ -77,9 +77,13 @@
   </table>
 </div>
 </div>
-  </div>
   @if ($request->status == "0")
-      <a class="btn btn-primary" href="{{action('PrintRequestsController@setComplete',$requestData->id)}}">Complete Request</a>
+  {{Form::open(array('route' => array('printrequests.complete', $requestData->id), 'method' => 'POST'))}}
+    <div class="form-group">
+      {{Form::select('name', $printers, $printers[1])}}
+      {{Form::submit('Complete Request')}}
+      </div>
+       {{ Form::close() }}
       @endif
       @if ($request->status == "1" && is_null($request->satisfaction_grade))
       <p>
@@ -91,14 +95,35 @@
       {{ Form::radio('satisfaction', '1') }}1<br/>
               {{ Form::radio('satisfaction', '2') }}2<br/>
                {{ Form::radio('satisfaction', '3',true) }}3<br/>
-    {{Form::submit('Click Me!')}}
+    {{Form::submit('Rate')}}
+
 </div>
+    {{ Form::close() }}
     @else
     @if (is_null($request->satisfaction_grade)==false)
     {{"You rated this printing as $requestData->satisfaction_grade, thank you for your feedback."}}
-{{ Form::close() }}
+
           @endif
     @endif
+    @if($request->status == "0" && is_null($request->refused_reason))
+    {{Form::open(array('route' => array('printrequests.refuseRequest', $requestData->id), 'method' => 'POST'))}}
+    {{ csrf_field() }}
+    <div class="form-group{{ $errors->has('refuseReason') ? ' has-error' : '' }}">
+        <label for="refuseReason" class="col-md-4 control-label">refuseReason</label>
+        <div class="col-md-6">
+            <input id="refuseReason" type="text" class="form-control" name="refuseReason" value="" required autofocus>
+            {{Form::submit('Refuse Request')}}
+            @if ($errors->has('refuseReason'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('refuseReason') }}</strong>
+                </span>
+            @endif
+            @endif
+</div>
+</div>
+
+</div>
+{{ Form::close() }}
   <div class="comments">
       <ul class="list-group">
       @foreach ($request->comments as $comment)
