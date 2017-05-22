@@ -129,6 +129,7 @@
             <div class="comments">
                 <ul class="list-group">
                     @foreach ($comments as $comment)
+                        @if($comment->blocked==0)
                         @if(is_null($comment->parent_id))
                         <li class="list-group-item">
                             <strong>
@@ -137,7 +138,7 @@
                             {{$comment->comment}}
                         </li>
                         @foreach ($comments as $subcomment)
-                        @if($comment->id==$subcomment->parent_id)
+                        @if($comment->id==$subcomment->parent_id && $subcomment->blocked==0)
                         <li class="list-group-item list-group-item-info">
                             <strong>
                                 {{$subcomment->created_at}}
@@ -146,6 +147,7 @@
                         </li>
                         @endif
                         @endforeach
+                        @endif
                         @endif
                     @endforeach
                 </ul>
