@@ -166,8 +166,7 @@ class PrintRequestsController extends Controller
         $requests = Request::SearchByKeyword($keyword)->orderBy('status',"$order")->paginate(5);
         }
         if($criteria == "depa"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name',"$order");
-        $requests = Request::join('users', 'users.department_id', '=', 'department.id')->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->SearchByKeyword($keyword)->orderBy('users.department_id',"$order")->paginate(5);
         }
         return view('printrequests.list', compact('requests','order'));
     }
