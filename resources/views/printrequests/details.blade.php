@@ -128,13 +128,33 @@
             {{ Form::close() }}
             <div class="comments">
                 <ul class="list-group">
-                    @foreach ($requestData->comments as $comment)
+                    @foreach ($comments as $comment)
+                        @if($comment->blocked==0)
+                        @if(is_null($comment->parent_id))
                         <li class="list-group-item">
                             <strong>
-                                {{$comment->created_at}}
+                                 {{$comment->users['name']}}
+                                 <p>
+                                     {{$comment->created_at}}
+                                 </p>
                             </strong>
-                            {{$comment->comment}}
+                             <p>{{$comment->comment}} </p>
                         </li>
+                        @foreach ($comments as $subcomment)
+                        @if($comment->id==$subcomment->parent_id && $subcomment->blocked==0)
+                        <li class="list-group-item list-group-item-info">
+                            <strong>
+                                 {{$subcomment->users['name']}}
+                                <p>
+                                {{$subcomment->created_at}}
+                                </p>
+                            </strong>
+                             <p>{{$subcomment->comment}} </p>
+                        </li>
+                        @endif
+                        @endforeach
+                        @endif
+                        @endif
                     @endforeach
                 </ul>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Request;
+use App\Comment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreatePrintRequest;
@@ -105,11 +106,12 @@ class PrintRequestsController extends Controller
         $requestData=Request::find($id);
         //$requestData = DB::table('requests')->find($id);
         $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
+        $comments= Comment::where('request_id',$id)->orderBy('created_at')->get();
         $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
         $printers=DB::table('printers')->distinct()->pluck('name');
         $user = Auth::user();
         if($user->isAdmin()||$user->id == $requestData->owner_id){
-            return view('printrequests.details', compact('requestData', 'userData', 'userDepartment', 'request', 'printers','user'));
+            return view('printrequests.details', compact('requestData', 'userData', 'userDepartment', 'comments', 'printers','user'));
         }
     }
 
