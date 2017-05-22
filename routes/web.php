@@ -57,6 +57,8 @@ Route::post('/list/{id}/complete', 'PrintRequestsController@setComplete')->name(
 
 Route::post('/list/{id}/rate', 'PrintRequestsController@setRating')->name('printrequests.setRating');
 
+Route::get('/list/{requestID}/block/{commentID}', 'CommentsController@block')->name('comments.block');
+
 Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')->name('printrequests.refuseRequest');
 
 Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');

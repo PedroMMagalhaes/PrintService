@@ -139,6 +139,7 @@
                                  </p>
                             </strong>
                              <p>{{$comment->comment}} </p>
+                             <td><a class="btn btn-primary" href={{ route('comments.block', ['requestID' => $requestData->id, 'commentID' => $comment->id]) }}>Block</a></td>
                         </li>
                         @foreach ($comments as $subcomment)
                         @if($comment->id==$subcomment->parent_id && $subcomment->blocked==0)
@@ -150,6 +151,7 @@
                                 </p>
                             </strong>
                              <p>{{$subcomment->comment}} </p>
+                             <td><a class="btn btn-primary" href={{ route('comments.block', ['requestID' => $requestData->id, 'commentID' => $subcomment->id]) }}>Block</a></td>
                         </li>
                         @endif
                         @endforeach
