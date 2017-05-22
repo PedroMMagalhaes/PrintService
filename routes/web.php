@@ -55,3 +55,5 @@ Route::post('/list/{id}/rate', 'PrintRequestsController@setRating')->name('print
 Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')->name('printrequests.refuseRequest');
 
 Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');
+
+Route::get('/dashboard', 'DashboardController@list')->name('printrequests.dashboard');

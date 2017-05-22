@@ -21,7 +21,7 @@ class PrintRequestsController extends Controller
     public function list()
     {
         $keyword = Input::get('keyword', '');
-        $requests = Request::orderBy('description','ASC')->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::SearchByKeyword($keyword)->orderBy('description','ASC')->paginate(5);
         $order='ASC';
 
         return view('printrequests.list', compact('requests','order'));
@@ -150,19 +150,19 @@ class PrintRequestsController extends Controller
         }
         $keyword = Input::get('keyword', '');
         if($criteria == "empl"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name',"$order")->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->SearchByKeyword($keyword)->orderBy('users.name',"$order")->paginate(5);
         }
         if($criteria == "date"){
-        $requests = Request::orderBy('due_date',"$order")->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::SearchByKeyword($keyword)->orderBy('due_date',"$order")->paginate(5);
         }
         if($criteria == "desc"){
-        $requests = Request::orderBy('description',"$order")->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::SearchByKeyword($keyword)->orderBy('description',"$order")->paginate(5);
         }
         if($criteria == "pape"){
-        $requests = Request::orderBy('paper_type',"$order")->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::SearchByKeyword($keyword)->orderBy('paper_type',"$order")->paginate(5);
         }
         if($criteria == "stat"){
-        $requests = Request::orderBy('status',"$order")->SearchByKeyword($keyword)->paginate(5);
+        $requests = Request::SearchByKeyword($keyword)->orderBy('status',"$order")->paginate(5);
         }
         if($criteria == "depa"){
         $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name',"$order");

@@ -18,7 +18,7 @@
           <a class="nav-link" href="{{ url('/list') }}">Print Request<span class="sr-only">Print Requests List</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/') }}">Dashboard<span class="sr-only">Dashboard</span></a>
+        <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard<span class="sr-only">Dashboard</span></a>
       </li>
         @endif
     </ul>
