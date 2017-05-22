@@ -32,6 +32,13 @@ class PrintRequestsController extends Controller
         return view('printrequests.create');
     }
 
+    public function edit()
+    {
+        return view('printrequests.edit');
+    }
+
+
+
     public function store(CreatePrintRequest $request)
     {
         $newRequest = new Request;
@@ -61,28 +68,33 @@ class PrintRequestsController extends Controller
     }
 
     /*/{1}/edit*/
-    /*public function store(CreatePrintRequest $request, $id)
+    public function update(CreatePrintRequest $request, $id)
     {
 
-    $newRequest = Request::findOrFaiil($id);
-        $newRequest = new Request;
+        $currentRequest = Request::findOrFaiil($id);
 
-        $newRequest->description = Input::get('description');
-        $newRequest->due_date = Input::get('due_date');
-        $newRequest->quantity = Input::get('quantity');
-        $newRequest->colored = Input::get('print_type');
-        $newRequest->stapled = Input::get('stapled');
-        $newRequest->owner_id = Auth::user()->id;
+        $currentRequest->description = Input::get('description');
+        $currentRequest->due_date = Input::get('due_date');
+        $currentRequest->quantity = Input::get('quantity');
+        $currentRequest->colored = Input::get('print_type');
+        $currentRequest->stapled = Input::get('stapled');
+        $currentRequest->owner_id = Auth::user()->id;
 
-        if (!$newRequest->save()) {
-            $message = ['message_error' => 'Failed to create request'];
+        if (!$currentRequest->save()) {
+            $message = ['message_error' => 'Failed to edit request'];
+        } else {
+            $message = ['message_success' => 'Request successfully edited'];
         }
-        else{
-            $message = ['message_success' => 'Request created successfully'];
-        }
-        return redirect()->route('create')->with($message);
-    }*/
+        return Redirect::route('dashboard');
+    }
 
+    public function destroy($id)
+    {
+        $currentRequest = Request::findOrFaiil($id);
+        $currentRequest->delete();
+
+        return Redirect::route('dashboard');
+    }
 
 
     public function show($id)
