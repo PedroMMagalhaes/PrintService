@@ -133,17 +133,23 @@
                         @if(is_null($comment->parent_id))
                         <li class="list-group-item">
                             <strong>
-                                 {{$comment->created_at}}
+                                 {{$comment->users['name']}}
+                                 <p>
+                                     {{$comment->created_at}}
+                                 </p>
                             </strong>
-                            {{$comment->comment}}
+                             <p>{{$comment->comment}} </p>
                         </li>
                         @foreach ($comments as $subcomment)
                         @if($comment->id==$subcomment->parent_id && $subcomment->blocked==0)
                         <li class="list-group-item list-group-item-info">
                             <strong>
+                                 {{$subcomment->users['name']}}
+                                <p>
                                 {{$subcomment->created_at}}
+                                </p>
                             </strong>
-                            {{$subcomment->comment}}
+                             <p>{{$subcomment->comment}} </p>
                         </li>
                         @endif
                         @endforeach
