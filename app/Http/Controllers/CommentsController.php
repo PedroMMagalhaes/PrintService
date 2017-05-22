@@ -22,7 +22,6 @@ class CommentsController extends Controller
 
   public function createComment($requestID,$commentID=null){
     $newComment = new Comment;
-    //$newComment->comment =
     $newComment->comment = request('comment');
     $newComment->blocked = 0;
     $newComment->request_id = $requestID;

@@ -45,7 +45,7 @@ class PrintRequestsController extends Controller
     {
         $newRequest = new Request;
         $newRequest->owner_id = Auth::user()->id;
-        $newRequest->fill($request->all()); 
+        $newRequest->fill($request->all());
         $newRequest->file = $_FILES["file"]["name"];
         $name= $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
@@ -151,7 +151,7 @@ class PrintRequestsController extends Controller
         }
         $keyword = Input::get('keyword', '');
         if($criteria == "empl"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->SearchByKeyword($keyword)->orderBy('users.name',"$order")->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->SearchByKeyword($keyword)->orderBy('users.name',"$order")->paginate(5);
         }
         if($criteria == "date"){
         $requests = Request::SearchByKeyword($keyword)->orderBy('due_date',"$order")->paginate(5);
