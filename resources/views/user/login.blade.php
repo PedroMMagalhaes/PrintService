@@ -9,6 +9,7 @@
 
   <h1>Sign In </h1>
 
+@include('layout.flash')
 
 <form method="POST" action="/login">
 

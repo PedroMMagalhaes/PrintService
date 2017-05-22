@@ -30,4 +30,9 @@ return [
 
     'compiled' => realpath(storage_path('framework/views')),
 
+
+    //paginator replace
+
+    'pagination' => 'paginator',
+
 ];

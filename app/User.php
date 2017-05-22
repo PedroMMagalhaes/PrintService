@@ -95,6 +95,29 @@ class User extends Authenticatable
     }
 
 
+// BOOT do modelo
+
+
+
+
+  public static function boot()
+  {
+      parent::boot();
+      static::creating(function ($user) {
+          $user->token = str_random(40);
+      });
+  }
+
+
+
+public function hasVerified()
+{
+
+    $this->verified = true;
+    $this->token = null;
+
+    $this->save();
+}
 
 
 

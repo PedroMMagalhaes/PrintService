@@ -22,6 +22,7 @@ Route::post('/store','PrintRequestsController@store')->name('printrequests.store
 //rota users
 Route::get('/register', 'UserController@create')->name('register');
 Route::post('/register', 'UserController@store')->name('register');
+Route::get('/register/confirm/{token}', 'UserController@confirmEmail')->name('confirmEmail');
 
 Route::get('/index', 'UserController@index')->name('index');
 

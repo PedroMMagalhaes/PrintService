@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 use App\User;
 use Auth;
 use Image;
-
+use Mail;
 use Validator;
 
+use App\Mail\ConfirmationEmail;
 use App\Http\Requests\CreateUserPostRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
@@ -119,9 +120,13 @@ class UserController extends Controller
           $message = ['message_error' => 'Failed to create user'];
       }
 
-      auth()->login($user);
+      Mail::to($user->email)->send(new ConfirmationEmail($user));
 
-      return redirect()->route('home');
+// visto ser ativado por email nao iremos autenticar logo pois a conta está bloqueada
+//    auth()->login($user);
+
+
+      return home()->with('status', 'Please confirm your email address');
   }
 
 
@@ -236,7 +241,7 @@ class UserController extends Controller
 
   { //tentar autenticar o user
 
-    if(! auth()->attempt(request(['email', 'password']))){
+    if(! auth()->attempt(request(['email', 'password']) + ['blocked' => true])){
 
       return back()->withErrors([
 
@@ -246,5 +251,17 @@ class UserController extends Controller
 
     return redirect()->home();
   }
+
+  /**
+     * Confirm a user's email address.
+     *
+     * @param  string $token
+     * @return mixed
+     */
+    public function confirmEmail($token)
+    {
+        User::whereToken($token)->firstOrFail()->confirmEmail();
+        return redirect('login')->with('status', 'You are now confirmed. Please login.');
+    }
 
 }

@@ -12,6 +12,9 @@
 
       <h1> Register</h1>
 
+
+      @include('layout.flash')
+
          <form method="POST" action="{{route('register')}}">
 
             {{ csrf_field() }}
@@ -51,17 +54,9 @@
 
 
 
-           <div class="checkbox checkbox-success">
-                    <label for="checkbox">Admin:</label>
-                    <input name="admin" id="admin" type="checkbox" value="1" required>
-                </div>
+            <input type="hidden" name="admin" value="0" />
 
-
-
-            <div class="checkbox checkbox-success">
-                    <label for="checkbox">Blocked:</label>
-                    <input name="blocked" id="blocked" type="checkbox" value="1">
-                </div>
+            <input type="hidden" name="blocked" value="0" />
 
 
 

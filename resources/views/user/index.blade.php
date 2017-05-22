@@ -51,15 +51,20 @@
                           </div>
                       </form>
                   @endcan
-                  </td>
+                </td>
               </tr>
           @endforeach
           </table>
       @else
           <h2>No users found</h2>
       @endif
-    <div class="text-center">
-        {{ $users->links() }}
-    </div>
 
+
+
+
+      <div class="text-center">
+          {{ $users->links() }}
+      </div>
+
+</div>
       @endsection
