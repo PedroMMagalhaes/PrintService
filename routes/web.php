@@ -14,6 +14,8 @@ Route::get('/list','PrintRequestsController@list')->name('list');
 //rota criar request
 Route::get('/create','PrintRequestsController@create')->name('create');
 Route::post('/store','PrintRequestsController@store')->name('printrequests.store');
+Route::post('/update/{id}','PrintRequestsController@update')->name('printrequests.update');
+
 
 //rota edit request
 //Route::get('dashboard??', 'PrintRequestsController@edit')->name('printrequests.edit');

@@ -8,9 +8,8 @@ class Request extends Model
 {
 
     protected $fillable = [
-        'description', 'due_date', 'quantity', 'colored', 'stapled'
+        'description', 'due_date', 'quantity', 'colored', 'stapled','paper_size','paper_type'
     ];
-
 
     public function users()
     {

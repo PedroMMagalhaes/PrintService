@@ -17,15 +17,14 @@
             </div>
         @endif
 
-        <h1> Edit Request----Copiado do create( ñ feito (por campos ja preenchidos)</h1>
+        <h1> Edit Request </h1>
 
-        <form method="POST" action="{{route('printrequests.store')}}" enctype="multipart/form-data">
-
+        <form method="POST" action="{{route('printrequests.dashboard')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name ="description">
+                <input type="text" class="form-control" id="description" name ="description" placeholder="Description" value="{{old('description', $request->email)}}>
             </div>
 
             <div class="form-group">
@@ -82,7 +81,7 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
                 <button type="submit" class="btn btn-default" name="cancel">Cancel</button>
             </div>
 

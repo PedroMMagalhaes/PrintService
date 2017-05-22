@@ -35,13 +35,13 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th><a href={{ route('printrequests.order',['criteria' => "desc", 'order' => $order]) }}>Description</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order]) }}>Due Date</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'empl','order' => $order]) }}>Employee</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'depa','order' => $order]) }}>Department</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'stat','order' => $order]) }}>Status</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'pape','order' => $order]) }}>Paper Type</th>
-                <th>Details</th>
+                <th><a href={{ route('printrequests.order',['criteria' => "desc", 'order' => $order]) }}></a>Description</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order]) }}></a>Due Date</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'empl','order' => $order]) }}></a>Employee</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'depa','order' => $order]) }}></a>Department</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'stat','order' => $order]) }}></a>Status</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'pape','order' => $order]) }}></a>Paper Type</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -53,7 +53,13 @@
                     <td>{{ $request->users->departToStr()}}</td>
                     <td>{{ $request->typeToStrState()}}</td>
                     <td>{{ $request->typeToStrPaperType()}}</td>
-                    <td><a class="btn btn-primary" href={{ route('printrequests.show', $request->id) }}>More</a></td>
+                    <td>
+                        <a class="btn btn-success" href={{ route('printrequests.show', $request->id) }}>Details</a>
+                        @if(!$request->status==1)
+                            <a class="btn btn-primary" href={{ route('printrequests.update', $request->id) }}>Edit</a>
+                            <a class="btn btn-danger" href={{ route('printrequests.show', $request->id) }}>Delete</a>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
             </tbody>
