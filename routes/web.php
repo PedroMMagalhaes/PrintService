@@ -16,11 +16,11 @@ Route::get('/create','PrintRequestsController@create')->name('create');
 Route::post('/store','PrintRequestsController@store')->name('printrequests.store');
 
 //rota edit request
-Route::get('/list/edit', 'PrintRequestsController@edit')->name('printrequests.edit');
-Route::post('/list/{id}/edit', 'PrintRequestsController@update')->name('printrequests.update');
+Route::get('/list/{request}/edit', 'PrintRequestsController@edit')->name('printrequests.edit');
+Route::post('/list/{request}', 'PrintRequestsController@update')->name('printrequests.update');
 
 //rota delete request
-Route::delete('dashboard', 'PrintRequestsController@destroy')
+Route::delete('/list/{id}', 'PrintRequestsController@destroy')
     ->name('printrequests.destroy');
 
 //rota users

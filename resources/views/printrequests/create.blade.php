@@ -8,15 +8,11 @@
     <div class="col-sm-8">
 
         <!-- Erros .... -->
-
-        @include('layout.errors')
-        @if(Session::has('message'))
-            <div class="alert alert-success fade in alert-dismissable">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-
-            {{Session::get('message')}}
-        </div>
+        @if(count($errors) > 0)
+            @include('layout.errors')
         @endif
+
+        @include('partials.flashmessages')
 
         <h1> Create a New Request</h1>
 
@@ -84,7 +80,7 @@
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Create</button>
-                <button type="submit" class="btn btn-default" name="cancel">Cancel</button>
+                <a class="btn btn-default btn-close" href="{{ route('home') }}">Cancel</a>
             </div>
 
         </form>

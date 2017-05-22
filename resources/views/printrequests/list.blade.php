@@ -23,11 +23,6 @@
                         </form>
                     <!--{!! Form::close() !!}-->
                     </div>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <a class="btn btn-success" href="{{ route('create')}}">Create new</a>
-                        </div>
-                    </div>
                 </div>
         </div>
 
