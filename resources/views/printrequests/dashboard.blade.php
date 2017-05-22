@@ -57,7 +57,7 @@
                         <a class="btn btn-success" href={{ route('printrequests.show', $request->id) }}>Details</a>
                         @if(!$request->status==1)
                             <a class="btn btn-primary" href={{ route('printrequests.update', $request->id) }}>Edit</a>
-                            <a class="btn btn-danger" href={{ route('printrequests.show', $request->id) }}>Delete</a>
+                            <a class="btn btn-danger" href={{ route('printrequests.destroy', $request->id) }}>Delete</a>
                         @endif
                     </td>
                 </tr>

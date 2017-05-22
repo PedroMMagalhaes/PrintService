@@ -68,15 +68,15 @@ class PrintRequestsController extends Controller
         return redirect()->route('create')->with('message', 'teste');
     }
 
-    /*/{1}/edit*/
+    /*{1}/edit*/
     public function update(CreatePrintRequest $request, $id)
     {
 
         $currentRequest = Request::findOrFaiil($id);
 
         $currentRequest->owner_id = Auth::user()->id;
-        $currentRequest->fill(\Input::all());
-        $currentRequest->file = \Input::get('file');
+        $currentRequest->fill(Input::all());
+        $currentRequest->file = Input::get('file');
         if (!$currentRequest->save()) {
             $message = ['message_error' => 'Failed to edit request'];
         } else {
@@ -86,11 +86,15 @@ class PrintRequestsController extends Controller
     }
 
 
-
     public function destroy($id)
     {
         $currentRequest = Request::findOrFaiil($id);
         $currentRequest->delete();
+        $currentRequest->session()->flash('alert-success', ' Request deleted successfully.');
+
+        if (!$id->delete()) {
+            $message = ['message_error' => 'Failed to remove user'];
+        }
 
         return Redirect::route('printrequests.dashboard');
     }
