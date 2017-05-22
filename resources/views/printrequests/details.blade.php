@@ -128,13 +128,27 @@
             {{ Form::close() }}
             <div class="comments">
                 <ul class="list-group">
-                    @foreach ($requestData->comments as $comment)
+                    <?php $pid=1 ?>
+                    @foreach ($comments as $comment)
+                        @if(is_null($comment->parent_id))
+                        <?php $pid=$comment->id ?>
                         <li class="list-group-item">
                             <strong>
-                                {{$comment->created_at}}
+                                 {{$comment->created_at}} 
                             </strong>
                             {{$comment->comment}}
                         </li>
+                        @foreach ($comments as $subcomment)
+                        @if($pid==$subcomment->parent_id)
+                        <li class="list-group-item list-group-item-info">
+                            <strong>
+                                {{$subcomment->created_at}}
+                            </strong>
+                            {{$subcomment->comment}}
+                        </li>
+                        @endif
+                        @endforeach
+                        @endif
                     @endforeach
                 </ul>
             </div>

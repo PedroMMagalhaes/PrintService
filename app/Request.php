@@ -18,7 +18,7 @@ class Request extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Comment')->orderBy('created_at');
+        return $this->hasMany('App\Comment')->groupBy('parent_id')->orderBy('created_at');
     }
 
     public function printers()
