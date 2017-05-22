@@ -113,11 +113,15 @@ class UserController extends Controller
   {
     //  $this->authorize('create', User::class);
     //  $title = 'Add user';
-      $user = User::create($request->input());
+
+
+      $user = User::create($request->input())->except(['_token']);
+      
+
       $user->password = password_hash($user->password, PASSWORD_DEFAULT);
               $message = ['message_success' => 'User created successfully'];
       if (!$user->save()) {
-          $message = ['message_error' => 'Failed to create user'];
+          $message = ['message_error  ' => 'Failed to create user'];
       }
 
       Mail::to($user->email)->send(new ConfirmationEmail($user));
