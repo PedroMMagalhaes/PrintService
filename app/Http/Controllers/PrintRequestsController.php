@@ -32,9 +32,10 @@ class PrintRequestsController extends Controller
         return view('printrequests.create');
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('printrequests.edit');
+        $title = 'Edit request';
+        return view('printrequests.edit', compact('title', 'request'));
     }
 
 
@@ -67,33 +68,35 @@ class PrintRequestsController extends Controller
         return redirect()->route('create')->with('message', 'teste');
     }
 
-    /*/{1}/edit*/
+    /*{1}/edit*/
     public function update(CreatePrintRequest $request, $id)
     {
 
         $currentRequest = Request::findOrFaiil($id);
 
-        $currentRequest->description = Input::get('description');
-        $currentRequest->due_date = Input::get('due_date');
-        $currentRequest->quantity = Input::get('quantity');
-        $currentRequest->colored = Input::get('print_type');
-        $currentRequest->stapled = Input::get('stapled');
         $currentRequest->owner_id = Auth::user()->id;
-
+        $currentRequest->fill(Input::all());
+        $currentRequest->file = Input::get('file');
         if (!$currentRequest->save()) {
             $message = ['message_error' => 'Failed to edit request'];
         } else {
             $message = ['message_success' => 'Request successfully edited'];
         }
-        return Redirect::route('dashboard');
+        return Redirect::route('printrequests.dashboard')->with($message);
     }
+
 
     public function destroy($id)
     {
         $currentRequest = Request::findOrFaiil($id);
         $currentRequest->delete();
+        $currentRequest->session()->flash('alert-success', ' Request deleted successfully.');
 
-        return Redirect::route('dashboard');
+        if (!$id->delete()) {
+            $message = ['message_error' => 'Failed to remove user'];
+        }
+
+        return Redirect::route('printrequests.dashboard');
     }
 
 
@@ -106,7 +109,7 @@ class PrintRequestsController extends Controller
         $printers=DB::table('printers')->distinct()->pluck('name');
         $user = Auth::user();
         if($user->isAdmin()||$user->id == $requestData->owner_id){
-            return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment', 'request', 'printers','user'));
+            return view('printrequests.details', compact('requestData', 'userData', 'userDepartment', 'request', 'printers','user'));
         }
     }
 

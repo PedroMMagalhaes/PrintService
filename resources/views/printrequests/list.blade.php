@@ -3,7 +3,7 @@
 @section ('content')
 
     <div class="col-sm-8">
-        <!-- Default panel contents -->
+
         <h1>Print Requests List</h1>
         <div class="container">
 
