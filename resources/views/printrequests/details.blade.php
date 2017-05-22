@@ -74,7 +74,7 @@
             </tr>
             </tbody>
         </table>
-
+        @if($user->isAdmin())
         @if ($requestData->status == "0")
             {{Form::open(array('route' => array('printrequests.complete', $requestData->id), 'method' => 'POST'))}}
             <div class="form-group">
@@ -83,6 +83,8 @@
             </div>
             {{ Form::close() }}
         @endif
+        @endif
+        @if($user->isPublisher())
         @if ($requestData->status == "1" && is_null($requestData->satisfaction_grade))
             <p>
                 How satisfacted are you with the printing quality?
@@ -103,7 +105,8 @@
 
             @endif
         @endif
-
+        @endif
+        @if($user->isAdmin())
         @if($requestData->status == "0" && is_null($requestData->refused_reason))
             {{Form::open(array('route' => array('printrequests.refuseRequest', $requestData->id), 'method' => 'POST'))}}
             {{ csrf_field() }}
@@ -119,13 +122,13 @@
                 </span>
                     @endif
                     @endif
+                    @endif
                 </div>
             </div>
             {{ Form::close() }}
             <div class="comments">
                 <ul class="list-group">
                     @foreach ($requestData->comments as $comment)
-                        
                         <li class="list-group-item">
                             <strong>
                                 {{$comment->created_at}}

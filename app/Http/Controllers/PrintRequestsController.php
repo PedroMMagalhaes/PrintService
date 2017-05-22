@@ -104,7 +104,10 @@ class PrintRequestsController extends Controller
         $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
         $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
         $printers=DB::table('printers')->distinct()->pluck('name');
-        return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment', 'request', 'printers'));
+        $user = Auth::user();
+        if($user->isAdmin()||$user->id == $requestData->owner_id){
+            return view('/printrequests/details', compact('requestData', 'userData', 'userDepartment', 'request', 'printers','user'));
+        }
     }
 
     public function download($id)
