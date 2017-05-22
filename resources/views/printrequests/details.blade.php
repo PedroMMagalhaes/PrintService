@@ -155,9 +155,33 @@
                         </li>
                         @endif
                         @endforeach
+                        {{Form::open(array('route' => array('comments.create',$requestData->id,$comment->id), 'method' => 'POST'))}}
+                        {{ csrf_field() }}
+                        <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                        <input id="comment" type="text" class="form-control" name="comment" value="" required
+                               autofocus>
+                        {{Form::submit('Reply to Comment Thread')}}
+                        @if ($errors->has('comment'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('comment') }}</strong>
+                        @endif
+                        </div>
+                        {{ Form::close() }}
                         @endif
                         @endif
                     @endforeach
+                    {{Form::open(array('route' => array('comments.create',$requestData->id), 'method' => 'POST'))}}
+                    {{ csrf_field() }}
+                    <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                    <input id="comment" type="text" class="form-control" name="comment" value="" required
+                           autofocus>
+                    {{Form::submit('New Comment')}}
+                    @if ($errors->has('comment'))
+                        <span class="help-block">
+                    <strong>{{ $errors->first('comment') }}</strong>
+                    @endif
+                    </div>
+                    {{ Form::close() }}
                 </ul>
             </div>
     </div>
