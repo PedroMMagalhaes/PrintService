@@ -9,16 +9,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreatePrintRequest;
 
-
-
 class PrintRequestsController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function list()
     {
         $keyword = Input::get('keyword', '');
@@ -28,31 +30,28 @@ class PrintRequestsController extends Controller
         return view('printrequests.list', compact('requests','order'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('printrequests.create');
     }
 
-    public function edit(Request $request)
-    {
-        $title = 'Edit request';
-        return view('printrequests.edit', compact('title', 'request'));
-    }
-
-
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(CreatePrintRequest $request)
     {
         $newRequest = new Request;
 
         $newRequest->owner_id = Auth::user()->id;
-        $newRequest->description = Input::get('description');
-        $newRequest->due_date = Input::get('due_date');
-        $newRequest->quantity = Input::get('quantity');
-        $newRequest->colored = Input::get('print_type');
-        $newRequest->stapled = Input::get('stapled');
-        $newRequest->paper_size = Input::get('paper_size');
-        $newRequest->paper_type = Input::get('paper_type');
+        $newRequest->fill($request->all());
         $newRequest->file = $_FILES["file"]["name"];
         $name= $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
@@ -66,17 +65,53 @@ class PrintRequestsController extends Controller
         } else {
             $message = ['message_success' => 'Request created successfully'];
         }
-        return redirect()->route('create')->with('message', 'teste');
+        return redirect()->route('create')->with($message);
     }
 
-    /*{1}/edit*/
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $requestData=Request::find($id);
+        //$requestData = DB::table('requests')->find($id);
+        $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
+        $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
+        $printers=DB::table('printers')->distinct()->pluck('name');
+        $user = Auth::user();
+        if($user->isAdmin()||$user->id == $requestData->owner_id){
+            return view('printrequests.details', compact('requestData', 'userData', 'userDepartment', 'request', 'printers','user'));
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request)
+    {
+        $title = 'Edit request';
+        return view('printrequests.edit', compact('title', 'request'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(CreatePrintRequest $request, $id)
     {
-
-        $currentRequest = Request::findOrFaiil($id);
+        $currentRequest = Request::findOrFail($id);
 
         $currentRequest->owner_id = Auth::user()->id;
-        $currentRequest->fill(Input::all());
+        $currentRequest->fill($request->all());
         $currentRequest->file = Input::get('file');
         if (!$currentRequest->save()) {
             $message = ['message_error' => 'Failed to edit request'];
@@ -86,7 +121,12 @@ class PrintRequestsController extends Controller
         return Redirect::route('printrequests.dashboard')->with($message);
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         $currentRequest = Request::findOrFaiil($id);
@@ -98,21 +138,6 @@ class PrintRequestsController extends Controller
         }
 
         return Redirect::route('printrequests.dashboard');
-    }
-
-
-    public function show($id)
-    {
-        $requestData=Request::find($id);
-        //$requestData = DB::table('requests')->find($id);
-        $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
-        $comments= Comment::where('request_id',$id)->orderBy('created_at')->get();
-        $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
-        $printers=DB::table('printers')->distinct()->pluck('name');
-        $user = Auth::user();
-        if($user->isAdmin()||$user->id == $requestData->owner_id){
-            return view('printrequests.details', compact('requestData', 'userData', 'userDepartment', 'comments', 'printers','user'));
-        }
     }
 
     public function download($id)
@@ -158,23 +183,23 @@ class PrintRequestsController extends Controller
         }
         $keyword = Input::get('keyword', '');
         if($criteria == "empl"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->SearchByKeyword($keyword)->orderBy('users.name',"$order")->paginate(5);
+            $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->SearchByKeyword($keyword)->orderBy('users.name',"$order")->paginate(5);
         }
         if($criteria == "date"){
-        $requests = Request::SearchByKeyword($keyword)->orderBy('due_date',"$order")->paginate(5);
+            $requests = Request::SearchByKeyword($keyword)->orderBy('due_date',"$order")->paginate(5);
         }
         if($criteria == "desc"){
-        $requests = Request::SearchByKeyword($keyword)->orderBy('description',"$order")->paginate(5);
+            $requests = Request::SearchByKeyword($keyword)->orderBy('description',"$order")->paginate(5);
         }
         if($criteria == "pape"){
-        $requests = Request::SearchByKeyword($keyword)->orderBy('paper_type',"$order")->paginate(5);
+            $requests = Request::SearchByKeyword($keyword)->orderBy('paper_type',"$order")->paginate(5);
         }
         if($criteria == "stat"){
-        $requests = Request::SearchByKeyword($keyword)->orderBy('status',"$order")->paginate(5);
+            $requests = Request::SearchByKeyword($keyword)->orderBy('status',"$order")->paginate(5);
         }
         if($criteria == "depa"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name',"$order");
-        $requests = Request::join('users', 'users.department_id', '=', 'department.id')->SearchByKeyword($keyword)->paginate(5);
+            $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name',"$order");
+            $requests = Request::join('users', 'users.department_id', '=', 'department.id')->SearchByKeyword($keyword)->paginate(5);
         }
         return view('printrequests.list', compact('requests','order'));
     }
