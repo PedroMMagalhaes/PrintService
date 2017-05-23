@@ -8,6 +8,7 @@ use App\Comment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreatePrintRequest;
+use App\Http\Requests\UpdatePrintRequest;
 
 
 
@@ -35,6 +36,7 @@ class PrintRequestsController extends Controller
 
     public function edit(Request $request)
     {
+        $this->authorize('update', $request);
         $title = 'Edit request';
         return view('printrequests.edit', compact('title', 'request'));
     }
@@ -63,15 +65,15 @@ class PrintRequestsController extends Controller
     }
 
     /*{1}/edit*/
-    public function update(CreatePrintRequest $request, $id)
+    public function update(UpdatePrintRequest $request, Request $requestValue)
     {
 
-        $currentRequest = Request::findOrFaiil($id);
+        $this->authorize('update', $requestValue);
 
-        $currentRequest->owner_id = Auth::user()->id;
-        $currentRequest->fill($request->all());
-        $currentRequest->file = Input::get('file');
-        if (!$currentRequest->save()) {
+        $requestValue->owner_id = Auth::user()->id;
+        $requestValue->fill($request->all());
+        $requestValue->file = Input::get('file');
+        if (!$requestValue->save()) {
             $message = ['message_error' => 'Failed to edit request'];
         } else {
             $message = ['message_success' => 'Request successfully edited'];
