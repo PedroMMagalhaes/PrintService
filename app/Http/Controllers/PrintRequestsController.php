@@ -158,6 +158,7 @@ class PrintRequestsController extends Controller
         }
         if($criteria == "date"){
         $requests = Request::SearchByKeyword($keyword)->orderBy('due_date',"$order")->paginate(5);
+        //ver bug com SearchByKeyword
         }
         if($criteria == "description"){
         $requests = Request::SearchByKeyword($keyword)->orderBy('description',"$order")->paginate(5);

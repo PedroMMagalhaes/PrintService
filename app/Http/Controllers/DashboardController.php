@@ -28,8 +28,9 @@ class DashboardController extends Controller
        }
 
         $order='ASC';
+        $criteria='id';
 
-        return view('printrequests.dashboard', compact('requests','order'));
+        return view('printrequests.dashboard', compact('requests','order','criteria'));
     }
 
 }
