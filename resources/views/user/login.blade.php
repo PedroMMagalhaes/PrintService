@@ -1,13 +1,8 @@
 @extends ('layout.master')
 
 
-
 @section('content')
 
-
-<div class = "col-md-8">
-
-  <h1>Sign In </h1>
 
 @include('layout.flash')
 
@@ -15,27 +10,24 @@
 
 {{ csrf_field() }}
 
-<div class="form-group">
+<!--  LOGIN -->
 
-  <label for="email">Email:</label>
-    <input type="email" class="form-control" id="email" name="email">
-
-    </div>
-
-    <div class="form-group">
-
-      <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password">
-        </div>
-
-        <div class ="form-group">
-          <button type ="submit" class="btn btn-primary">Sign In</button>
-        </div>
-
-        @include('layout.errors')
-
+<div class="wrapper">
+  <form class="form-signin">
+    <h2 class="form-signin-heading">Please login</h2>
+    <p>
+    </p>
+    <input type="text" class="form-control" name="username" id="email" placeholder="Email Address" required="" autofocus="" />
+    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required=""/>
+    <label class="checkbox">
+      <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+    </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
   </form>
 </div>
 
+<!--  LOGIN -->
+
+        @include('layout.errors')
 
 @endsection
