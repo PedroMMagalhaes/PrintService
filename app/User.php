@@ -24,7 +24,7 @@ class User extends Authenticatable
         'name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id', 'profile_photo'
     ];
 
-    
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -35,7 +35,7 @@ class User extends Authenticatable
     ];
 
     protected $guarded = [
-
+      'id',
     ];
 
 

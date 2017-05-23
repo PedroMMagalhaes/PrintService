@@ -112,11 +112,10 @@ class UserController extends Controller
   public function store(CreateUserPostRequest $request)
   {
     //  $this->authorize('create', User::class);
-    //  $title = 'Add user';
+    //  $title = 'Add user';  //->except(['_token'])
 
 
-      $user = User::create($request->input())->except(['_token']);
-
+      $user = User::create($request->input());
 
       $user->password = password_hash($user->password, PASSWORD_DEFAULT);
               $message = ['message_success' => 'User created successfully'];
