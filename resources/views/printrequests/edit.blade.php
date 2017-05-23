@@ -9,37 +9,31 @@
         <!-- Erros .... -->
 
         @include('layout.errors')
-        @if(Session::has('message'))
-            <div class="alert alert-success fade in alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-
-                {{Session::get('message')}}
-            </div>
-        @endif
 
         <h1> Edit Request </h1>
 
-        <form method="POST" action="{{route('printrequests.dashboard')}}" enctype="multipart/form-data">
+        <form action="{{route('printrequests.dashboard',[$request->id])}}" method="post">
+            <input type="hidden" name="user_id" value="<?= (int) $request->request_id?>" />
             {{ csrf_field() }}
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name ="description" placeholder="Description" value="{{old('description', $request->email)}}>
+                <input type="text" class="form-control" id="description" name ="description" placeholder="Description" value="{{ old('description', $request->description)}}"/>
             </div>
 
             <div class="form-group">
                 <label for="due_date">Due date</label>
-                <input type="date" class="form-control" id="due_date" name ="due_date">
+                <input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{ old('due_date', $request->due_date)}}"/>
             </div>
 
             <div class="form-group">
                 <label for="quantity">Quantity</label>
-                <input type="number" min="1" class="form-control" id="quantity" name ="quantity">
+                <input type="number" min="1" class="form-control" id="quantity" name ="quantity" placeholder="Quantity" value="{{ old('quantity', $request->quantity)}}"/>
             </div>
 
             <div class="form-group">
                 <label for="print_type">Print type</label>
-                <select name="print_type" id="print_type" class="form-control">
+                <select name="print_type" id="print_type" class="form-control"/>
                     <option disabled selected> -- select an option -- </option>
                     <option value="0">Black/White</option>
                     <option value="1">Color</option>
@@ -82,7 +76,7 @@
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Edit</button>
-                <button type="submit" class="btn btn-default" name="cancel">Cancel</button>
+                <a class="btn btn-default btn-close" href="{{ route('printrequests.dashboard') }}">Cancel</a>
             </div>
 
         </form>

@@ -139,6 +139,9 @@
                                  </p>
                             </strong>
                              <p>{{$comment->comment}} </p>
+                             @if($user->isAdmin())
+                             <td><a class="btn btn-primary" href={{ route('comments.block', ['requestID' => $requestData->id, 'commentID' => $comment->id]) }}>Block</a></td>
+                             @endif
                         </li>
                         @foreach ($comments as $subcomment)
                         @if($comment->id==$subcomment->parent_id && $subcomment->blocked==0)
@@ -150,12 +153,39 @@
                                 </p>
                             </strong>
                              <p>{{$subcomment->comment}} </p>
+                             @if($user->isAdmin())
+                             <td><a class="btn btn-primary" href={{ route('comments.block', ['requestID' => $requestData->id, 'commentID' => $subcomment->id]) }}>Block</a></td>
+                             @endif
                         </li>
                         @endif
                         @endforeach
+                        {{Form::open(array('route' => array('comments.create',$requestData->id,$comment->id), 'method' => 'POST'))}}
+                        {{ csrf_field() }}
+                        <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                        <input id="comment" type="text" class="form-control" name="comment" value="" required
+                               autofocus>
+                        {{Form::submit('Reply to Comment Thread')}}
+                        @if ($errors->has('comment'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('comment') }}</strong>
+                        @endif
+                        </div>
+                        {{ Form::close() }}
                         @endif
                         @endif
                     @endforeach
+                    {{Form::open(array('route' => array('comments.create',$requestData->id), 'method' => 'POST'))}}
+                    {{ csrf_field() }}
+                    <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                    <input id="comment" type="text" class="form-control" name="comment" value="" required
+                           autofocus>
+                    {{Form::submit('New Comment')}}
+                    @if ($errors->has('comment'))
+                        <span class="help-block">
+                    <strong>{{ $errors->first('comment') }}</strong>
+                    @endif
+                    </div>
+                    {{ Form::close() }}
                 </ul>
             </div>
     </div>

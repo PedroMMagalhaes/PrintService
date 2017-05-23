@@ -35,12 +35,57 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th><a href={{ route('printrequests.order',['criteria' => "desc", 'order' => $order]) }}></a>Description</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order]) }}></a>Due Date</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'empl','order' => $order]) }}></a>Employee</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'depa','order' => $order]) }}></a>Department</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'stat','order' => $order]) }}></a>Status</th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'pape','order' => $order]) }}></a>Paper Type</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'description','order' => $order]) }}>Description
+                    @if($criteria=='description')
+                    @if($order=='asc')
+                    ▲
+                    @else
+                    ▼
+                    @endif
+                    @endif
+                </th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order]) }}>Due Date
+                    @if($criteria=='date')
+                    @if($order=='asc')
+                    ▲
+                    @else
+                    ▼
+                    @endif
+                    @endif
+                </th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'employee','order' => $order]) }}>Employee
+                    @if($criteria=='employee')
+                    @if($order=='asc')
+                    ▲
+                    @else
+                    ▼
+                    @endif
+                    @endif
+                </th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'department','order' => $order]) }}>Department</th>
+                    @if($criteria=='department')
+                    @if($order=='asc')
+                    ▲
+                    @else
+                    ▼
+                    @endif
+                    @endif
+                <th><a href={{ route('printrequests.order',['criteria' => 'status','order' => $order]) }}>Status</th>
+                    @if($criteria=='status')
+                    @if($order=='asc')
+                    ▲
+                    @else
+                    ▼
+                    @endif
+                    @endif
+                <th><a href={{ route('printrequests.order',['criteria' => 'paper','order' => $order]) }}>Paper Type</th>
+                    @if($criteria=='paper')
+                    @if($order=='asc')
+                    ▲
+                    @else
+                    ▼
+                    @endif
+                    @endif
                 <th>Actions</th>
             </tr>
             </thead>

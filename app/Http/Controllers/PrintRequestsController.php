@@ -23,9 +23,9 @@ class PrintRequestsController extends Controller
     {
         $keyword = Input::get('keyword', '');
         $requests = Request::SearchByKeyword($keyword)->orderBy('description','ASC')->paginate(5);
-        $order='ASC';
-
-        return view('printrequests.list', compact('requests','order'));
+        $order='asc';
+        $criteria='id';
+        return view('printrequests.list', compact('requests','order','criteria'));
     }
 
     public function create()
@@ -44,15 +44,8 @@ class PrintRequestsController extends Controller
     public function store(CreatePrintRequest $request)
     {
         $newRequest = new Request;
-
         $newRequest->owner_id = Auth::user()->id;
-        $newRequest->description = Input::get('description');
-        $newRequest->due_date = Input::get('due_date');
-        $newRequest->quantity = Input::get('quantity');
-        $newRequest->colored = Input::get('print_type');
-        $newRequest->stapled = Input::get('stapled');
-        $newRequest->paper_size = Input::get('paper_size');
-        $newRequest->paper_type = Input::get('paper_type');
+        $newRequest->fill($request->all());
         $newRequest->file = $_FILES["file"]["name"];
         $name= $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
@@ -76,7 +69,7 @@ class PrintRequestsController extends Controller
         $currentRequest = Request::findOrFaiil($id);
 
         $currentRequest->owner_id = Auth::user()->id;
-        $currentRequest->fill(Input::all());
+        $currentRequest->fill($request->all());
         $currentRequest->file = Input::get('file');
         if (!$currentRequest->save()) {
             $message = ['message_error' => 'Failed to edit request'];
@@ -110,6 +103,7 @@ class PrintRequestsController extends Controller
         $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
         $printers=DB::table('printers')->distinct()->pluck('name');
         $user = Auth::user();
+
         if($user->isAdmin()||$user->id == $requestData->owner_id){
             return view('printrequests.details', compact('requestData', 'userData', 'userDepartment', 'comments', 'printers','user'));
         }
@@ -151,31 +145,30 @@ class PrintRequestsController extends Controller
     {
         //$keyword = Input::get('keyword', '');
         //$requests = Request::SearchByKeyword($keyword)->paginate(5);
-        if($order=='ASC'){
-            $order='DESC';
+        if($order=='asc'){
+            $order='desc';
         }else{
-            $order='ASC';
+            $order='asc';
         }
         $keyword = Input::get('keyword', '');
-        if($criteria == "empl"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->SearchByKeyword($keyword)->orderBy('users.name',"$order")->paginate(5);
+        if($criteria == "employee"){
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->SearchByKeyword($keyword)->orderBy('users.name',"$order")->paginate(5);
         }
         if($criteria == "date"){
         $requests = Request::SearchByKeyword($keyword)->orderBy('due_date',"$order")->paginate(5);
         }
-        if($criteria == "desc"){
+        if($criteria == "description"){
         $requests = Request::SearchByKeyword($keyword)->orderBy('description',"$order")->paginate(5);
         }
-        if($criteria == "pape"){
+        if($criteria == "paper"){
         $requests = Request::SearchByKeyword($keyword)->orderBy('paper_type',"$order")->paginate(5);
         }
-        if($criteria == "stat"){
+        if($criteria == "status"){
         $requests = Request::SearchByKeyword($keyword)->orderBy('status',"$order")->paginate(5);
         }
-        if($criteria == "depa"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->orderBy('users.name',"$order");
-        $requests = Request::join('users', 'users.department_id', '=', 'department.id')->SearchByKeyword($keyword)->paginate(5);
+        if($criteria == "department"){
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->SearchByKeyword($keyword)->orderBy('users.department_id',"$order")->paginate(5);
         }
-        return view('printrequests.list', compact('requests','order'));
+        return view('printrequests.list', compact('requests','order','criteria'));
     }
 }

@@ -2,19 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Comment;
+use Auth;
+use App\Comment;
 use App\Request;
-use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+
+
 
 class CommentsController extends Controller
 {
 
-  public function static getUserName($userID)
+  public function block($requetsID,$commentID)
   {
-    $authorName=DB::table('users')->find($userID)->name;
-    return $authorName;
+    DB::table('comments')->where('id', $commentID)->update(['blocked'=>1]);
+    return back();
+
+  }
+
+  public function createComment($requestID,$commentID=null){
+    $newComment = new Comment;
+    $newComment->comment = request('comment');
+    $newComment->blocked = 0;
+    $newComment->request_id = $requestID;
+    $newComment->parent_id = $commentID;
+    $newComment->user_id = Auth::user()->id;
+    $newComment->save();
+    return back();
 
 
   }
