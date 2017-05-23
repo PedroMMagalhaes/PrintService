@@ -7,9 +7,9 @@
         <h1>Dashboard</h1>
         <div class="container">
 
+
                 <div class="row">
                     <div clas="col-sm-6">
-                    <!--{!! Form::open(['method'=>'GET','url'=>'request','class'=>'navbar-form navbar-left','role'=>'search']) !!}-->
                         <form method="get" action="{{ route('list') }}">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" name="search" placeholder="Search..."
@@ -21,8 +21,8 @@
                         </span>
                             </div>
                         </form>
-                    <!--{!! Form::close() !!}-->
                     </div>
+
                     <div class="col-sm-6">
                         <div class="row">
                             <a class="btn btn-success" href="{{ route('create')}}">Create new</a>
@@ -90,19 +90,22 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($requests as $request)
+            @foreach ($requests as $requestValue)
                 <tr>
-                    <td>{{ $request->description }}</td>
-                    <td>{{ $request->due_date }}</td>
-                    <td>{{ $request->users->name }}</td>
-                    <td>{{ $request->users->departToStr()}}</td>
-                    <td>{{ $request->typeToStrState()}}</td>
-                    <td>{{ $request->typeToStrPaperType()}}</td>
+                    <td>{{ $requestValue->description }}</td>
+                    <td>{{ $requestValue->due_date }}</td>
+                    <td>{{ $requestValue->users->name }}</td>
+                    <td>{{ $requestValue->users->departToStr()}}</td>
+                    <td>{{ $requestValue->typeToStrState()}}</td>
+                    <td>{{ $requestValue->typeToStrPaperType()}}</td>
                     <td>
-                        <a class="btn btn-success" href={{ route('printrequests.show', $request->id) }}>Details</a>
-                        @if(!$request->status==1)
-                            <a class="btn btn-primary" href={{ route('printrequests.update', $request->id) }}>Edit</a>
-                            <a class="btn btn-danger" href={{ route('printrequests.destroy', $request->id) }}>Delete</a>
+                        <a class="btn btn-success" href={{ route('printrequests.show', [$requestValue->id]) }}>Details</a>
+                        @if(!$requestValue->status==1)
+                            @can('update', $requestValue)
+                                <a class="btn btn-primary" href="{{ route('printrequests.edit', [$requestValue->id]) }}">Edit</a>
+                            @endcan
+
+                            <a class="btn btn-danger" href="{{ route('printrequests.destroy', [$requestValue->id]) }}">Delete</a>
                         @endif
                     </td>
                 </tr>
