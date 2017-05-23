@@ -12,8 +12,8 @@
   <meta name="generator" content="Codeply">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-
-  <link rel="stylesheet" href="css/style.css" />
+  <!--link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" /> -->
+  <link rel="stylesheet" href="{{ URL::asset('css/sidebar.css') }}" />
 </head>
 
 

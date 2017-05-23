@@ -24,7 +24,7 @@ class User extends Authenticatable
         'name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id', 'profile_photo'
     ];
 
-    
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -36,7 +36,7 @@ class User extends Authenticatable
     ];
 
     protected $guarded = [
-      'id',
+      'id','remember_token'
     ];
 
 
@@ -106,7 +106,7 @@ class User extends Authenticatable
   {
       parent::boot();
       static::creating(function ($user) {
-          $user->token = str_random(40);
+          $user->remember_token = str_random(40);
       });
   }
 
@@ -116,7 +116,7 @@ public function hasVerified()
 {
 
     $this->verified = true;
-    $this->token = null;
+    $this->remember_token = null;
 
     $this->save();
 }
