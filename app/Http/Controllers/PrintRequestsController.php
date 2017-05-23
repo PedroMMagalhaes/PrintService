@@ -25,8 +25,6 @@ class PrintRequestsController extends Controller
         $requests = Request::SearchByKeyword($keyword)->orderBy('description','ASC')->paginate(5);
         $order='asc';
         $criteria='id';
-
-
         return view('printrequests.list', compact('requests','order','criteria'));
     }
 
