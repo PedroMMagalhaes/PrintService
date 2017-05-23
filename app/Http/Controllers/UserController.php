@@ -116,7 +116,7 @@ class UserController extends Controller
 
 
       $user = User::create($request->input())->except(['_token']);
-      
+
 
       $user->password = password_hash($user->password, PASSWORD_DEFAULT);
               $message = ['message_success' => 'User created successfully'];
