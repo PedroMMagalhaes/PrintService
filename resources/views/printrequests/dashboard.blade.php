@@ -90,22 +90,31 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($requests as $requestValue)
+            @foreach ($requests as $request)
                 <tr>
-                    <td>{{ $requestValue->description }}</td>
-                    <td>{{ $requestValue->due_date }}</td>
-                    <td>{{ $requestValue->users->name }}</td>
-                    <td>{{ $requestValue->users->departToStr()}}</td>
-                    <td>{{ $requestValue->typeToStrState()}}</td>
-                    <td>{{ $requestValue->typeToStrPaperType()}}</td>
+                    <td>{{ $request->description }}</td>
+                    <td>{{ $request->due_date }}</td>
+                    <td>{{ $request->users->name }}</td>
+                    <td>{{ $request->users->departToStr()}}</td>
+                    <td>{{ $request->typeToStrState()}}</td>
+                    <td>{{ $request->typeToStrPaperType()}}</td>
                     <td>
-                        <a class="btn btn-success" href={{ route('printrequests.show', [$requestValue->id]) }}>Details</a>
-                        @if(!$requestValue->status==1)
-                            @can('update', $requestValue)
-                                <a class="btn btn-primary" href="{{ route('printrequests.edit', [$requestValue->id]) }}">Edit</a>
-                            @endcan
+                        <a class="btn btn-success" href={{ route('printrequests.show', [$request->id]) }}>Details</a>
+                        @if(!$request->status==1)
 
-                            <a class="btn btn-danger" href="{{ route('printrequests.destroy', [$requestValue->id]) }}">Delete</a>
+                                <a class="btn btn-primary" href="{{ route('printrequests.edit', [$request->id]) }}">Edit</a>
+
+
+                            <a class="btn btn-danger" href="{{ route('printrequests.destroy', [$request->id]) }}">Delete</a>
+
+
+                            <form action="{{route('users.destroy', [$user->id])}}" method="post" class="inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                </div>
+
                         @endif
                     </td>
                 </tr>

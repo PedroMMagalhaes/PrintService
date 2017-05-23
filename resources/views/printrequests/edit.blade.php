@@ -12,25 +12,25 @@
 
         <h1> Edit Request </h1>
 
-        <form action="{{route('printrequests.update',[$requestValue->id])}}" method="post" class="form-group">
-            <input type="hidden" name="$requestValue_id" value="<?= (int) $requestValue->$requestValue_id?>" />
+        <form action="{{route('printrequests.update',[$request->id])}}" method="post" class="form-group">
+            <input type="hidden" name="request_id" value="<?= (int) $request->request_id?>" />
 
 
             {{ csrf_field() }}
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name ="description" placeholder="Description" value="{{ old('description', $requestValue->description)}}"/>
+                <input type="text" class="form-control" id="description" name ="description" placeholder="Description" value="{{ old('description', $request->description)}}"/>
             </div>
 
             <div class="form-group">
                 <label for="due_date">Due date</label>
-                <input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{ old('due_date', $requestValue->due_date)}}"/>
+                <input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{ old('due_date', $request->due_date)}}"/>
             </div>
 
             <div class="form-group">
                 <label for="quantity">Quantity</label>
-                <input type="number" min="1" class="form-control" id="quantity" name ="quantity" placeholder="Quantity" value="{{ old('quantity', $requestValue->quantity)}}"/>
+                <input type="number" min="1" class="form-control" id="quantity" name ="quantity" placeholder="Quantity" value="{{ old('quantity', $request->quantity)}}"/>
             </div>
 
             <div class="form-group">

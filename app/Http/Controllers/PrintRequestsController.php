@@ -36,7 +36,7 @@ class PrintRequestsController extends Controller
 
     public function edit(Request $request)
     {
-        $this->authorize('update', $request);
+        //$this->authorize('update', $request);
         $title = 'Edit request';
         return view('printrequests.edit', compact('title', 'request'));
     }
@@ -61,14 +61,14 @@ class PrintRequestsController extends Controller
         } else {
             $message = ['message_success' => 'Request created successfully'];
         }
-        return redirect()->route('create')->with('message', 'teste');
+        return redirect()->route('create')->with($message);
     }
 
     /*{1}/edit*/
     public function update(UpdatePrintRequest $request, Request $requestValue)
     {
 
-        $this->authorize('update', $requestValue);
+        //$this->authorize('update', $requestValue);
 
         $requestValue->owner_id = Auth::user()->id;
         $requestValue->fill($request->all());
@@ -78,21 +78,24 @@ class PrintRequestsController extends Controller
         } else {
             $message = ['message_success' => 'Request successfully edited'];
         }
-        return Redirect::route('printrequests.dashboard')->with($message);
+        return redirect()->route('printrequests.dashboard')->with($message);
     }
 
 
     public function destroy($id)
     {
+
         $currentRequest = Request::findOrFaiil($id);
         $currentRequest->delete();
         $currentRequest->session()->flash('alert-success', ' Request deleted successfully.');
 
         if (!$id->delete()) {
             $message = ['message_error' => 'Failed to remove user'];
+        }else {
+            $message = ['message_success' => 'Request successfully deleted'];
         }
 
-        return Redirect::route('printrequests.dashboard');
+        return redirect()->route('printrequests.dashboard')->with($message);
     }
 
 
