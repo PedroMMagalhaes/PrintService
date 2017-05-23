@@ -128,8 +128,8 @@ class UserController extends Controller
 // visto ser ativado por email nao iremos autenticar logo pois a conta está bloqueada
 //    auth()->login($user);
 
-
-      return home()->with('status', 'Please confirm your email address');
+      return redirect()->route('home')->with('status', 'Please confirm your email address');
+      //return home()
   }
 
 
@@ -261,9 +261,9 @@ class UserController extends Controller
      * @param  string $token
      * @return mixed
      */
-    public function confirmEmail($token)
+    public function confirmEmail($remember_token)
     {
-        User::whereToken($token)->firstOrFail()->confirmEmail();
+        User::whereToken($remember_token)->firstOrFail()->confirmEmail();
         return redirect('login')->with('status', 'You are now confirmed. Please login.');
     }
 
