@@ -25,6 +25,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\CreatePrintRequest' => $baseDir . '/app/Http/Requests/CreatePrintRequest.php',
     'App\\Http\\Requests\\CreateUserPostRequest' => $baseDir . '/app/Http/Requests/CreateUserPostRequest.php',
+    'App\\Http\\Requests\\UpdatePrintRequest' => $baseDir . '/app/Http/Requests/UpdatePrintRequest.php',
     'App\\Http\\Requests\\UpdateUserRequest' => $baseDir . '/app/Http/Requests/UpdateUserRequest.php',
     'App\\Mail\\ConfirmationEmail' => $baseDir . '/app/Mail/ConfirmationEmail.php',
     'App\\Policies\\UserPolicy' => $baseDir . '/app/Policies/UserPolicy.php',

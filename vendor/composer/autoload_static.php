@@ -330,6 +330,7 @@ class ComposerStaticInit9f7123053474ba579fb47d687e6c2ec0
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\CreatePrintRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CreatePrintRequest.php',
         'App\\Http\\Requests\\CreateUserPostRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CreateUserPostRequest.php',
+        'App\\Http\\Requests\\UpdatePrintRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdatePrintRequest.php',
         'App\\Http\\Requests\\UpdateUserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateUserRequest.php',
         'App\\Mail\\ConfirmationEmail' => __DIR__ . '/../..' . '/app/Mail/ConfirmationEmail.php',
         'App\\Policies\\UserPolicy' => __DIR__ . '/../..' . '/app/Policies/UserPolicy.php',

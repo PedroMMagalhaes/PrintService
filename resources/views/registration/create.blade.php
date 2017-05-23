@@ -103,21 +103,11 @@
             </div>
 
 
-            <div class="form-group">
+            <input type="hidden" name="print_evals" value="0" />
 
-              <label for="print_evals">print_evals:</label>
-              <input type="number" class="form-control" id="print_evals" name ="print_evals">
+            <input type="hidden" name="print_counts" value="0" />
 
-            </div>
-
-
-            <div class="form-group">
-
-              <label for="print_counts">print_counts:</label>
-              <input type="number" class="form-control" id="print_counts" name ="print_counts">
-
-            </div>
-
+          
 
             <div class="form-group">
 
