@@ -39,6 +39,18 @@ class Request extends Model
         return 'Unknown';
     }
 
+    public static function strToTypeState($status)
+    {
+        switch ($status) {
+            case 'In process':
+                return 0;
+            case 'Closed':
+                return 1;
+        }
+
+        return -1;
+    }
+
     public function typeToStrPaperType()
     {
         switch ($this->paper_type) {

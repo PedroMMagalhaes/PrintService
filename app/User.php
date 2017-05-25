@@ -86,7 +86,7 @@ class User extends Authenticatable
         return 'Unknown';
     }
 
-    public function strToDepart($string)
+    public static function strToDepart($string)
     {
         switch ($string) {
             case 'Ciências Jurídicas':

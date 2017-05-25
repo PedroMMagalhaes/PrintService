@@ -105,7 +105,7 @@
         </table>
 
         <div class="text-center" style="...">
-            {{ $requests->links() }}
+            {{ $requests->appends(Request::input())->links() }}
         </div>
 
     </div>

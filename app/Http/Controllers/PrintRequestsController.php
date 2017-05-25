@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Request;
 use App\Comment;
-use App\Department;
+use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreatePrintRequest;
@@ -154,12 +154,14 @@ class PrintRequestsController extends Controller
 
     public function searchByKeyword($query, $keyword)
     {
+        $status=Request::strToTypeState($keyword);
+        //$department=User::strToDepart($keyword);
         if (is_null($keyword)==false) {
-            //$department=Department::strToDepart($keyword);
-            $query->where(function ($query) use ($keyword) {
-                $query->where("description", "like","%$keyword%")
-                    ->orWhere("due_date", "like", "%$keyword%")
-                    ->orWhere("requests.status", "like", "%$keyword%")
+            $query->where(function ($query) use ($keyword,$status) {
+                $query->where("requests.description", "like","%$keyword%")
+                    ->orWhere("requests.due_date", "like", "%$keyword%")
+                    ->orWhere("requests.status", "like", "%$status%")
+                    //->orWhere("users.department_id", "like", "%$department%")
                     ->orWhere("users.name", "like", "%$keyword%");
             });
         }
