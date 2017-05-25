@@ -13,7 +13,7 @@
   <h1>Thanks for Sign Up</h1>
 
   <p>
-      You need to <a href='{{ url("user/confirm/{user->remember_token}") }}'> confirm your email address</a>
+      You need to <a href='{{ url("register/confirm/{user->remember_token}") }}'> confirm your email address</a>
   </p>
 
 </body>

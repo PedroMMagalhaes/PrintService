@@ -28,7 +28,7 @@ Route::get('/departmentStatistics','InicialController@departmentStatistics')->na
 //rota users
 Route::get('/register', 'UserController@create')->name('register');
 Route::post('/register', 'UserController@store')->name('register');
-Route::get('/register/confirm/{token}', 'UserController@confirmEmail')->name('confirmEmail');
+Route::get('/register/confirm/{remember_token}', 'UserController@confirmEmail')->name('confirmEmail');
 
 Route::get('/index', 'UserController@index')->name('index');
 
