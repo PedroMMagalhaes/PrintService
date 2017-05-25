@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Request;
 use App\Comment;
+use App\Department;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreatePrintRequest;
 use App\Http\Requests\UpdatePrintRequest;
+
+
+
 
 
 
@@ -24,10 +28,10 @@ class PrintRequestsController extends Controller
     {
 
         $keyword = Input::get('search', '');
-        $requests = Request::orderBy('description','ASC');
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('description','ASC');
         $requests=$this->searchByKeyword($requests,$keyword)->paginate(5);
         $order='asc';
-        $criteria='id';
+        $criteria='description';
         return view('printrequests.list', compact('requests','order','criteria'));
     }
 
@@ -151,10 +155,12 @@ class PrintRequestsController extends Controller
     public function searchByKeyword($query, $keyword)
     {
         if (is_null($keyword)==false) {
+            //$department=Department::strToDepart($keyword);
             $query->where(function ($query) use ($keyword) {
                 $query->where("description", "like","%$keyword%")
-                    ->orWhere("due_date", "like", "%$keyword%");
-                    //->orWhere("users->name", "like", "%$keyword%");
+                    ->orWhere("due_date", "like", "%$keyword%")
+                    ->orWhere("requests.status", "like", "%$keyword%")
+                    ->orWhere("users.name", "like", "%$keyword%");
             });
         }
         return $query;
@@ -171,23 +177,23 @@ class PrintRequestsController extends Controller
         }
         $keyword = Input::get('search', '');
         if($criteria == "employee"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('users.name',"$order")->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('users.name',"$order");
         }
         if($criteria == "date"){
-        $requests = Request::orderBy('due_date',"$order")->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('due_date',"$order");
         //ver bug com SearchByKeyword
         }
         if($criteria == "description"){
-        $requests = Request::orderBy('description',"$order");
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('description',"$order");
         }
         if($criteria == "paper"){
-        $requests = Request::orderBy('paper_type',"$order")->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('paper_type',"$order");
         }
         if($criteria == "status"){
-        $requests = Request::orderBy('status',"$order")->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('status',"$order");
         }
         if($criteria == "department"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('users.department_id',"$order")->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('users.department_id',"$order");
         }
         $requests=$this->searchByKeyword($requests,$keyword)->paginate(5);
         return view('printrequests.list', compact('requests','order','criteria'));

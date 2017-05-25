@@ -86,6 +86,39 @@ class User extends Authenticatable
         return 'Unknown';
     }
 
+    public function strToDepart($string)
+    {
+        switch ($string) {
+            case 'Ciências Jurídicas':
+                return 1;
+            case 'Ciências da Linguagem':
+                return 2;
+
+            case 'Engenharia do Ambiente':
+                return 3;
+
+            case 'Engenharia Civil':
+                return 4;
+
+            case 'Engenharia Eletrotécnica':
+                return 5;
+
+            case 'Engenharia Informática':
+                return 6;
+
+            case 'Engenharia Mecânica':
+                return 7;
+
+            case 'Gestão e Economia':
+                return 8;
+
+            case 'Matemática':
+                return 9;
+        }
+
+        return -1;
+    }
+
     public function isAdmin()
     {
         return $this->admin == 1;

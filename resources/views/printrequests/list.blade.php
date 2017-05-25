@@ -10,7 +10,7 @@
                 <div class="row">
                     <div clas="col-sm-6">
                     <!--{!! Form::open(['method'=>'GET','url'=>'request','class'=>'navbar-form navbar-left','role'=>'search']) !!}-->
-                        <form method="get" action="{{ route('list') }}">
+                        <form method="get" action="{{ route('printrequests.order',['criteria' => 'description','order' => $order]) }}">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" name="search" placeholder="Search..."
                                        value="{{old('query')}}" required autofocous>
