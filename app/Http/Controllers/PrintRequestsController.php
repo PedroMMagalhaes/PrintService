@@ -16,14 +16,16 @@ class PrintRequestsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('guest');
     }
 
 
     public function list()
     {
-        $keyword = Input::get('keyword', '');
-        $requests = Request::SearchByKeyword($keyword)->orderBy('description','ASC')->paginate(5);
+
+        $keyword = Input::get('search', '');
+        $requests = Request::orderBy('description','ASC');
+        $requests=$this->searchByKeyword($requests,$keyword)->paginate(5);
         $order='asc';
         $criteria='id';
         return view('printrequests.list', compact('requests','order','criteria'));
@@ -146,6 +148,18 @@ class PrintRequestsController extends Controller
         return back();
     }
 
+    public function searchByKeyword($query, $keyword)
+    {
+        if (is_null($keyword)==false) {
+            $query->where(function ($query) use ($keyword) {
+                $query->where("description", "like","%$keyword%")
+                    ->orWhere("due_date", "like", "%$keyword%");
+                    //->orWhere("users->name", "like", "%$keyword%");
+            });
+        }
+        return $query;
+    }
+
     public function order($criteria, $order)
     {
         //$keyword = Input::get('keyword', '');
@@ -155,26 +169,31 @@ class PrintRequestsController extends Controller
         }else{
             $order='asc';
         }
-        $keyword = Input::get('keyword', '');
+        $keyword = Input::get('search', '');
         if($criteria == "employee"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->SearchByKeyword($keyword)->orderBy('users.name',"$order")->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('users.name',"$order")->paginate(5);
         }
         if($criteria == "date"){
-        $requests = Request::SearchByKeyword($keyword)->orderBy('due_date',"$order")->paginate(5);
+        $requests = Request::orderBy('due_date',"$order")->paginate(5);
         //ver bug com SearchByKeyword
         }
         if($criteria == "description"){
-        $requests = Request::SearchByKeyword($keyword)->orderBy('description',"$order")->paginate(5);
+        $requests = Request::orderBy('description',"$order");
         }
         if($criteria == "paper"){
-        $requests = Request::SearchByKeyword($keyword)->orderBy('paper_type',"$order")->paginate(5);
+        $requests = Request::orderBy('paper_type',"$order")->paginate(5);
         }
         if($criteria == "status"){
-        $requests = Request::SearchByKeyword($keyword)->orderBy('status',"$order")->paginate(5);
+        $requests = Request::orderBy('status',"$order")->paginate(5);
         }
         if($criteria == "department"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->SearchByKeyword($keyword)->orderBy('users.department_id',"$order")->paginate(5);
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('users.department_id',"$order")->paginate(5);
         }
+        $requests=$this->searchByKeyword($requests,$keyword)->paginate(5);
         return view('printrequests.list', compact('requests','order','criteria'));
     }
+
+
+
+
 }

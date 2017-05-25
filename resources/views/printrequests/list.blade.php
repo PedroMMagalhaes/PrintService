@@ -15,7 +15,7 @@
                                 <input type="text" class="form-control" name="search" placeholder="Search..."
                                        value="{{old('query')}}" required autofocous>
                                 <span class="input-group-btn">
-                            <button class="btn btn-default-sm" type="submit">
+                            <button class="btn btn-default-sm" type="submit" value="search">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>

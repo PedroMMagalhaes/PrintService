@@ -26,17 +26,6 @@ class Request extends Model
       return $this->belongsTo('App\Printer');
     }
 
-    public function scopeSearchByKeyword($query, $keyword)
-    {
-        if ($keyword!='') {
-            $query->where(function ($query) use ($keyword) {
-                $query->where("description", "like","%$keyword%")
-                    ->orWhere("due-date", "like", "%$keyword%")
-                    ->orWhere("users->name", "like", "%$keyword%");
-            });
-        }
-        return $query;
-    }
 
     public function typeToStrState()
     {
