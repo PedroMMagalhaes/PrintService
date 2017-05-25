@@ -35,7 +35,7 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th><a href={{ route('printrequests.order',['criteria' => 'description','order' => $order]) }}>Description
+                <th><a href={{ route('printrequests.order',['criteria' => 'description','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Description
                     @if($criteria=='description')
                     @if($order=='asc')
                     ▲
@@ -44,7 +44,7 @@
                     @endif
                     @endif
                 </th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order]) }}>Due Date
+                <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Due Date
                     @if($criteria=='date')
                     @if($order=='asc')
                     ▲
@@ -53,7 +53,7 @@
                     @endif
                     @endif
                 </th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'employee','order' => $order]) }}>Employee
+                <th><a href={{ route('printrequests.order',['criteria' => 'employee','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Employee
                     @if($criteria=='employee')
                     @if($order=='asc')
                     ▲
@@ -62,7 +62,7 @@
                     @endif
                     @endif
                 </th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'department','order' => $order]) }}>Department</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'department','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Department
                     @if($criteria=='department')
                     @if($order=='asc')
                     ▲
@@ -70,7 +70,8 @@
                     ▼
                     @endif
                     @endif
-                <th><a href={{ route('printrequests.order',['criteria' => 'status','order' => $order]) }}>Status</th>
+                    </th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'status','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Status
                     @if($criteria=='status')
                     @if($order=='asc')
                     ▲
@@ -78,7 +79,8 @@
                     ▼
                     @endif
                     @endif
-                <th><a href={{ route('printrequests.order',['criteria' => 'paper','order' => $order]) }}>Paper Type</th>
+                    </th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'paper','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Paper Type
                     @if($criteria=='paper')
                     @if($order=='asc')
                     ▲
@@ -86,6 +88,7 @@
                     ▼
                     @endif
                     @endif
+                    </th>
                 <th>Details</th>
             </tr>
             </thead>
