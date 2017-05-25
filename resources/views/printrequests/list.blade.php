@@ -89,6 +89,7 @@
                     @endif
                     @endif
                     </th>
+                <th>Image</th>
                 <th>Details</th>
             </tr>
             </thead>
@@ -101,6 +102,7 @@
                     <td>{{ $request->users->departToStr()}}</td>
                     <td>{{ $request->typeToStrState()}}</td>
                     <td>{{ $request->typeToStrPaperType()}}</td>
+                    <td><img src="{{ route('printrequests.displayImage', ['file'=>$request->file,'ownerID'=>$request->owner_id]) }}"></img></td>
                     <td><a class="btn btn-primary" href={{ route('printrequests.show', $request->id) }}>More</a></td>
                 </tr>
             @endforeach

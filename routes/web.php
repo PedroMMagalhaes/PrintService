@@ -68,3 +68,12 @@ Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')
 Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');
 
 Route::get('/dashboard', 'DashboardController@list')->name('printrequests.dashboard');
+
+Route::get('image/{ownerID}/{filename}', function ($ownerID,$file)
+{
+    $image=Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $file))->resize(64, 64);
+    $extension = File::extension($file);
+    if($extension=='png'||$extension=='gif'||$extension=='jpg'||$extension=='jpeg'||$extension=='svg'){
+        return Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $file))->resize(64, 64)->response();
+    }
+})->name('printrequests.displayImage');
