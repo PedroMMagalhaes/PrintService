@@ -155,13 +155,12 @@ class PrintRequestsController extends Controller
     public function searchByKeyword($query, $keyword)
     {
         $status=Request::strToTypeState($keyword);
-        //$department=User::strToDepart($keyword);
         if (is_null($keyword)==false) {
             $query->where(function ($query) use ($keyword,$status) {
                 $query->where("requests.description", "like","%$keyword%")
                     ->orWhere("requests.due_date", "like", "%$keyword%")
                     ->orWhere("requests.status", "like", "%$status%")
-                    //->orWhere("users.department_id", "like", "%$department%")
+                    ->orWhere("departments.name", "like", "%$keyword%")
                     ->orWhere("users.name", "like", "%$keyword%");
             });
         }
@@ -179,23 +178,29 @@ class PrintRequestsController extends Controller
         }
         $keyword = Input::get('search', '');
         if($criteria == "employee"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('users.name',"$order");
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*');
+        $requests->join('departments','users.department_id','=','departments.id')->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name', 'requests.*')->orderBy('users.name',"$order");
         }
         if($criteria == "date"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('due_date',"$order");
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*');
+        $requests->join('departments','users.department_id','=','departments.id')->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name', 'requests.*')->orderBy('due_date',"$order");
         //ver bug com SearchByKeyword
         }
         if($criteria == "description"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('description',"$order");
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*');
+        $requests->join('departments','users.department_id','=','departments.id')->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name', 'requests.*')->orderBy('description',"$order");
         }
         if($criteria == "paper"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('paper_type',"$order");
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*');
+        $requests->join('departments','users.department_id','=','departments.id')->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name', 'requests.*')->orderBy('paper_type',"$order");
         }
         if($criteria == "status"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('status',"$order");
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*');
+        $requests->join('departments','users.department_id','=','departments.id')->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name', 'requests.*')->orderBy('status',"$order");
         }
         if($criteria == "department"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('users.department_id',"$order");
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*');
+        $requests->join('departments','users.department_id','=','departments.id')->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name', 'requests.*')->orderBy('users.department_id',"$order");
         }
         $requests=$this->searchByKeyword($requests,$keyword)->paginate(5);
         return view('printrequests.list', compact('requests','order','criteria'));
