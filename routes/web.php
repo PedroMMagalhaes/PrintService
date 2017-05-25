@@ -23,6 +23,8 @@ Route::post('/list/{request}', 'PrintRequestsController@update')->name('printreq
 Route::delete('/list/{id}', 'PrintRequestsController@destroy')
     ->name('printrequests.destroy');
 
+Route::get('/departmentStatistics','InicialController@departmentStatistics')->name('layout.departmentStatistics');
+
 //rota users
 Route::get('/register', 'UserController@create')->name('register');
 Route::post('/register', 'UserController@store')->name('register');

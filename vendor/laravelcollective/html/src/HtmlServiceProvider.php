@@ -5,6 +5,7 @@ namespace Collective\Html;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class HtmlServiceProvider extends ServiceProvider
 {
@@ -37,8 +38,7 @@ class HtmlServiceProvider extends ServiceProvider
         $this->app->alias('html', HtmlBuilder::class);
         $this->app->alias('form', FormBuilder::class);
 
-        $this->setBladeDirectives('Html', get_class_methods(HtmlBuilder::class));
-        $this->setBladeDirectives('Form', get_class_methods(FormBuilder::class));
+        $this->registerBladeDirectives();
     }
 
     /**
@@ -61,32 +61,38 @@ class HtmlServiceProvider extends ServiceProvider
     protected function registerFormBuilder()
     {
         $this->app->singleton('form', function ($app) {
-            $form = new FormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->token());
+            $form = new FormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->token(), $app['request']);
 
             return $form->setSessionStore($app['session.store']);
         });
     }
 
     /**
-     * Set blade directives
-     *
-     * @param string $namespace
-     * @param array $methods
+     * Register Blade directives.
      *
      * @return void
      */
-    protected function setBladeDirectives($namespace, $methods)
+    protected function registerBladeDirectives()
     {
-        foreach ($methods as $method) {
-            if (in_array($method, $this->directives)) {
-                $snakeMethod = Str::snake($method);
-                $directive = strtolower($namespace).'_'.$snakeMethod;
+        $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
+            $namespaces = [
+                'Html' => get_class_methods(HtmlBuilder::class),
+                'Form' => get_class_methods(FormBuilder::class),
+            ];
 
-                Blade::directive($directive, function ($expression) use ($namespace, $method) {
-                    return "<?php echo $namespace::$method($expression); ?>";
-                });
+            foreach ($namespaces as $namespace => $methods) {
+                foreach ($methods as $method) {
+                    if (in_array($method, $this->directives)) {
+                        $snakeMethod = Str::snake($method);
+                        $directive = strtolower($namespace).'_'.$snakeMethod;
+
+                        $bladeCompiler->directive($directive, function ($expression) use ($namespace, $method) {
+                            return "<?php echo $namespace::$method($expression); ?>";
+                        });
+                    }
+                }
             }
-        }
+        });
     }
 
     /**

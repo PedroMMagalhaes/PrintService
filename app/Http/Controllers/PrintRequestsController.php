@@ -87,7 +87,7 @@ class PrintRequestsController extends Controller
 
         $currentRequest = Request::findOrFaiil($id);
         $currentRequest->delete();
-        $currentRequest->session()->flash('alert-success', ' Request deleted successfully.');
+        $currentRequest->session()->flash('alert-success', ' Request successfully deleted!');
 
         if (!$id->delete()) {
             $message = ['message_error' => 'Failed to remove user'];

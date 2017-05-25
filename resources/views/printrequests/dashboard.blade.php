@@ -104,15 +104,11 @@
 
                                 <a class="btn btn-primary" href="{{ route('printrequests.edit', [$request->id]) }}">Edit</a>
 
-
-                            <a class="btn btn-danger" href="{{ route('printrequests.destroy', [$request->id]) }}">Delete</a>
-
-
-                            <form action="{{route('users.destroy', [$user->id])}}" method="post" class="inline">
+                            <form action="{{route('printrequests.destroy', [$request->id])}}" method="post" class="inline">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 </div>
 
                         @endif
