@@ -17,7 +17,7 @@ class InitialMigration extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->token()->nullable();
+            $table->string('token',100)->nullable();
             $table->rememberToken();
             $table->boolean('admin');
             $table->boolean('blocked');
@@ -35,7 +35,7 @@ class InitialMigration extends Migration
             $table->string('email')->index();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
-        });        
+        });
         Schema::create('printers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
