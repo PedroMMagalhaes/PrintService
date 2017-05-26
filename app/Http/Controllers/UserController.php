@@ -249,15 +249,16 @@ class UserController extends Controller
   public function login_post(Request $request)
 
   { //tentar autenticar o user | + ['blocked' => true]
-
+    $user=User::where('email','=',$request['email'])->first();
     $credentials = [
                 'email' => $request['email'],
                 'password' => $request['password'],
-                'blocked' => $request['blocked']
+                'blocked' => $user->blocked,
+                'activated' => $user->activated
             ];
 //dd($credentials);
 
- if(! Auth::attempt($credentials)) {
+ if((! Auth::attempt($credentials)) || $credentials['blocked']=="1" || $credentials['activated']=="0") {
 
       return back()->withErrors([
         'message' => 'Please check your credentials and try again.'
