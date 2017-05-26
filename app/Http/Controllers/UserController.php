@@ -29,7 +29,6 @@ class UserController extends Controller
 
   //  $this->middleware('guest', ['except' => 'destroy']);
     $this->middleware('guest');
-    $this->auth = $auth;
 
   }
 

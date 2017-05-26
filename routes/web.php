@@ -77,9 +77,3 @@ Route::get('image/{ownerID}/{filename}', function ($ownerID,$file)
         return Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $file))->resize(64, 64)->response();
     }
 })->name('printrequests.displayImage');
-
-
-
-
-
-Route::get('/home', 'HomeController@index')->name('home');
