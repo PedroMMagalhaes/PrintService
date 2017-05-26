@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+namespace Illuminate\Foundation\Auth;
 use App\User;
 use Auth;
 use Image;
 use Mail;
 use Validator;
+
 
 use App\Mail\ConfirmationEmail;
 use App\Http\Requests\CreateUserPostRequest;
@@ -243,6 +245,13 @@ class UserController extends Controller
   public function login_post()
 
   { //tentar autenticar o user
+
+
+
+
+
+
+
 
     if(! auth()->attempt(request(['email', 'password']) + ['blocked' => true])){
 

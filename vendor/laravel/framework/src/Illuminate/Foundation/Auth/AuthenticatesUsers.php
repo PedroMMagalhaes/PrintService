@@ -140,9 +140,9 @@ trait AuthenticatesUsers
      *
      * @return string
      */
-    public function username()
+    public function username(Request $resquest)
     {
-        return 'email';
+        return $request;
     }
 
     /**
