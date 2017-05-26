@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Khill\Lavacharts\Lavacharts;
+use App\Request;
+use Carbon\Carbon;
+use App\Department;
+use App\User;
 
 class InicialController extends Controller
 {
@@ -15,14 +18,24 @@ class InicialController extends Controller
 
     public function index()
     {
-        $totalNumberOfPrints = \App\Request::where('status',1)->count();
-        $printwithcolor = \App\Request::where('status',1)->where('colored',1)->count();
+        $totalNumberOfPrints = Request::where('status',1)->count();
+        $printwithcolor = Request::where('status',1)->where('colored',1)->count();
         $printwithcolorpercent = round(($printwithcolor/$totalNumberOfPrints)* 100,2);
 
-        $printwithoutcolor =\App\Request::where('status',1)->where('colored',0)->count();
+        $printwithoutcolor = Request::where('status',1)->where('colored',0)->count();
         $printwithoutcolorpercent = round(($printwithoutcolor/$totalNumberOfPrints)* 100,2);
 
-        return view('home.index', compact('totalNumberOfPrints','printwithcolorpercent','printwithoutcolorpercent'));
+        $todayDate = Carbon::now();
+        $startDayDate = Carbon::now()->setTime(0,0,0);
+
+        $todaysPrints =  Request::where('status',1)->where('due_date', '<=', $todayDate )->where('due_date','>=',$startDayDate)->count();
+
+        $depart1 = Department::find(1)->users('id');
+        $totalPrintsDep1 = Request::where('status',1)->where('owner_id','==',$depart1)->count();
+        //dd($totalPrintsDep1 );
+
+
+        return view('home.index', compact('totalNumberOfPrints','printwithcolorpercent','printwithoutcolorpercent','todaysPrints'));
     }
 
     public function login()
@@ -35,8 +48,10 @@ class InicialController extends Controller
         return view('auth.register');
     }
 
-    public function departmentStatistics()
+    public function departmentStatistics($id)
     {
+        $numberOfPrints = Request::where();
+
         return view('layout.statistics');
     }
 
