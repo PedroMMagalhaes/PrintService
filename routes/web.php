@@ -78,10 +78,8 @@ Route::get('image/{ownerID}/{filename}', function ($ownerID,$file)
     }
 })->name('printrequests.displayImage');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
