@@ -7,6 +7,7 @@ use Auth;
 use Image;
 use Mail;
 use Validator;
+use Session;
 
 
 
@@ -16,6 +17,7 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -244,41 +246,26 @@ class UserController extends Controller
 
   }
 
-  public function login_post()
+  public function login_post(Request $request)
 
   { //tentar autenticar o user | + ['blocked' => true]
 
-    $user = array(
-  'email' => Input::get('email'),
-  'password' => Input::get('password')
-);
+    $credentials = [
+                'email' => $request['email'],
+                'password' => $request['password'],
+            ];
+//dd($credentials);
 
-dd($user);
-if (Auth::attempt($user)) {
-
-echo 'successfully' ;
-
-}else {
-
-  echo 'fail' ;
-}
-
-
-
-
-
-
-}
-  /*  if(! auth()->attempt(request(['email', 'password']) )){
+ if(! Auth::attempt($credentials)){
 
       return back()->withErrors([
-
         'message' => 'Please check your credentials and try again.'
       ]);
     }
 
     return redirect()->home();
-  } */
+  }
+
 
   /**
      * Confirm a user's email address.
