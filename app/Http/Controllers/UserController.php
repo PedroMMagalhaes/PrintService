@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-namespace Illuminate\Foundation\Auth;
+
 use App\User;
 use Auth;
 use Image;
@@ -9,11 +9,13 @@ use Mail;
 use Validator;
 
 
+
 use App\Mail\ConfirmationEmail;
 use App\Http\Requests\CreateUserPostRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
@@ -244,16 +246,30 @@ class UserController extends Controller
 
   public function login_post()
 
-  { //tentar autenticar o user
+  { //tentar autenticar o user | + ['blocked' => true]
+
+    $user = array(
+  'email' => Input::get('email'),
+  'password' => Input::get('password')
+);
+
+dd($user);
+if (Auth::attempt($user)) {
+
+echo 'successfully' ;
+
+}else {
+
+  echo 'fail' ;
+}
 
 
 
 
 
 
-
-
-    if(! auth()->attempt(request(['email', 'password']) + ['blocked' => true])){
+}
+  /*  if(! auth()->attempt(request(['email', 'password']) )){
 
       return back()->withErrors([
 
@@ -262,7 +278,7 @@ class UserController extends Controller
     }
 
     return redirect()->home();
-  }
+  } */
 
   /**
      * Confirm a user's email address.
