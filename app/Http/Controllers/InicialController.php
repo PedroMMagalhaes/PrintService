@@ -32,10 +32,11 @@ class InicialController extends Controller
 
         $depart1 = Department::find(1)->users('id');
         $totalPrintsDep1 = Request::where('status',1)->where('owner_id','==',$depart1)->count();
-        //dd($totalPrintsDep1 );
+        //dd($depart1);
 
+        $totalNumberOfActiveUsers = User::where('blocked',0)->count();
 
-        return view('home.index', compact('totalNumberOfPrints','printwithcolorpercent','printwithoutcolorpercent','todaysPrints'));
+        return view('home.index', compact('totalNumberOfPrints','printwithcolorpercent','printwithoutcolorpercent','todaysPrints','totalNumberOfActiveUsers'));
     }
 
     public function login()

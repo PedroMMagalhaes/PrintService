@@ -18,14 +18,13 @@
     <span class="text-muted">teste</span>
   </div>
   <div class="col-6 col-sm-3 placeholder text-center">
-    <img src="//placehold.it/200/d6d6d6/fff?text=3" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-    <h4>Users</h4>
+    <img src="//placehold.it/200/d6d6d6/fff?text={{$totalNumberOfActiveUsers}}" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+    <h4>Total Nº Of Active Users</h4>
     <span class="text-muted">teste</span>
   </div>
   <div class="col-6 col-sm-3 placeholder text-center">
-    <img src="//placehold.it/200/e0e0e0/fff?text=4" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-    <h4>Total Print</h4>
-    <span class="text-muted">teste</span>
+    <img src="//placehold.it/200/e0e0e0/fff?text={{$totalNumberOfPrints}}" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+    <h4>Total Nº Of Prints</h4>
   </div>
 </div>
 
@@ -45,7 +44,7 @@
             ]);
 
             var options = {
-                title: 'Number Of Prints By Type'
+                title: 'Number Of Prints By Type',
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -81,6 +80,10 @@
         <tr>
           <td>Daily average of prints for the current month</td>
           <td>##</td>
+        </tr>
+        <tr>
+          <td>Total Nº Of Active Users</td>
+          <td>{{$totalNumberOfActiveUsers}}</td>
         </tr>
 
         </tbody>
