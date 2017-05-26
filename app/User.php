@@ -140,6 +140,7 @@ class User extends Authenticatable
       parent::boot();
       static::creating(function ($user) {
           $user->remember_token = str_random(40);
+          $user->token = str_random(100);
       });
   }
 
@@ -148,8 +149,8 @@ class User extends Authenticatable
 public function hasVerified()
 {
 
-    $this->verified = true;
-    $this->remember_token = null;
+    $this->activated = 1;
+    //$this->token = null;
 
     $this->save();
 }

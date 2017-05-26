@@ -17,7 +17,7 @@ class InitialMigration extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('token',100)->nullable();
+            $table->string('token',100);
             $table->rememberToken();
             $table->boolean('admin');
             $table->boolean('blocked');

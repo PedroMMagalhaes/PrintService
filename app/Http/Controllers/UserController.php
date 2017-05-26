@@ -274,9 +274,9 @@ class UserController extends Controller
      * @param  string $token
      * @return mixed
      */
-    public function confirmEmail($remember_token)
+    public function confirmEmail($token)
     {
-        User::whereToken($remember_token)->firstOrFail()->confirmEmail();
+        User::whereToken($token)->firstOrFail()->hasVerified();
         return redirect('login')->with('status', 'You are now confirmed. Please login.');
     }
 
