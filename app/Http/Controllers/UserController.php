@@ -253,10 +253,11 @@ class UserController extends Controller
     $credentials = [
                 'email' => $request['email'],
                 'password' => $request['password'],
+                'blocked' => $request['blocked']
             ];
 //dd($credentials);
 
- if(! Auth::attempt($credentials)){
+ if(! Auth::attempt($credentials)) {
 
       return back()->withErrors([
         'message' => 'Please check your credentials and try again.'
