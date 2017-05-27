@@ -189,6 +189,8 @@
                 </ul>
             </div>
     </div>
+    <div class="text-center" style="...">
+            {{ $comments->links() }}
     </div>
 
 
