@@ -102,15 +102,15 @@
                     <td>{{ $request->users->departToStr()}}</td>
                     <td>{{ $request->typeToStrState()}}</td>
                     <td>{{ $request->typeToStrPaperType()}}</td>
-                    <td><img src="{{ route('printrequests.displayImage', ['file'=>$request->file,'ownerID'=>$request->owner_id]) }}"></img></td>
-                    <td><a class="btn btn-primary" href={{ route('printrequests.show', $request->id) }}>More</a></td>
+                    <td><img src="{{ route('printrequests.displayImage', ['file'=>$request->file,'ownerID'=>$request->owner_id]) }}"></td>
+                    <td><a class="btn btn-primary" href="{{ route('printrequests.show', $request->id) }}">More</a></td>
                 </tr>
             @endforeach
             </tbody>
         </table>
 
         <div class="text-center" style="...">
-            {{ $requests->appends(Request::input())->links() }}
+            {{ $requests->links() }}
         </div>
 
     </div>

@@ -23,7 +23,7 @@ Route::post('/list/{request}', 'PrintRequestsController@update')->name('printreq
 Route::delete('/list/{id}', 'PrintRequestsController@destroy')
     ->name('printrequests.destroy');
 
-Route::get('/departmentStatistics','InicialController@departmentStatistics')->name('layout.departmentStatistics');
+Route::get('/departmentStatistics/{id}','InicialController@departmentStatistics')->name('layout.departmentStatistics');
 
 //rota users
 Route::get('/register', 'UserController@create')->name('register');
@@ -67,7 +67,7 @@ Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')
 
 Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');
 
-Route::get('/dashboard', 'PrintRequestsController@list')->name('printrequests.dashboard');
+Route::get('/dashboard', 'DashboardController@list')->name('printrequests.dashboard');
 
 Route::get('image/{ownerID}/{filename}', function ($ownerID,$file)
 {

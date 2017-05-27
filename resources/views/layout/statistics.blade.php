@@ -2,49 +2,29 @@
 
 @section ('content')
 
+    <!-- Tabela -->
     <div class="col-lg-9 col-md-8">
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead class="thead-inverse">
-                    <th colspan="2">Statistics</th>
+                <th colspan="2">Statistics For Department {{$department->name}}</th>
                 </thead>
                 <tbody>
                 <tr>
                     <td>Total Number Of Prints</td>
-                    <td>responsive</td>
+                    <td>{{$totalPrints}}</td>
                 </tr>
                 <tr>
-                    <td>1,002</td>
-                    <td>rwd</td>
+                    <td>Percentage Of Prints By Type</td>
+                    <td>Black/White - {{$printwithoutcolorpercent }}%     |     Color - {{$printwithcolorpercent}}%</td>
                 </tr>
                 <tr>
-                    <td>1,003</td>
-                    <td>free</td>
+                    <td>Today's Number of Prints</td>
+                    <td>{{$todaysPrints}}</td>
                 </tr>
                 <tr>
-                    <td>1,003</td>
-                    <td>frontend</td>
-                </tr>
-                <tr>
-                    <td>1,004</td>
-                    <td>migration</td>
-                </tr>
-                <tr>
-                    <td>1,005</td>
-                    <td>navbar</td>
-                </tr>
-                <tr>
-                    <td>1,006</td>
-                    <td>collapse</td>
-
-                </tr>
-                <tr>
-                    <td>1,007</td>
-                    <td>layout</td>
-                </tr>
-                <tr>
-                    <td>1,008</td>
-                    <td>migration</td>
+                    <td>Daily average of prints for the current month</td>
+                    <td>{{$averageRequestsDay}}</td>
                 </tr>
                 </tbody>
             </table>

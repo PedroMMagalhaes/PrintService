@@ -51,10 +51,34 @@
 
             chart.draw(data, options);
         }
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart2);
+
+        function drawChart2() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Department', 'Number of prints'],
+                ['Ciências Jurídicas',{{$countRequests[0]['numero_impressoes']}}],
+            ]);
+
+            var options = {
+                title: 'Number Of Prints By Department',
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('barchart'));
+
+            chart.draw(data, options);
+        }
+
+
     </script>
+
+
+
   </head>
   <body>
   <div id="piechart" style="width: 900px; height: 500px;"></div>
+  <div id="barchart" style="width: 900px; height: 500px;"></div>
   </body>
 
   <!-- Tabela -->
@@ -79,13 +103,22 @@
         </tr>
         <tr>
           <td>Daily average of prints for the current month</td>
-          <td>##</td>
+          <td>{{$averageRequestsDay}}</td>
         </tr>
         <tr>
           <td>Total Nº Of Active Users</td>
           <td>{{$totalNumberOfActiveUsers}}</td>
         </tr>
-
+        <thead class="thead-inverse">
+        <th colspan="2">
+          Total Number Of Prints by Department
+        </th>
+        @foreach($countRequests as $request)
+          <tr>
+            <td>{{$request['nome_departamento']}}</td>
+            <td>{{$request['numero_impressoes']}}</td>
+          </tr>
+        @endforeach
         </tbody>
       </table>
     </div>
