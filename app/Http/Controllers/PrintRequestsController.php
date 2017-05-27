@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreatePrintRequest;
 use App\Http\Requests\UpdatePrintRequest;
+use File;
 
 class PrintRequestsController extends Controller
 {
@@ -52,21 +53,24 @@ class PrintRequestsController extends Controller
 
     public function store(CreatePrintRequest $request)
     {
-        $newRequest = new Request;
-        $newRequest->owner_id = Auth::user()->id;
-        $newRequest->fill($request->all());
-        $newRequest->file = $_FILES["file"]["name"];
+
         $name= $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
-        if (is_dir(storage_path("app/print-jobs/$newRequest->owner_id/")) === false) {
-            mkdir(storage_path("app/print-jobs/$newRequest->owner_id/"));
-        }
-        move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/")."$name");
+        $newRequest = new Request;
+        $newRequest->owner_id = Auth::user()->id;
+        $newRequest->file = $_FILES["file"]["name"];
+        $newRequest->fill($request->all());
+
 
         if (!$newRequest->save()) {
             $message = ['message_error' => 'Failed to create request'];
         } else {
             $message = ['message_success' => 'Request created successfully'];
+            if (is_dir(storage_path("app/print-jobs/$newRequest->owner_id/")) === false) {
+                mkdir(storage_path("app/print-jobs/$newRequest->owner_id/"));
+            }
+
+            move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/")."$name");
         }
         return redirect()->route('create')->with($message);
     }

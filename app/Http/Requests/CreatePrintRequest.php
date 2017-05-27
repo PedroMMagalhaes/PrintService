@@ -29,7 +29,7 @@ class CreatePrintRequest extends FormRequest
             'quantity' => 'required|integer|min:1',
             'paper_size' => 'required',
             'paper_type' => 'required',
-            'file' => 'required',
+            'file' => 'required|mimes:png,gif,jpg,jpeg,svg,odt,pdf,docx,doc,xls,xlsx',
             'print_type' => 'required',
             'stapled' => 'required'
         ];
