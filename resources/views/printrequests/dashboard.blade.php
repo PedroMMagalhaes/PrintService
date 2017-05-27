@@ -62,7 +62,7 @@
                     @endif
                     @endif
                 </th>
-                <th><a href={{ route('printrequests.order',['criteria' => 'department','order' => $order]) }}>Department</th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'department','order' => $order]) }}>Department
                     @if($criteria=='department')
                     @if($order=='asc')
                     ▲
@@ -70,7 +70,8 @@
                     ▼
                     @endif
                     @endif
-                <th><a href={{ route('printrequests.order',['criteria' => 'status','order' => $order]) }}>Status</th>
+                    </th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'status','order' => $order]) }}>Status
                     @if($criteria=='status')
                     @if($order=='asc')
                     ▲
@@ -78,7 +79,8 @@
                     ▼
                     @endif
                     @endif
-                <th><a href={{ route('printrequests.order',['criteria' => 'paper','order' => $order]) }}>Paper Type</th>
+                    </th>
+                <th><a href={{ route('printrequests.order',['criteria' => 'paper','order' => $order]) }}>Paper Type
                     @if($criteria=='paper')
                     @if($order=='asc')
                     ▲
@@ -86,6 +88,7 @@
                     ▼
                     @endif
                     @endif
+                    </th>
                 <th>Actions</th>
             </tr>
             </thead>

@@ -15,22 +15,6 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function list()
-    {
 
-        $keyword = Input::get('keyword', '');
-        $user = Auth::user();
-        if ( Auth::check() && $user->isAdmin() )
-       {
-           $requests = Request::SearchByKeyword($keyword)->orderBy('description','ASC')->paginate(5);
-       }else{
-           $requests = Request::SearchByKeyword($keyword)->where('owner_id',$user->id)->orderBy('description','ASC')->paginate(5);
-       }
-
-        $order='ASC';
-        $criteria='id';
-
-        return view('printrequests.dashboard', compact('requests','order','criteria'));
-    }
 
 }

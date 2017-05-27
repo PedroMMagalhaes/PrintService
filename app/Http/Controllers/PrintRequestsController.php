@@ -25,6 +25,11 @@ class PrintRequestsController extends Controller
         $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')
                         ->join('departments', 'users.department_id', '=', 'departments.id')
                         ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname', 'requests.*')->orderBy('description', 'ASC');
+
+        $user=Auth::user();
+        if($user->isPublisher()){
+            $requests->where('users.id',$user->id);
+        }
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
         $order='asc';
         $criteria='description';

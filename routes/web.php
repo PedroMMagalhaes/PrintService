@@ -67,7 +67,7 @@ Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')
 
 Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');
 
-Route::get('/dashboard', 'DashboardController@list')->name('printrequests.dashboard');
+Route::get('/dashboard', 'PrintRequestsController@list')->name('printrequests.dashboard');
 
 Route::get('image/{ownerID}/{filename}', function ($ownerID,$file)
 {
