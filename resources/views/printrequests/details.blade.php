@@ -134,29 +134,25 @@
                         <li class="list-group-item">
                             <strong>
                                  {{$comment->users['name']}}
-                                 <p>
-                                     {{$comment->created_at}}
-                                 </p>
+                                 commented at {{$comment->created_at}} &nbsp;
                             </strong>
-                             <p>{{$comment->comment}} </p>
-                             @if($user->isAdmin())
-                             <td><a class="btn btn-primary" href={{ route('comments.block', ['requestID' => $requestData->id, 'commentID' => $comment->id]) }}>Block</a></td>
-                             @endif
+                            {{$comment->comment}}
                         </li>
+                        @if($user->isAdmin())
+                        <p><a class="btn btn-primary" href={{ route('comments.block', ['requestID' => $requestData->id, 'commentID' => $comment->id]) }}>Block</a></p>
+                        @endif
                         @foreach ($comments as $subcomment)
                         @if($comment->id==$subcomment->parent_id && $subcomment->blocked==0)
                         <li class="list-group-item list-group-item-info">
                             <strong>
                                  {{$subcomment->users['name']}}
-                                <p>
-                                {{$subcomment->created_at}}
-                                </p>
+                                commented at {{$subcomment->created_at}} &nbsp;
                             </strong>
-                             <p>{{$subcomment->comment}} </p>
-                             @if($user->isAdmin())
-                             <td><a class="btn btn-primary" href={{ route('comments.block', ['requestID' => $requestData->id, 'commentID' => $subcomment->id]) }}>Block</a></td>
-                             @endif
+                             {{$subcomment->comment}}
                         </li>
+                        @if($user->isAdmin())
+                        <p><a class="btn btn-primary" href={{ route('comments.block', ['requestID' => $requestData->id, 'commentID' => $subcomment->id]) }}>Block</a></p>
+                        @endif
                         @endif
                         @endforeach
                         @if($requestData->status==0)
@@ -196,10 +192,11 @@
                     @endif
                 </ul>
             </div>
+            <div class="text-center" style="...">
+                    {{ $comments->links() }}
+            </div>
     </div>
-    <div class="text-center" style="...">
-            {{ $comments->links() }}
-    </div>
+
 
 
 @endsection
