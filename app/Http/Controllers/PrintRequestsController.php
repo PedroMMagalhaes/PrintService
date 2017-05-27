@@ -109,9 +109,9 @@ class PrintRequestsController extends Controller
     {
         $requestData=Request::find($id);
         //$requestData = DB::table('requests')->find($id);
-        $userData = DB::table('users')->find(DB::table('requests')->find($id)->owner_id);
+        $userData = User::find(Request::find($id)->owner_id);
         $comments= Comment::where('request_id',$id)->orderBy('created_at')->get();
-        $userDepartment = DB::table('departments')->find(DB::table('users')->find(DB::table('requests')->find($id)->owner_id)->department_id);
+        $userDepartment = DB::table('departments')->find(User::find(Request::find($id)->owner_id)->department_id);
         $printers=DB::table('printers')->distinct()->pluck('name');
         $user = Auth::user();
 
@@ -156,7 +156,7 @@ class PrintRequestsController extends Controller
                 $query->where("requests.description", "like","%$keyword%")
                     ->orWhere("requests.due_date", "like", "%$keyword%")
                     ->orWhere("requests.status", "like", "%$status%")
-                    ->orWhere("departments.name", "like", "%$keyword%")
+                    //->orWhere("departments.name", "like", "%$keyword%")
                     ->orWhere("users.name", "like", "%$keyword%");
             });
         }
