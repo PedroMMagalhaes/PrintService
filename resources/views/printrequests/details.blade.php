@@ -160,6 +160,7 @@
                         @endif
                         @endforeach
                         @if($requestData->status==0)
+                        @if($user->isPublisher())
                         {{Form::open(array('route' => array('comments.create',$requestData->id,$comment->id), 'method' => 'POST'))}}
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
@@ -175,8 +176,10 @@
                         @endif
                         @endif
                         @endif
+                        @endif
                     @endforeach
                     @if($requestData->status==0)
+                    @if($user->isPublisher())
                     {{Form::open(array('route' => array('comments.create',$requestData->id), 'method' => 'POST'))}}
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
@@ -189,6 +192,7 @@
                     @endif
                     </div>
                     {{ Form::close() }}
+                    @endif
                     @endif
                 </ul>
             </div>
