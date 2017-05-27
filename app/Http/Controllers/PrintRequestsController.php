@@ -20,7 +20,7 @@ class PrintRequestsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
 
@@ -174,7 +174,7 @@ class PrintRequestsController extends Controller
         }
         $keyword = Input::get('search', '');
         if($criteria == "employee"){
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*');
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*','users.department_id');
         $requests->join('departments','users.department_id','=','departments.id')->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name', 'requests.*')->orderBy('users.name',"$order");
         }
         if($criteria == "date"){
