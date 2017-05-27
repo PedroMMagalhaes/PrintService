@@ -22,7 +22,9 @@ class PrintRequestsController extends Controller
     public function list()
     {
         $keyword = Input::get('search', '');
-        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')->select('users.id as usersID', 'users.name', 'requests.*')->orderBy('description', 'ASC');
+        $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')
+                        ->join('departments', 'users.department_id', '=', 'departments.id')
+                        ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname', 'requests.*')->orderBy('description', 'ASC');
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
         $order='asc';
         $criteria='description';
@@ -166,7 +168,7 @@ class PrintRequestsController extends Controller
         $keyword = Input::get('search', '');
         $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')
                         ->join('departments', 'users.department_id', '=', 'departments.id')
-                        ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dnamed', 'requests.*');
+                        ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname', 'requests.*');
         if ($criteria == "employee") {
             $requests->orderBy('users.name', "$order");
         }
