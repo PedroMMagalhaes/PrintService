@@ -75,7 +75,7 @@
             </tbody>
         </table>
         @if($user->isAdmin())
-        @if ($requestData->status == "0")
+        @if($requestData->status == "0")
             {{Form::open(array('route' => array('printrequests.complete', $requestData->id), 'method' => 'POST'))}}
             <div class="form-group">
                 {{Form::select('name', $printers, $printers[1])}}

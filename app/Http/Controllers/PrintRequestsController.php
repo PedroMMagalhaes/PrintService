@@ -6,11 +6,14 @@ use Auth;
 use App\Request;
 use App\Comment;
 use App\User;
+use App\Printer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreatePrintRequest;
 use App\Http\Requests\UpdatePrintRequest;
+use App\Mail\CompletionEmail;
 use File;
+use Mail;
 
 class PrintRequestsController extends Controller
 {
@@ -135,8 +138,10 @@ class PrintRequestsController extends Controller
     public function setComplete($id)
     {
         DB::table('requests')->where('id', $id)->update(['status'=>1]);
-        $printerID=DB::table('printers')->distinct()->find(request('name'))->id;
-        DB::table('requests')->where('id', $id)->update(['printer_id'=>$printerID]);
+        DB::table('requests')->where('id', $id)->update(['printer_id'=>Input::get('name')+1]);
+        $request=Request::find($id);
+        $user=$request->users;
+        Mail::to($user->email)->send(new CompletionEmail($request));
         return back();
     }
 

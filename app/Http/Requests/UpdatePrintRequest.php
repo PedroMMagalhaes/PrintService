@@ -29,7 +29,7 @@ class UpdatePrintRequest extends FormRequest
             'quantity' => 'required|integer|min:1',
             'paper_size' => 'required',
             'paper_type' => 'required',
-            'file' => 'required|mimes:png,gif,jpg,jpeg,svg,odt,pdf,docx,doc,xls,xlsx',
+            'file' => 'required|mimes:png,gif,jpg,jpeg,svg,odt,pdf,docx,doc,xls,xlsx,tiff',
             'print_type' => 'required',
             'stapled' => 'required'
         ];
