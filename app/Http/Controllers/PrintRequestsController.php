@@ -42,11 +42,15 @@ class PrintRequestsController extends Controller
 
     public function create()
     {
-        return view('printrequests.create');
+        $request = new Request;
+
+        return view('printrequests.create', compact('request'));
     }
 
-    public function edit(Request $request)
+    public function edit($id)
     {
+        $request= Request::find($id);
+
         //$this->authorize('update', $request);
         $title = 'Edit request';
         return view('printrequests.edit', compact('title', 'request'));
@@ -63,7 +67,6 @@ class PrintRequestsController extends Controller
         $newRequest->owner_id = Auth::user()->id;
         $newRequest->file = $_FILES["file"]["name"];
         $newRequest->fill($request->all());
-
 
         if (!$newRequest->save()) {
             $message = ['message_error' => 'Failed to create request'];
@@ -84,7 +87,7 @@ class PrintRequestsController extends Controller
 
         //$this->authorize('update', $requestValue);
 
-        $requestValue->owner_id = Auth::user()->id;
+        //$requestValue->owner_id = Auth::user()->id;
         $requestValue->fill($request->all());
         $requestValue->file = Input::get('file');
         if (!$requestValue->save()) {
@@ -98,12 +101,10 @@ class PrintRequestsController extends Controller
 
     public function destroy($id)
     {
-        $currentRequest = Request::findOrFaiil($id);
+        $currentRequest = Request::findOrFail($id);
         $currentRequest->delete();
-        $currentRequest->session()->flash('alert-success', ' Request successfully deleted!');
-
         if (!$id->delete()) {
-            $message = ['message_error' => 'Failed to remove user'];
+            $message = ['message_error' => 'Failed to remove request'];
         } else {
             $message = ['message_success' => 'Request successfully deleted'];
         }

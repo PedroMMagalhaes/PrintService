@@ -9,7 +9,6 @@
 
                 <div class="row">
                     <div clas="col-sm-6">
-                    <!--{!! Form::open(['method'=>'GET','url'=>'request','class'=>'navbar-form navbar-left','role'=>'search']) !!}-->
                         <form method="get" action="{{ route('printrequests.order',['criteria' => 'description','order' => $order]) }}">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" name="search" placeholder="Search..."
@@ -21,7 +20,6 @@
                         </span>
                             </div>
                         </form>
-                    <!--{!! Form::close() !!}-->
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
@@ -103,7 +101,21 @@
                     <td>{{ $request->typeToStrState()}}</td>
                     <td>{{ $request->typeToStrPaperType()}}</td>
                     <td><img src="{{ route('printrequests.displayImage', ['file'=>$request->file,'ownerID'=>$request->owner_id]) }}"></td>
-                    <td><a class="btn btn-primary" href="{{ route('printrequests.show', $request->id) }}">More</a></td>
+                    <td>
+                        <a class="btn btn-success" href="{{ route('printrequests.show', $request->id) }}">More</a>
+                        @if(!$request->status==1)
+
+                            <a class="btn btn-primary" href="{{ route('printrequests.edit', [$request->id]) }}">Edit</a>
+
+                            <form action="{{route('printrequests.destroy', [$request->id])}}" method="post" class="inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
+                            </form>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -114,9 +126,6 @@
         </div>
 
     </div>
-
-
-
 
 
 @endsection

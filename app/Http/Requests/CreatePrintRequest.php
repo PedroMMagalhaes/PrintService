@@ -25,7 +25,7 @@ class CreatePrintRequest extends FormRequest
     {
         return [
             'description' => 'bail|required|max:255',
-            'due_date' => 'date_format:Y-m-d|after:yesterday',
+            'due_date' => 'nullable|date|after:yesterday',
             'quantity' => 'required|integer|min:1',
             'paper_size' => 'required',
             'paper_type' => 'required',

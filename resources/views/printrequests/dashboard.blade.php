@@ -113,7 +113,6 @@
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </div>
-
                         @endif
                     </td>
                 </tr>

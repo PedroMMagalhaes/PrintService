@@ -59,7 +59,17 @@ class InicialController extends Controller
 
         $totalNumberOfActiveUsers = User::where('blocked',0)->count();
 
-        return view('home.index', compact('totalNumberOfPrints','printwithcolorpercent','printwithoutcolorpercent','todaysPrints','totalNumberOfActiveUsers','countRequests','averageRequestsDay'));
+        $data = [
+            'totalNumberOfPrints' => $totalNumberOfPrints,
+            'printwithcolorpercent' => $printwithcolorpercent,
+            'printwithoutcolorpercent' => $printwithoutcolorpercent,
+            'todaysPrints' => $todaysPrints,
+            'totalNumberOfActiveUsers' => $totalNumberOfActiveUsers,
+            'countRequests' => $countRequests,
+            'averageRequestsDay' => $averageRequestsDay
+        ];
+
+        return view('home.index', compact('data'));
     }
 
     public function login()
@@ -112,7 +122,16 @@ class InicialController extends Controller
 
         $averageRequestsDay = round(($monthPrints / $today),2);
 
-        return view('layout.statistics',compact('department','totalPrints','printwithcolorpercent','printwithoutcolorpercent','todaysPrints','averageRequestsDay'));
+        $data = [
+            'department' => $department,
+            'totalPrints' => $totalPrints,
+            'printwithcolorpercent' => $printwithcolorpercent,
+            'printwithoutcolorpercent' => $printwithoutcolorpercent,
+            'todaysPrints' => $todaysPrints,
+            'averageRequestsDay' => $averageRequestsDay
+        ];
+
+        return view('layout.statistics',compact('data'));
     }
 
 
