@@ -238,6 +238,6 @@ class PrintRequestsController extends Controller
             $requests->where('users.id',$user->id);
         }
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
-        return view('printrequests.list', compact('requests', 'order', 'criteria'));
+        return view('printrequests.list', compact('requests', 'order', 'criteria','user'));
     }
 }
