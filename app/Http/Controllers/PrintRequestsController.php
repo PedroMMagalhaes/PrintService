@@ -14,6 +14,7 @@ use App\Http\Requests\UpdatePrintRequest;
 use App\Mail\CompletionEmail;
 use File;
 use Mail;
+use Route;
 
 class PrintRequestsController extends Controller
 {
@@ -28,15 +29,20 @@ class PrintRequestsController extends Controller
         $keyword = Input::get('search', '');
         $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')
                         ->join('departments', 'users.department_id', '=', 'departments.id')
-                        ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname', 'requests.*')->orderBy('description', 'ASC');
+                        ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname', 'requests.*');
 
         $user=Auth::user();
-        if($user->isPublisher()){
+        if($user->isPublisher() && Route::currentRouteName()!='printrequests.finished'){
             $requests->where('users.id',$user->id);
         }
+        if(Route::currentRouteName()=='printrequests.finished'){
+            $requests->where('status',1);
+        }
+        $requests->orderBy('description', 'ASC');
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
         $order='asc';
         $criteria='description';
+
         return view('printrequests.list', compact('requests', 'order', 'criteria','user'));
     }
 
@@ -236,6 +242,9 @@ class PrintRequestsController extends Controller
         $user=Auth::user();
         if($user->isPublisher()){
             $requests->where('users.id',$user->id);
+        }
+        if(Route::currentRouteName()=='printrequests.finished'){
+            $requests->where('status',1);
         }
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
         return view('printrequests.list', compact('requests', 'order', 'criteria','user'));

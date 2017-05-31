@@ -25,7 +25,7 @@
 
             <div class="form-group">
                 <label for="due_date">Due date</label>
-                <input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{ old('due_date', $request['due_date'])}}"/>
+                <input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{old('due_date', $request['due_date'])}}"/>
             </div>
 
             <div class="form-group">
@@ -66,7 +66,10 @@
             </div>
 
             <div class="form-group">
-                <label for="file">File</label>
+                <label for="file">Current File</label>
+                <br>
+                <label for="file">{{ old('file', $request['file'])}}</label>
+                </br>
                 <br>
                 <input type="file" name="file" id="file">
                 </br>
