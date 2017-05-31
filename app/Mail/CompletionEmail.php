@@ -20,7 +20,7 @@ class CompletionEmail extends Mailable
         $this->request = $request;
     }
 
-
+ //Done
     public function build()
     {
         return $this->view('mails.completion');

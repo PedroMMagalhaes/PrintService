@@ -265,6 +265,7 @@ class UserController extends Controller
         ];
         //dd($credentials);
 
+
         if ((!Auth::attempt($credentials)) || $credentials['blocked'] == "1" || $credentials['activated'] == "0") {
 
             return back()->withErrors([
