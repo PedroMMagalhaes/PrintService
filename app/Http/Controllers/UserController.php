@@ -255,6 +255,8 @@ class UserController extends Controller
 
     { //tentar autenticar o user | + ['blocked' => true]
         $user = User::where('email', '=', $request['email'])->first();
+
+
         $credentials = [
             'email' => $request['email'],
             'password' => $request['password'],
@@ -331,5 +333,3 @@ class UserController extends Controller
     }
 
 }
-
-
