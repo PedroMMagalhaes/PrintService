@@ -30,7 +30,7 @@ class CreatePrintRequest extends FormRequest
             'paper_size' => 'required',
             'paper_type' => 'required',
             'file' => 'required|mimes:png,gif,jpg,jpeg,svg,odt,pdf,docx,doc,xls,xlsx,tiff',
-            'print_type' => 'required',
+            'colored' => 'required',
             'stapled' => 'required'
         ];
     }

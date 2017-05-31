@@ -11,15 +11,23 @@
   <div class="navbar-collapse collapse" id="collapsingNavbar">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/') }}">Home<span class="sr-only">Home</span></a>
+        <a class="nav-link" href="{{ url('/') }}">Home<span class="sr-only"></span></a>
       </li>
         @if(!Auth::guest())
-      <li class="nav-item">
-          <a class="nav-link" href="{{ url('/list') }}">Print Request<span class="sr-only">Print Requests List</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard<span class="sr-only">Dashboard</span></a>
-      </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/list') }}">Request Dashboard<span class="sr-only"></span></a>
+            </li>
+            @if(Auth::user()->admin)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('users.manageblock') }}">Manage User Clearence<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('users.managerole') }}">Manage User Roles<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Manage Comments<span class="sr-only"></span></a>
+                </li>
+            @endif
         @endif
     </ul>
   </div>

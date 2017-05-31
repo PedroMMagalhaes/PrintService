@@ -29,12 +29,14 @@
                         {{"Color"}}
                     @else
                         {{"Black and White"}}
-                    @endif</td>
+                    @endif
+                </td>
                 <td>@if($requestData->front_back == 1)
                         {{"Double Sided"}}
                     @else
                         {{"Single Sided"}}
-                    @endif</td>
+                    @endif
+                </td>
                 <td>
                     @if($requestData->stapled == 1)
                         {{"Yes"}}
@@ -192,6 +194,7 @@
                     @endif
                 </ul>
             </div>
+                <a href="{{ route('list') }}" class="btn btn-primary">Back</a>
             <div class="text-center" style="...">
                     {{ $comments->links() }}
             </div>

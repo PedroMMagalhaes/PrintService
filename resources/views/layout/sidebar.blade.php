@@ -11,6 +11,7 @@
             @endforeach
           </ul>
         </li>
+        <li class="nav-item"><a class="nav-link" href="{{ url('/list') }}">List of Finished Requests</a></li>
       </ul>
     </div>
 

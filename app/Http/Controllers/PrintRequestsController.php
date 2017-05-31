@@ -37,14 +37,13 @@ class PrintRequestsController extends Controller
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
         $order='asc';
         $criteria='description';
-        return view('printrequests.list', compact('requests', 'order', 'criteria'));
+        return view('printrequests.list', compact('requests', 'order', 'criteria','user'));
     }
+
 
     public function create()
     {
-        $request = new Request;
-
-        return view('printrequests.create', compact('request'));
+        return view('printrequests.create');
     }
 
     public function edit($id)
@@ -55,7 +54,6 @@ class PrintRequestsController extends Controller
         $title = 'Edit request';
         return view('printrequests.edit', compact('title', 'request'));
     }
-
 
 
     public function store(CreatePrintRequest $request)
@@ -75,7 +73,6 @@ class PrintRequestsController extends Controller
             if (is_dir(storage_path("app/print-jobs/$newRequest->owner_id/")) === false) {
                 mkdir(storage_path("app/print-jobs/$newRequest->owner_id/"));
             }
-
             move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/")."$name");
         }
         return redirect()->route('create')->with($message);
@@ -95,21 +92,54 @@ class PrintRequestsController extends Controller
         } else {
             $message = ['message_success' => 'Request successfully edited'];
         }
-        return redirect()->route('printrequests.dashboard')->with($message);
+        return redirect()->route('list')->with($message);
     }
 
 
     public function destroy($id)
     {
         $currentRequest = Request::findOrFail($id);
-        $currentRequest->delete();
-        if (!$id->delete()) {
-            $message = ['message_error' => 'Failed to remove request'];
+        $comments = $currentRequest->comments->where('parent_id',null);
+
+        foreach($comments as $comment){
+            $commentsWithParent = $currentRequest->comments->where('parent_id',$comment['id']);
+            foreach($commentsWithParent as $commentsParent){
+                if($commentsWithParent->count() == 0){
+                    $comment->delete();
+                }
+                else{
+                    $commentsParent->delete();
+                }
+            }
+        }
+
+
+        /*foreach($commentsOfRequest as $commentRequest){
+            $commentsOfRequestWithParent = Comment::where('request_id', $id)->where('parent_id',$commentRequest['id'])->get();
+            if($commentsOfRequestWithParent->count() == 0) {
+                $commentRequest->delete();
+            }
+            else{
+                foreach ($commentsOfRequestWithParent as $commentRequestWithParent){
+                    $commentRequestWithParent->delete();
+                    if($commentsOfRequestWithParent->count() == 0) {
+                        $commentRequest->delete();
+                    }
+                }
+            }
+
+        }*/
+
+
+        //$currentRequest->delete();
+
+        if (!$currentRequest->delete()) {
+            $message = ['message_error' => 'Failed to delete request'];
         } else {
             $message = ['message_success' => 'Request successfully deleted'];
         }
 
-        return redirect()->route('printrequests.dashboard')->with($message);
+        return redirect()->route('list')->with($message);
     }
 
 
@@ -155,6 +185,7 @@ class PrintRequestsController extends Controller
     public function refuseRequest($id)
     {
         DB::table('requests')->where('id', $id)->update(['refused_reason'=>request('refuseReason')]);
+        DB::table('requests')->where('id', $id)->update(['status'=>1]);
         return back();
     }
 

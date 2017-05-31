@@ -23,6 +23,31 @@ Route::post('/list/{request}', 'PrintRequestsController@update')->name('printreq
 Route::delete('/list/{id}', 'PrintRequestsController@destroy')
     ->name('printrequests.destroy');
 
+Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
+
+Route::post('/list/{id}/complete', 'PrintRequestsController@setComplete')->name('printrequests.complete');
+
+Route::post('/list/{id}/rate', 'PrintRequestsController@setRating')->name('printrequests.setRating');
+
+Route::get('/list/{requestID}/block/{commentID}', 'CommentsController@block')->name('comments.block');
+
+Route::post('/list/{requestID}/create/{commentID?}', 'CommentsController@createComment')->name('comments.create');
+
+Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')->name('printrequests.refuseRequest');
+
+Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');
+
+Route::get('image/{ownerID}/{filename}', function ($ownerID,$file)
+{
+    $image=Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $file))->resize(64, 64);
+    $extension = File::extension($file);
+    if($extension=='png'||$extension=='gif'||$extension=='jpg'||$extension=='jpeg'||$extension=='svg'){
+        return Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $file))->resize(64, 64)->response();
+    }
+})->name('printrequests.displayImage');
+
+
+//statistics
 Route::get('/departmentStatistics/{id}','InicialController@departmentStatistics')->name('layout.departmentStatistics');
 
 //rota users
@@ -39,6 +64,7 @@ Route::get('/logout', 'UserController@logout')->name('logout');;
 //Route::get('/home', 'HomeController@index');
 
 Route::get('/profile', 'UserController@profile')->name('profile');
+Route::get('/user/profile/{id}', 'UserController@showProfile')->name('showProfile');
 Route::post('/profile_avatar', 'UserController@update_avatar')->name('update_avatar');
 Route::post('/profile', 'UserController@update_profile')->name('update_profile');
 
@@ -52,28 +78,12 @@ Route::delete('users/{user}', 'UserController@destroy')
 Route::post('users/{user}/edit', 'UserController@update')
         ->name('users.update');
 
+Route::get('/users/manage/users','UserController@showBlokedUsers')->name('users.manageblock');
+Route::get('/users/manageBlock/users/block/{id}','UserController@blockUser')->name('users.block');
+Route::get('/users/manageBlock/users/unblock/{id}','UserController@unblockUser')->name('users.unblock');
 
-Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
+Route::get('/users/manageRole/users','UserController@showUsersRole')->name('users.managerole');
+Route::get('/users/manageRole/users/givepermissions/{id}','UserController@givePrivileges')->name('users.getAdmin');
+Route::get('/users/manageRole/users/removepermissions/{id}','UserController@removePrivileges')->name('users.removeAdmin');
 
-Route::post('/list/{id}/complete', 'PrintRequestsController@setComplete')->name('printrequests.complete');
 
-Route::post('/list/{id}/rate', 'PrintRequestsController@setRating')->name('printrequests.setRating');
-
-Route::get('/list/{requestID}/block/{commentID}', 'CommentsController@block')->name('comments.block');
-
-Route::post('/list/{requestID}/create/{commentID?}', 'CommentsController@createComment')->name('comments.create');
-
-Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')->name('printrequests.refuseRequest');
-
-Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');
-
-Route::get('/dashboard', 'DashboardController@list')->name('printrequests.dashboard');
-
-Route::get('image/{ownerID}/{filename}', function ($ownerID,$file)
-{
-    $image=Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $file))->resize(64, 64);
-    $extension = File::extension($file);
-    if($extension=='png'||$extension=='gif'||$extension=='jpg'||$extension=='jpeg'||$extension=='svg'){
-        return Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $file))->resize(64, 64)->response();
-    }
-})->name('printrequests.displayImage');

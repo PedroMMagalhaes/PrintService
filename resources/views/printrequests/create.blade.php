@@ -36,8 +36,8 @@
             </div>
 
             <div class="form-group">
-                <label for="print_type">Print type</label>
-                <select name="print_type" id="print_type" class="form-control">
+                <label for="colored">Print type</label>
+                <select name="colored" id="colored" class="form-control">
                     <option disabled selected> -- select an option -- </option>
                     <option value="0">Black/White</option>
                     <option value="1">Color</option>

@@ -39,8 +39,8 @@
 
             var data = google.visualization.arrayToDataTable([
                 ['Type', 'Black/White'],
-                ['Black/White',{{$data['printwithoutcolorpercent']}}],
-                ['Color',{{$data['printwithcolorpercent']}}],
+                ['Black/White',{{$data['totalNumberOfPrintsWithoutColor']}}],
+                ['Color',{{$data['totalNumberOfPrintsColor']}}],
             ]);
 
             var options = {
@@ -75,7 +75,7 @@
         </tr>
         <tr>
           <td>Number Of Prints By Type</td>
-          <td>Black/White - {{$data['printwithoutcolorpercent']}}%     |     Color - {{$data['printwithcolorpercent']}}%</td>
+          <td>Black/White({{$data['totalNumberOfPrintsWithoutColor']}}) - {{$data['printwithoutcolorpercent']}}%     |     Color({{$data['totalNumberOfPrintsColor']}}) - {{$data['printwithcolorpercent']}}%</td>
         </tr>
         <tr>
           <td>Today's Number of Prints</td>
@@ -90,7 +90,7 @@
           <td>{{$data['totalNumberOfActiveUsers']}}</td>
         </tr>
         <thead class="thead-inverse">
-        <th colspan="2">a
+        <th colspan="2">
           Total Number Of Prints by Department
         </th>
         @foreach($data['countRequests'] as $request)

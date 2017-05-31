@@ -163,9 +163,14 @@ class UserController extends Controller
 
   public function profile()
   {
-
     return view('user.profile', array('user' => Auth::user()) );
+  }
 
+  public function showProfile($id)
+  {
+      //tem de mostrar o user que está na mesma linha da tabela e quando aparecer, mostra so informaçoes sem dar para editar
+      $user= User::find($id);
+      return view('user.profile', compact('user'));
   }
 
 
@@ -246,27 +251,27 @@ class UserController extends Controller
 
   }
 
-  public function login_post(Request $request)
+    public function login_post(Request $request)
 
-  { //tentar autenticar o user | + ['blocked' => true]
-    $user=User::where('email','=',$request['email'])->first();
-    $credentials = [
-                'email' => $request['email'],
-                'password' => $request['password'],
-                'blocked' => $user->blocked,
-                'activated' => $user->activated
-            ];
-//dd($credentials);
+    { //tentar autenticar o user | + ['blocked' => true]
+        $user = User::where('email', '=', $request['email'])->first();
+        $credentials = [
+            'email' => $request['email'],
+            'password' => $request['password'],
+            'blocked' => $user->blocked,
+            'activated' => $user->activated
+        ];
+        //dd($credentials);
 
- if((! Auth::attempt($credentials)) || $credentials['blocked']=="1" || $credentials['activated']=="0") {
+        if ((!Auth::attempt($credentials)) || $credentials['blocked'] == "1" || $credentials['activated'] == "0") {
 
-      return back()->withErrors([
-        'message' => 'Please check your credentials and try again.'
-      ]);
+            return back()->withErrors([
+                'message' => 'Please check your credentials and try again.'
+            ]);
+        }
+
+        return redirect()->home();
     }
-
-    return redirect()->home();
-  }
 
 
   /**
@@ -281,4 +286,50 @@ class UserController extends Controller
         return redirect('login')->with('status', 'You are now confirmed. Please login.');
     }
 
+    public function showBlokedUsers()
+    {
+        $blockedUsers = User::where('blocked',1)->paginate(5);
+        $unblockedUsers = User::where('blocked',0)->paginate(5);
+
+        return view('user.manageBlock', compact('blockedUsers','unblockedUsers'));
+    }
+
+    public function blockUser($id)
+    {
+        User::where('id',$id)->update(['blocked'=>1]);
+
+        return back();
+    }
+
+    public function unblockUser($id)
+    {
+        User::where('id',$id)->update(['blocked'=>0]);
+
+        return back();
+    }
+
+    public function showUsersRole()
+    {
+        $normalUsers = User::where('admin',0)->paginate(5);
+        $adminUsers = User::where('admin',1)->paginate(5);
+
+        return view('user.manageRole', compact('normalUsers','adminUsers'));
+    }
+
+    public function givePrivileges($id)
+    {
+        User::where('id',$id)->update(['admin'=>1]);
+
+        return back();
+    }
+
+    public function removePrivileges($id)
+    {
+        User::where('id',$id)->update(['admin'=>0]);
+
+        return back();
+    }
+
 }
+
+

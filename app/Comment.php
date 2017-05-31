@@ -13,7 +13,7 @@ class Comment extends Model
 
   public function requests()
   {
-    return $this->belongsTo('App\Request');
+    return $this->belongsTo('App\Request','request_id');
   }
 
   public function comments()

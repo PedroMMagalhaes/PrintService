@@ -18,7 +18,7 @@ class InitialRelations extends Migration
         });
         Schema::table('comments', function (Blueprint $table) {
             $table->foreign('request_id')->references('id')->on('requests');
-            $table->foreign('parent_id')->references('id')->on('comments');
+            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
         });
         Schema::table('requests', function (Blueprint $table) {
@@ -41,8 +41,8 @@ class InitialRelations extends Migration
             $table->dropForeign(['closed_user_id']);
         });
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropForeign(['request_id']);
             $table->dropForeign(['parent_id']);
+            $table->dropForeign(['request_id']);
             $table->dropForeign(['user_id']);
         });
         Schema::table('users', function (Blueprint $table) {
