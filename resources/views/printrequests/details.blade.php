@@ -46,12 +46,7 @@
                 <td>{{$requestData->typeToStrPaperSize()}}</td>
                 <td>{{$requestData->typeToStrPaperType()}}</td>
                 <td><a href="{{action('PrintRequestsController@download',$requestData->id)}}">Download</a></td>
-                <td>
-                    @if($requestData->status == 1)
-                        {{"Complete"}}
-                    @else {{"In process"}}
-                    @endif
-                </td>
+                <td>{{$requestData->typeToStrState($requestData->status)}}</td>
             </tr>
             </tbody>
         </table>
@@ -177,7 +172,6 @@
                         @endif
                     @endforeach
                     @if($requestData->status==0)
-                    @if($user->isPublisher())
                     {{Form::open(array('route' => array('comments.create',$requestData->id), 'method' => 'POST'))}}
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
@@ -190,7 +184,6 @@
                     @endif
                     </div>
                     {{ Form::close() }}
-                    @endif
                     @endif
                 </ul>
             </div>

@@ -74,6 +74,7 @@ class PrintRequestsController extends Controller
         $newRequest->owner_id = Auth::user()->id;
         $newRequest->file = $_FILES["file"]["name"];
         $newRequest->fill($request->all());
+        $uniqueName=uniqid().pathinfo($name, PATHINFO_EXTENSION);
 
         if (!$newRequest->save()) {
             $message = ['message_error' => 'Failed to create request'];
@@ -82,7 +83,7 @@ class PrintRequestsController extends Controller
             if (is_dir(storage_path("app/print-jobs/$newRequest->owner_id/")) === false) {
                 mkdir(storage_path("app/print-jobs/$newRequest->owner_id/"));
             }
-            move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/")."$name");
+            move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/")."$uniqueName");
         }
         return redirect()->route('create')->with($message);
     }
@@ -94,8 +95,9 @@ class PrintRequestsController extends Controller
         //$this->authorize('update', $requestValue);
 
         //$requestValue->owner_id = Auth::user()->id;
+
         $requestValue->fill($request->all());
-        $requestValue->file = Input::get('file');
+        //$requestValue->file = $_FILES["file"]["name"];
         if (!$requestValue->save()) {
             $message = ['message_error' => 'Failed to edit request'];
         } else {
