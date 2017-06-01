@@ -91,3 +91,5 @@ Route::get('/users/manageRole/users/givepermissions/{id}','UserController@givePr
 Route::get('/users/manageRole/users/removepermissions/{id}','UserController@removePrivileges')->name('users.removeAdmin');
 
 
+// Password reset routes
+Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
