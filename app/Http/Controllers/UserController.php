@@ -254,7 +254,8 @@ class UserController extends Controller
     public function login_post(Request $request)
 
     { //tentar autenticar o user | + ['blocked' => true]
-        $user = User::where('email', '=', $request['email'])->first();
+
+      $user = User::where('email', '=', $request['email'])->first();
 
 
         $credentials = [
@@ -266,12 +267,12 @@ class UserController extends Controller
         //dd($credentials);
 
 
-        if ((!Auth::attempt($credentials)) || $credentials['blocked'] == "1" || $credentials['activated'] == "0") {
+       if ((!Auth::attempt($credentials)) || $credentials['blocked'] == "1" || $credentials['activated'] == "0") {
 
-            return back()->withErrors([
-                'message' => 'Please check your credentials and try again.'
-            ]);
-        }
+           return back()->withErrors([
+             'message' => 'Please check your credentials and try again.'
+          ]);
+       }
 
         return redirect()->home();
     }

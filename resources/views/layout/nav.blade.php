@@ -46,7 +46,7 @@
 
       @else (Auth::check())
 
-  <img src ="/img/profile_photo{{ Auth::user()->profile_photo }}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%">
+  <img src ="/img/profile_photo{{ Auth::user()->profile_photo }}">
 
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ Auth::user()->name }}
   <span class="caret"></span></button>
