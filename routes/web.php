@@ -87,3 +87,11 @@ Route::get('/users/manageRole/users/givepermissions/{id}','UserController@givePr
 Route::get('/users/manageRole/users/removepermissions/{id}','UserController@removePrivileges')->name('users.removeAdmin');
 
 
+// Password reset routes
+Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+
+
+Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
+Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');

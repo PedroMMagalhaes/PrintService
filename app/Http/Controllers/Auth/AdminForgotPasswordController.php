@@ -35,4 +35,9 @@ class AdminForgotPasswordController extends Controller
     {
       return Password::broker('admins');
     }
+
+    public function showLinkRequestForm()
+    {
+        return view('auth.passwords.email-admin');
+    }
 }
