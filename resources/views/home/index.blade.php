@@ -95,8 +95,8 @@
         </th>
         @foreach($data['countRequests'] as $request)
           <tr>
-            <td>{{$request['nome_departamento']}}</td>
-            <td>{{$request['numero_impressoes']}}</td>
+            <td>{{$request['department_name']}}</td>
+            <td>{{$request['number_of_prints']}}</td>
           </tr>
         @endforeach
         </tbody>

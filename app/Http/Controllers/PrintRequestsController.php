@@ -35,11 +35,15 @@ class PrintRequestsController extends Controller
         if($user->isPublisher() && Route::currentRouteName()!='printrequests.finished'){
             $requests->where('users.id',$user->id);
         }
+
         if(Route::currentRouteName()=='printrequests.finished'){
             $requests->where('status',1);
         }
         $requests->orderBy('description', 'ASC');
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
+
+        $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
+
         $order='asc';
         $criteria='description';
 
@@ -191,7 +195,7 @@ class PrintRequestsController extends Controller
     public function refuseRequest($id)
     {
         DB::table('requests')->where('id', $id)->update(['refused_reason'=>request('refuseReason')]);
-        DB::table('requests')->where('id', $id)->update(['status'=>1]);
+        DB::table('requests')->where('id', $id)->update(['status'=>2]);
         return back();
     }
 

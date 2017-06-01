@@ -46,27 +46,39 @@ class InicialController extends Controller
         $todayDateFormatted = $todayDate->format('Y-m-d H:i:s');
         $firstDayMonth = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
 
-        $monthPrints = Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$firstDayMonth)->count();
-        $averageRequestsDay = round(($monthPrints / $today),2);
-
+        //Daily average of prints for the current month
+        $monthPrints = Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$firstDayMonth)->get();
+        $prints = 0;
+        foreach ($monthPrints as $monthPrint){
+            $prints += $monthPrint->quantity;
+        }
+        $averageRequestsDay = round(($prints / $today),2);
 
         $startDayDate = $todayDate->setTime(0,0,0);
 
+        //todays prints
+        $todaysPrintstotal =  Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->get();
+        $todaysPrints = 0;
+        foreach ($todaysPrintstotal as $value) {
+            $todaysPrints += $value->quantity;
+        }
 
-        $todaysPrints =  Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->count();
-
-
+        //total prints by department
         $countRequests = collect();
         $count = 0;
         $i = 0;
-        foreach(Department::all() as $departamentVariable)
+        $departmentsArray = Department::all();
+        foreach($departmentsArray as $value)
         {
-            $departments = Department::find($departamentVariable->id)->users()->pluck('id');
+            $departments = Department::find($value->id)->users->pluck('id');
             foreach( $departments as $depart) {
-                $count += Request::where('status',1)->where('owner_id',$depart)->count();
+                $requestsCount = Request::where('status',1)->where('owner_id',$depart)->get();
+                foreach ($requestsCount as $request){
+                    $count+= $request->quantity;
+                }
                 $numUsers = count($departments);
                 if(++$i === $numUsers) {
-                    $countRequests->push(['numero_impressoes' => $count, 'nome_departamento' => $departamentVariable->name]);
+                    $countRequests->push(['number_of_prints' => $count, 'department_name' => $value->name]);
                     $i = 0;
                     $count = 0;
                 }
@@ -126,15 +138,33 @@ class InicialController extends Controller
 
         foreach($users as $user_id){
 
-            $totalPrints += Request::where('status',1)->where('owner_id',$user_id)->count();
+            //total prints
+            $totalPrintsArray = Request::where('status',1)->where('owner_id',$user_id)->get();
+            foreach ($totalPrintsArray as $item) {
+                $totalPrints += $item->quantity;
+            }
+
             //P.b
-            $totalNumberOfPrintsBlack += Request::where('status',1)->where('colored',0)->where('owner_id',$user_id)->count();
+            $totalNumberOfPrintsBlackArray = Request::where('status',1)->where('colored',0)->where('owner_id',$user_id)->get();
+            foreach ($totalNumberOfPrintsBlackArray as $item1) {
+                $totalNumberOfPrintsBlack += $item1->quantity;
+            }
+
             //Cores
-            $totalNumberOfPrintsColor += Request::where('status',1)->where('colored',1)->where('owner_id',$user_id)->count();
+            $totalNumberOfPrintsColorArray = Request::where('status',1)->where('colored',1)->where('owner_id',$user_id)->get();
+            foreach ($totalNumberOfPrintsColorArray as $item2){
+                $totalNumberOfPrintsColor += $item2->quantity;
+            }
 
-            $monthPrints += Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$firstDayMonth)->where('owner_id',$user_id)->count();
+            $monthPrintsArray = Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$firstDayMonth)->where('owner_id',$user_id)->get();
+            foreach ($monthPrintsArray as $item4){
+                $monthPrints += $item4->quantity;
+            }
 
-            $todaysPrints +=  Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->where('owner_id',$user_id)->count();
+            $todaysPrintsArray =  Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->where('owner_id',$user_id)->get();
+            foreach ($todaysPrintsArray as $item3){
+                $todaysPrints += $item3->quantity;
+            }
         }
 
         if($totalPrints == 0) {

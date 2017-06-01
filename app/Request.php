@@ -31,9 +31,11 @@ class Request extends Model
     {
         switch ($this->status) {
             case 0:
-                return 'In process';
+                return 'Pending';
             case 1:
-                return 'Closed';
+                return 'Completed';
+            case 2:
+                return 'Refused';
         }
 
         return 'Unknown';
@@ -42,10 +44,12 @@ class Request extends Model
     public static function strToTypeState($status)
     {
         switch ($status) {
-            case 'In process':
+            case 'Pending':
                 return 0;
-            case 'Closed':
+            case 'Completed':
                 return 1;
+            case 'Refused':
+                return 2;
         }
 
         return -1;
