@@ -73,7 +73,7 @@ class PrintRequestsController extends Controller
         $newRequest = new Request;
         $newRequest->owner_id = Auth::user()->id;
         $uniqueName=uniqid().".".pathinfo($name, PATHINFO_EXTENSION);
-        $newRequest->file = uniqid().".".pathinfo($name, PATHINFO_EXTENSION);
+        $newRequest->file = $uniqueName;
         $newRequest->fill($request->all());
 
 
@@ -95,10 +95,8 @@ class PrintRequestsController extends Controller
 
         //$this->authorize('update', $requestValue);
 
-        //$requestValue->owner_id = Auth::user()->id;
-
         $requestValue->fill($request->all());
-        //$requestValue->file = $_FILES["file"]["name"];
+        $requestValue->file = $_FILES["file"]["name"];
         if (!$requestValue->save()) {
             $message = ['message_error' => 'Failed to edit request'];
         } else {

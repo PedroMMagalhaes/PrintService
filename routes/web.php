@@ -29,7 +29,11 @@ Route::post('/list/{id}/complete', 'PrintRequestsController@setComplete')->name(
 
 Route::post('/list/{id}/rate', 'PrintRequestsController@setRating')->name('printrequests.setRating');
 
+//comments
+Route::get('/comments/manageComments','CommentsController@showBlockedComments')->name('manageComments');
 Route::get('/list/{requestID}/block/{commentID}', 'CommentsController@block')->name('comments.block');
+Route::get('/comments/manageComments/{commentID}','CommentsController@unblockComments')->name('comments.unblock');
+
 
 Route::post('/list/{requestID}/create/{commentID?}', 'CommentsController@createComment')->name('comments.create');
 
@@ -87,4 +91,3 @@ Route::get('/users/manageRole/users/givepermissions/{id}','UserController@givePr
 Route::get('/users/manageRole/users/removepermissions/{id}','UserController@removePrivileges')->name('users.removeAdmin');
 
 
-Route::get('/comments/manageComments','CommentsController@showBlockedComments')->name('manageComments');

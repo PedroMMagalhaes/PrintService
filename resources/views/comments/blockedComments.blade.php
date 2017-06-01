@@ -17,8 +17,6 @@
                 <thead>
                 <tr>
                     <th>Blocked Comments</th>
-
-
                 </tr>
                 </thead>
                 <tbody>
@@ -26,9 +24,10 @@
                     <tr>
                         <td>{{ $blockedComment->comment }}</td>
                         <td>{{ $blockedComment->created_at }}</td>
+                        <td>{{ $blockedComment->users->name }}</td>
 
                         <td>
-                            <a class="btn btn-xs btn-success" href="{{route('manageComments', $blockedComment->blocked)}}">Unblock</a>
+                            <a class="btn btn-xs btn-success" href="{{route('comments.unblock', $blockedComment->blocked)}}">Unblock</a>
                         </td>
                     </tr>
                 @endforeach

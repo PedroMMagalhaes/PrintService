@@ -29,37 +29,38 @@
 </div>
 
 
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
+@section('scripts')
 
-            var data = google.visualization.arrayToDataTable([
-                ['Type', 'Black/White'],
-                ['Black/White',{{$data['totalNumberOfPrintsWithoutColor']}}],
-                ['Color',{{$data['totalNumberOfPrintsColor']}}],
-            ]);
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
-            var options = {
-                title: 'Number Of Prints By Type',
-            };
+      function drawChart() {
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          var data = google.visualization.arrayToDataTable([
+              ['Type', 'Black/White'],
+              ['Black/White',{{$data['totalNumberOfPrintsWithoutColor']}}],
+              ['Color',{{$data['totalNumberOfPrintsColor']}}],
+          ]);
 
-            chart.draw(data, options);
-        }
+          var options = {
+              title: 'Number Of Prints By Type',
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+          chart.draw(data, options);
+      }
 
 
-    </script>
+  </script>
 
+@endsection
 
-  </head>
-  <body>
   <div id="piechart" style="width: 900px; height: 500px;"></div>
-  </body>
+
 
   <!-- Tabela -->
   <div class="col-lg-9 col-md-8">

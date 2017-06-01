@@ -25,8 +25,10 @@
 
             <div class="form-group">
                 <label for="due_date">Due date</label>
-                <input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{old('due_date', $request['due_date'])}}"/>
+                {{ Form::date('due_date', date('Y-m-d',strtotime(old('due_date', $request['due_date']))), ['class' => 'form-control']) }}
+                <!--<input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{date('d/m/Y',strtotime(old('due_date', $request['due_date'])))}}"/>!-->
             </div>
+            <!--{{date('d/m/Y',strtotime(old('due_date', $request['due_date'])))}}!-->
 
             <div class="form-group">
                 <label for="quantity">Quantity</label>
@@ -66,7 +68,7 @@
             </div>
 
             <div class="form-group">
-                <label for="file">Current File</label>
+                <img src="{{ route('printrequests.displayImage', ['file'=>$request->file,'ownerID'=>$request->owner_id]) }}">
                 <br>
                 <label for="file">{{ old('file', $request['file'])}}</label>
                 </br>

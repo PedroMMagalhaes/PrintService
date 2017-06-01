@@ -16,17 +16,17 @@
   <link rel="stylesheet" href="{{ URL::asset('css/sidebar.css') }}" />
 </head>
 
-<body>
 
+
+<body>
 @include ('layout.nav')
 @include('layout.sidebar')
+
+<!--<body>-->
 
 @yield('content')
 
 @include ('layout.footer')
-
-</body>
-
 
 
 <!--scripts-->
@@ -34,7 +34,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 <script src="js/scripts.js"></script>
-
 @yield('scripts')
 
+</body>
 </html>

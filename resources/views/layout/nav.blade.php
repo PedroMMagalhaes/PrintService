@@ -13,19 +13,10 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ url('/') }}">Home<span class="sr-only"></span></a>
       </li>
-        @if(!Auth::guest())
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/list') }}">Request Dashboard<span class="sr-only"></span></a>
-            </li>
-            @if(Auth::user()->admin)
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('users.manageblock') }}">Manage User Clearence<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('users.managerole') }}">Manage User Roles<span class="sr-only"></span></a>
-                </li>
-            @endif
-        @endif
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/index') }}">Contacts</a>
+        </li>
+
     </ul>
   </div>
 
@@ -43,7 +34,7 @@
 
       @else (Auth::check())
 
-  <img src ="/img/profile_photo{{ Auth::user()->profile_photo }}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%">
+  <img src ="/img/profile_photo{{ Auth::user()->profile_photo }}">
 
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ Auth::user()->name }}
   <span class="caret"></span></button>
