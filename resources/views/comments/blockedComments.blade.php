@@ -27,7 +27,7 @@
                         <td>{{ $blockedComment->users->name }}</td>
 
                         <td>
-                            <a class="btn btn-xs btn-success" href="{{route('comments.unblock', $blockedComment->blocked)}}">Unblock</a>
+                            <a class="btn btn-xs btn-success" href="{{route('comments.unblock', $blockedComment->id)}}">Unblock</a>
                         </td>
                     </tr>
                 @endforeach
