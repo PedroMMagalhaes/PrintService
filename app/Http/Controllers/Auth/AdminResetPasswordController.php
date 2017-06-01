@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Password;
+use Auth;
 
-class ResetPasswordController extends Controller
+
+class AdminResetPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -25,15 +29,30 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+     //adiconar aqui depois a pag da dashboard do admin
+
+    protected $redirectTo = 'home';
 
     /**
-     * Create a new controller instance.
+     * Create a new controll er instance.
      *
      * @return void
      */
+
+     //Falta um guard do admin adicionar depois & acrscentar neste middleware('guest:admin')
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    //falta criar o guard dos admins
+    protected function guard()
+    {
+      return Auth::guard('admin');
+    }
+
+    protected function broker() //Func para saber qual broker vai usar (usar ou admin)
+    {
+      return Password::broker('admins');
     }
 }
