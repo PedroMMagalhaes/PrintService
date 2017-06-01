@@ -93,7 +93,7 @@ body.modal-open {
 
 
 
-@import "bourbon";
+/*@import "bourbon";*/
 
 body {
 	background: #eee !important;
@@ -120,7 +120,7 @@ body {
 	  font-weight: normal;
 	}
 
-	.form-control {
+	/*.form-control {
 	  position: relative;
 	  font-size: 16px;
 	  height: auto;
@@ -130,7 +130,7 @@ body {
 		&:focus {
 		  z-index: 2;
 		}
-	}
+	}*/
 
 	input[type="text"] {
 	  margin-bottom: -1px;
@@ -143,4 +143,10 @@ body {
 	  border-top-left-radius: 0;
 	  border-top-right-radius: 0;
 	}
-}
+
+  .navbar img{
+    margin-top: 2px;
+    margin-right: 2px;
+
+    border-radius: 50%;
+  }
