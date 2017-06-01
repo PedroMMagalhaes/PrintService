@@ -40,7 +40,6 @@ class PrintRequestsController extends Controller
             $requests->where('status',1);
         }
         $requests->orderBy('description', 'ASC');
-        $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
 
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
 
@@ -250,7 +249,7 @@ class PrintRequestsController extends Controller
         if(Route::currentRouteName()=='printrequests.finished'){
             $requests->where('status',1);
         }
-        $requests=$this->searchByKeyword($requests, $keyword)->paginate(5);
+        $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
         return view('printrequests.list', compact('requests', 'order', 'criteria','user'));
     }
 }
