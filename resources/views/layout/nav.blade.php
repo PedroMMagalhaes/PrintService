@@ -24,9 +24,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('users.managerole') }}">Manage User Roles<span class="sr-only"></span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Manage Comments<span class="sr-only"></span></a>
-                </li>
             @endif
         @endif
     </ul>

@@ -12,21 +12,19 @@
   <meta name="generator" content="Codeply">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-  <!--link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" /> -->
+  <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('css/sidebar.css') }}" />
 </head>
 
+<body>
 
 @include ('layout.nav')
 @include('layout.sidebar')
 
-<body>
-
-<!--<body>-->
-
 @yield('content')
 
 @include ('layout.footer')
+
 </body>
 
 
@@ -36,5 +34,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 <script src="js/scripts.js"></script>
+
+@yield('scripts')
 
 </html>

@@ -78,8 +78,6 @@ Route::delete('users/{user}', 'UserController@destroy')
 Route::post('users/{user}/edit', 'UserController@update')
         ->name('users.update');
 
-Route::get('/finished','PrintRequestsController@list')->name('printrequests.finished');
-
 Route::get('/users/manage/users','UserController@showBlokedUsers')->name('users.manageblock');
 Route::get('/users/manageBlock/users/block/{id}','UserController@blockUser')->name('users.block');
 Route::get('/users/manageBlock/users/unblock/{id}','UserController@unblockUser')->name('users.unblock');
@@ -87,3 +85,6 @@ Route::get('/users/manageBlock/users/unblock/{id}','UserController@unblockUser')
 Route::get('/users/manageRole/users','UserController@showUsersRole')->name('users.managerole');
 Route::get('/users/manageRole/users/givepermissions/{id}','UserController@givePrivileges')->name('users.getAdmin');
 Route::get('/users/manageRole/users/removepermissions/{id}','UserController@removePrivileges')->name('users.removeAdmin');
+
+
+Route::get('/comments/manageComments','CommentsController@showBlockedComments')->name('manageComments');

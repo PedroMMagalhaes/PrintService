@@ -33,7 +33,19 @@ class CommentsController extends Controller
 
   }
 
+  public function showBlockedComments()
+  {
+      $blockedComments = Comment::where('blocked',1)->paginate(5);
 
+      return view('comments.blockedComments', compact('blockedComments'));
+  }
+
+  public function unblockComments($blocked)
+  {
+      Comment::where('blocked',1)->update(['blocked'=>0]);
+
+      return back();
+  }
 
 
 
