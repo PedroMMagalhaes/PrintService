@@ -72,9 +72,10 @@ class PrintRequestsController extends Controller
         $tmp_name = $_FILES["file"]["tmp_name"];
         $newRequest = new Request;
         $newRequest->owner_id = Auth::user()->id;
-        $newRequest->file = $_FILES["file"]["name"];
+        $uniqueName=uniqid().".".pathinfo($name, PATHINFO_EXTENSION);
+        $newRequest->file = uniqid().".".pathinfo($name, PATHINFO_EXTENSION);
         $newRequest->fill($request->all());
-        $uniqueName=uniqid().pathinfo($name, PATHINFO_EXTENSION);
+
 
         if (!$newRequest->save()) {
             $message = ['message_error' => 'Failed to create request'];
