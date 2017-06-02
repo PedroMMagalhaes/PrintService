@@ -192,9 +192,21 @@ class UserController extends Controller
 
     { //tentar autenticar o user | + ['blocked' => true]
 
-      $user = User::where('email', '=', $request['email'])->first();
+      if(!isset($request['email']))
+      {
+        return back()->withErrors([
+          'message' => 'Please introduce your credentials and try again.'
+       ]);
+      }
 
+    $user = User::where('email', '=', $request['email'])->first();
 
+      if(!isset($user))
+      {
+        return back()->withErrors([
+          'message' => 'Please check your email and try again.'
+       ]);
+      }
         $credentials = [
             'email' => $request['email'],
             'password' => $request['password'],
