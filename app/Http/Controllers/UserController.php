@@ -23,12 +23,13 @@ class UserController extends Controller
 {
 
 
-  public function __contruct()
+  public function __construct()
 
   {
 
   //  $this->middleware('guest', ['except' => 'destroy']);
-    $this->middleware('guest');
+    //$this->middleware('auth', ['except' => 'login_get'], ['except' => 'login_post']);
+    $this->middleware('auth', ['except' => ['login_get', 'login_post']]);
 
   }
 

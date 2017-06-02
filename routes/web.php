@@ -61,7 +61,7 @@ Route::get('/register/confirm/{token}', 'UserController@confirmEmail')->name('co
 
 Route::get('/index', 'UserController@index')->name('index');
 
-Route::get('/login', 'UserController@login_get');
+Route::get('/login', 'UserController@login_get')->name('login');
 Route::post('/login','UserController@login_post');
 
 Route::get('/logout', 'UserController@logout')->name('logout');;
