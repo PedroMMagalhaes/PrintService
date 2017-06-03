@@ -82,6 +82,6 @@
 </div>
 
 
-        @include('layout.errors')
+        
 
 @endsection

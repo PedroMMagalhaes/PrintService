@@ -24,6 +24,7 @@
 @include('layout.sidebar')
 
 <!--<body>-->
+@include('layout.flash')
 
 @yield('content')
 

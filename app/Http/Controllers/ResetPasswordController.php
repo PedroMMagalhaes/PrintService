@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Password;
 class ResetPasswordController extends Controller
 {
   // redirect path
-    protected $redirectTo = 'home';
+    protected $redirectTo = '/';
 
     //trait for handling reset Password
     use ResetsPasswords;
