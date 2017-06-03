@@ -15,6 +15,8 @@ use App\Mail\CompletionEmail;
 use File;
 use Mail;
 use Route;
+use Carbon\Carbon;
+
 
 class PrintRequestsController extends Controller
 {
@@ -186,8 +188,12 @@ class PrintRequestsController extends Controller
 
     public function setComplete($id)
     {
+        $admin=Auth::user();
         DB::table('requests')->where('id', $id)->update(['status'=>1]);
         DB::table('requests')->where('id', $id)->update(['printer_id'=>Input::get('name')+1]);
+        DB::table('requests')->where('id', $id)->update(['updated_at'=>Carbon::now()]);
+        DB::table('requests')->where('id', $id)->update(['closed_date'=>Carbon::now()]);
+        DB::table('requests')->where('id', $id)->update(['closed_user_id'=>$admin->id]);
         $request=Request::find($id);
         $user=$request->users;
         Mail::to($user->email)->send(new CompletionEmail($request));

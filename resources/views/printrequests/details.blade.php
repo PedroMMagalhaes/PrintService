@@ -24,7 +24,7 @@
             <tbody>
             <tr>
                 <th scope="row">{{$requestData->description}}</th>
-                <td>{{$requestData->created_at}}</td>
+                <td>{{$requestData->updated_at}}</td>
                 <td>@if($requestData->colored == 1)
                         {{"Color"}}
                     @else
@@ -153,7 +153,6 @@
                         @endif
                         @endforeach
                         @if($requestData->status==0)
-                        @if($user->isPublisher())
                         {{Form::open(array('route' => array('comments.create',$requestData->id,$comment->id), 'method' => 'POST'))}}
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
@@ -166,7 +165,6 @@
                         @endif
                         </div>
                         {{ Form::close() }}
-                        @endif
                         @endif
                         @endif
                         @endif
