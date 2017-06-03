@@ -41,9 +41,9 @@ class Request extends Model
         return 'Unknown';
     }
 
-    public static function strToTypeState()
+    public static function strToTypeState($status)
     {
-        switch ($this->status) {
+        switch ($status) {
             case 'Pending':
                 return 0;
             case 'Completed':
