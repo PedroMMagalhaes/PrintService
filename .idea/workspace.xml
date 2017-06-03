@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1dd73b64-eedc-4075-8fcb-c486aaede595" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/profile_photo1496502712.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/profile_photo1496504103.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/InicialController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/InicialController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateUserPostRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateUserPostRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/comments/blockedComments.blade.php" afterPath="$PROJECT_DIR$/resources/views/comments/blockedComments.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layout/statistics.blade.php" afterPath="$PROJECT_DIR$/resources/views/layout/statistics.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/printrequests/details.blade.php" afterPath="$PROJECT_DIR$/resources/views/printrequests/details.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/printrequests/list.blade.php" afterPath="$PROJECT_DIR$/resources/views/printrequests/list.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/registration/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/registration/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/profile.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/profile.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,11 +18,31 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="profile.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="profile.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/user/profile.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="778">
+            <state relative-caret-position="809">
               <caret line="70" column="10" lean-forward="false" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InicialController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InicialController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="620">
+              <caret line="171" column="9" lean-forward="false" selection-start-line="171" selection-start-column="9" selection-end-line="171" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="statistics.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/layout/statistics.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="22" column="46" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -73,8 +81,8 @@
       <file leaf-file-name="PrintRequestsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PrintRequestsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="88" column="59" lean-forward="false" selection-start-line="88" selection-start-column="15" selection-end-line="88" selection-end-column="59" />
+            <state relative-caret-position="392">
+              <caret line="193" column="68" lean-forward="false" selection-start-line="193" selection-start-column="58" selection-end-line="193" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -84,9 +92,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$userData</find>
-      <find>name</find>
-      <find>show</find>
       <find>nav</find>
       <find>colo</find>
       <find>user</find>
@@ -99,8 +104,6 @@
       <find>profi</find>
       <find>todaysprints</find>
       <find>to</find>
-      <find>todaysPrints</find>
-      <find>today</find>
       <find>dd</find>
       <find>c</find>
       <find>s</find>
@@ -114,6 +117,11 @@
       <find>profile</find>
       <find>can</find>
       <find>create</find>
+      <find>updated_at</find>
+      <find>setc</find>
+      <find>due_date</find>
+      <find>today</find>
+      <find>todaysPrints</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -165,11 +173,11 @@
         <option value="$PROJECT_DIR$/resources/views/user/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/printrequests/list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layout/statistics.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/InicialController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PrintRequestsController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/resources/views/user/profile.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/InicialController.php" />
       </list>
     </option>
   </component>
@@ -371,7 +379,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ws6" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="SearchEverywhereHistoryKey" value="side&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/sidebar.blade.php&#10;sta&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/statistics.blade.php&#10;inde&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/home/index.blade.php&#10;list&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/printrequests/list.blade.php&#10;profi&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/user/profile.blade.php&#10;deta&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/printrequests/details.blade.php&#10;crea&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/printrequests/create.blade.php&#10;rese&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/user/reset.blade.php&#10;create&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/registration/create.blade.php&#10;maste&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/master.blade.php&#10;in&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/home/index.blade.php&#10;footer&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/footer.blade.php&#10;mas&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/master.blade.php&#10;MAS&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/master.blade.php&#10;nav&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/nav.blade.php&#10;prin&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/app/Http/Controllers/PrintRequestsController.php&#10;SIDE&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/sidebar.blade.php&#10;na&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/nav.blade.php&#10;req&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/app/Request.php&#10;index&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/home/index.blade.php&#10;InicialController&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/app/Http/Controllers/InicialController.php&#10;Authenticates&#9;null&#9;null&#10;authenticates&#9;null&#9;null&#10;dash&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/printrequests/dashboard.blade.php" />
+    <property name="SearchEverywhereHistoryKey" value="stat&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/statistics.blade.php&#10;side&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/sidebar.blade.php&#10;sta&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/statistics.blade.php&#10;inde&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/home/index.blade.php&#10;list&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/printrequests/list.blade.php&#10;profi&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/user/profile.blade.php&#10;deta&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/printrequests/details.blade.php&#10;crea&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/printrequests/create.blade.php&#10;rese&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/user/reset.blade.php&#10;create&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/registration/create.blade.php&#10;maste&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/master.blade.php&#10;in&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/home/index.blade.php&#10;footer&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/footer.blade.php&#10;mas&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/master.blade.php&#10;MAS&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/master.blade.php&#10;nav&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/nav.blade.php&#10;prin&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/app/Http/Controllers/PrintRequestsController.php&#10;SIDE&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/sidebar.blade.php&#10;na&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/layout/nav.blade.php&#10;req&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/app/Request.php&#10;index&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/home/index.blade.php&#10;InicialController&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/app/Http/Controllers/InicialController.php&#10;Authenticates&#9;null&#9;null&#10;authenticates&#9;null&#9;null&#10;dash&#9;FILE&#9;file:///home/pedro/Desktop/AINET/Projeto/projeto-de-ainet/resources/views/printrequests/dashboard.blade.php" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
   </component>
   <component name="RecentsManager">
@@ -491,18 +499,18 @@
       <workItem from="1496359175849" duration="2096000" />
       <workItem from="1496398632612" duration="2451000" />
       <workItem from="1496487717624" duration="38000" />
-      <workItem from="1496500623417" duration="12241000" />
+      <workItem from="1496500623417" duration="13279000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="265099000" />
+    <option name="totallyTimeSpent" value="266137000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19270833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.028125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -846,22 +854,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InicialController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="113" column="25" lean-forward="false" selection-start-line="113" selection-start-column="24" selection-end-line="113" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layout/statistics.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="46" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/user/manageBlock.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="533">
@@ -894,18 +886,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PrintRequestsController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/user/profile.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="88" column="59" lean-forward="false" selection-start-line="88" selection-start-column="15" selection-end-line="88" selection-end-column="59" />
+        <state relative-caret-position="809">
+          <caret line="70" column="10" lean-forward="false" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/user/profile.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PrintRequestsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="778">
-          <caret line="70" column="10" lean-forward="false" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
+        <state relative-caret-position="392">
+          <caret line="193" column="68" lean-forward="false" selection-start-line="193" selection-start-column="58" selection-end-line="193" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layout/statistics.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="46" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InicialController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="171" column="9" lean-forward="false" selection-start-line="171" selection-start-column="9" selection-end-line="171" selection-end-column="9" />
           <folding />
         </state>
       </provider>
