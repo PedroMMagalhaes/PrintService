@@ -6,6 +6,8 @@
 
 @include('layout.flash')
 
+
+
 <form method="POST" action="/login">
 
 {{ csrf_field() }}
@@ -13,6 +15,10 @@
 <!--  LOGIN -->
 
 <div class="wrapper">
+    @if(count($errors) > 0)
+        @include('layout.errors')
+    @endif
+    @include('partials.flashmessages')
   <form class="form-signin">
     <h2 class="form-signin-heading">Please login</h2>
     <p>

@@ -68,9 +68,9 @@ class UserController extends Controller
 
       Mail::to($user->email)->send(new ConfirmationEmail($user));
 
-      session()->flash('message', 'Thanks for sign up');
+      $msg=['message_success' => 'Thanks for signing up, check your email to activate your account'];
 
-      return redirect()->route('home');
+      return redirect()->route('home')->with($msg);
 
   }
 
@@ -246,7 +246,8 @@ class UserController extends Controller
     public function confirmEmail($token)
     {
         User::whereToken($token)->firstOrFail()->hasVerified();
-        return redirect('login')->with('status', 'You are now confirmed. Please login.');
+        $msg=['message_success' => 'You are now confirmed. Please login.'];
+        return redirect('login')->with($msg);
     }
 
     public function showBlokedUsers()
