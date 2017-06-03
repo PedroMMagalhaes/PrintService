@@ -24,29 +24,14 @@
             <tbody>
             <tr>
                 <th scope="row">{{$requestData->description}}</th>
-                <td>{{$requestData->updated_at}}</td>
-                <td>@if($requestData->colored == 1)
-                        {{"Color"}}
-                    @else
-                        {{"Black and White"}}
-                    @endif
-                </td>
-                <td>@if($requestData->front_back == 1)
-                        {{"Double Sided"}}
-                    @else
-                        {{"Single Sided"}}
-                    @endif
-                </td>
-                <td>
-                    @if($requestData->stapled == 1)
-                        {{"Yes"}}
-                    @else {{"No"}}
-                    @endif
-                </td>
+                <td>{{$requestData->created_at}}</td>
+                <td>{{$requestData->typeToStrColored()}}</td>
+                <td>{{$requestData->typeToStrFrontBack()}}</td>
+                <td>{{$requestData->typeToStrStampled()}}</td>
                 <td>{{$requestData->typeToStrPaperSize()}}</td>
                 <td>{{$requestData->typeToStrPaperType()}}</td>
                 <td><a href="{{action('PrintRequestsController@download',$requestData->id)}}">Download</a></td>
-                <td>{{$requestData->typeToStrState($requestData->status)}}</td>
+                <td>{{$requestData->typeToStrState()}}</td>
             </tr>
             </tbody>
         </table>

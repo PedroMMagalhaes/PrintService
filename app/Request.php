@@ -41,9 +41,9 @@ class Request extends Model
         return 'Unknown';
     }
 
-    public static function strToTypeState($status)
+    public static function strToTypeState()
     {
-        switch ($status) {
+        switch ($this->status) {
             case 'Pending':
                 return 0;
             case 'Completed':
@@ -76,6 +76,43 @@ class Request extends Model
                 return 'A3';
             case 4:
                 return 'A4';
+        }
+
+        return 'Unknown';
+    }
+
+    public function typeToStrStampled()
+    {
+        switch ($this->stampled) {
+            case 0:
+                return 'No';
+            case 1:
+                return 'Yes';
+        }
+
+        return 'Unknown';
+    }
+
+
+    public function typeToStrColored()
+    {
+        switch ($this->colored) {
+            case 0:
+                return 'Black and White';
+            case 1:
+                return 'Colored';
+        }
+
+        return 'Unknown';
+    }
+
+    public function typeToStrFrontBack()
+    {
+        switch ($this->front_back) {
+            case 0:
+                return 'Single-sided';
+            case 1:
+                return 'Double-sided';
         }
 
         return 'Unknown';
