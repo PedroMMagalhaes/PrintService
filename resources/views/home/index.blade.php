@@ -6,6 +6,11 @@
 
 <div class="col-sm-8">
 
+    @if(count($errors) > 0)
+        @include('layout.errors')
+    @endif
+    @include('partials.flashmessages')
+
 
   <div class="row mb-3">
     <div class="col-xl-3 col-lg-6">

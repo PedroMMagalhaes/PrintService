@@ -232,8 +232,8 @@ class UserController extends Controller
              'message' => 'Please check your credentials and try again.'
           ]);
        }
-
-        return redirect()->home();
+       $msg=['message_success' => 'You are now logged in'];
+        return redirect()->home()->with($msg);
     }
 
 
@@ -292,5 +292,30 @@ class UserController extends Controller
 
         return back();
     }
+
+    public function order($criteria, $order)
+    {
+        if ($order=='asc') {
+            $order='desc';
+        } else {
+            $order='asc';
+        }
+        $keyword = Input::get('search', '');
+        $contacts = User::orderBy('department', "$order");
+        $contacts=$this->searchByKeyword($requests, $keyword)->paginate(10);
+        return view('printrequests.list', compact('contacts', 'order', 'criteria'));
+    }
+
+    public function searchByKeyword($query, $keyword)
+    {
+        if (is_null($keyword)==false) {
+            $query->where(function ($query) use ($keyword, $status) {
+                $query->where("name", "like", "%$keyword%")
+                    ->orWhere("department_id", "like", "%$keyword%");
+            });
+        }
+        return $query;
+    }
+
 
 }
