@@ -57,7 +57,8 @@ class InicialController extends Controller
         }
         $averageRequestsDay = round(($prints / $today),2);
 
-        $startDayDate = $todayDate->setTime(0,0,0);
+        $startDayDate = $todayDate->startOfDay();
+
 
         //todays prints
         $todaysPrintstotal =  Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->get();
@@ -164,7 +165,7 @@ class InicialController extends Controller
                 $monthPrints += $item4->quantity;
             }
 
-            $todaysPrintsArray =  Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->where('owner_id',$user_id)->get();
+            $todaysPrintsArray = Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->where('owner_id',$user_id)->get();
             foreach ($todaysPrintsArray as $item3){
                 $todaysPrints += $item3->quantity;
             }
@@ -181,7 +182,7 @@ class InicialController extends Controller
 
         $averageRequestsDay = round(($monthPrints / $today),2);
 
-        $data = [
+        $data2 = [
             'department' => $department,
             'totalPrints' => $totalPrints,
             'printwithcolorpercent' => $printwithcolorpercent,
@@ -190,7 +191,7 @@ class InicialController extends Controller
             'averageRequestsDay' => $averageRequestsDay
         ];
 
-        return view('layout.statistics',compact('data'));
+        return view('layout.statistics',compact('data2'));
     }
 
 

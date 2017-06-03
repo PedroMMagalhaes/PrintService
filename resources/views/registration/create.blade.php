@@ -22,7 +22,7 @@
             <br/>
             <div class="form-group">
 
-              <label for="name">Name:</label>
+              <label for="name">Name</label>
               <input type="text" class="form-control" id="name" name ="name" required>
 
             </div>
@@ -30,7 +30,7 @@
 
             <div class="form-group">
 
-              <label for="email">Email:</label>
+              <label for="email">Email</label>
 
               <input type="email" class="form-control" id="email" name ="email" required>
 
@@ -40,7 +40,7 @@
 
             <div class="form-group">
 
-              <label for="password">Password:</label>
+              <label for="password">Password</label>
               <input type="password" class="form-control" id="password" name ="password" required>
 
 
@@ -48,7 +48,7 @@
 
             <div class="form-group">
 
-              <label for="password_confirmation">Password Confirmation:</label>
+              <label for="password_confirmation">Password Confirmation</label>
               <input type="password" class="form-control" id="password_confirmation" name ="password_confirmation" required>
 
             </div>
@@ -97,14 +97,14 @@
                 </div>-->
 
             <div class="form-group">
-              <label for="phone">Phone:</label>
-              <input type="number" class="form-control" name="phone"  id="phone" min="9">
+              <label for="phone">Phone</label>
+              <input type="number" class="form-control" name="phone"  id="phone">
             </div>
 
 
             <div class="form-group">
 
-              <label for="presentation">Presentation:</label>
+              <label for="presentation">Presentation</label>
               <input type="text" class="form-control" id="presentation" name ="presentation">
 
             </div>

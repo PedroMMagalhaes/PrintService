@@ -31,7 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id', 'profile_photo'
+        'name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id', 'profile_photo', 'phone'
     ];
 
 
@@ -57,6 +57,18 @@ class User extends Authenticatable
                 return 'Administrator';
             case 0:
                 return 'Functionary';
+        }
+
+        return 'Unknown';
+    }
+
+    public function blockedToStr()
+    {
+        switch ($this->blocked) {
+            case 1:
+                return 'Bloqueado';
+            case 0:
+                return 'Sem bloqueio';
         }
 
         return 'Unknown';

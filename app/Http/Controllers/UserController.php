@@ -111,6 +111,7 @@ class UserController extends Controller
   {
       //tem de mostrar o user que está na mesma linha da tabela e quando aparecer, mostra so informaçoes sem dar para editar
       $user= User::find($id);
+
       return view('user.profile', compact('user'));
   }
 

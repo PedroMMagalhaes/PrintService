@@ -26,30 +26,31 @@
             <br/>
             <br/>
 
+
             <div class = "container">
               <p><h5> Update details </h5></p>
 
              <form method="POST" action="{{ route('update_profile') }}">
 
-               <div class "form-group">
+               <div class ="form-group">
                   {{ csrf_field() }}
 
-                 <label for="password">New Password:</label>
+                 <label for="password">New Password</label>
                  <input type="password" class="form-control" id="password" name ="password" required>
 
 
                </div>
 
-               <div class "form-group">
+               <div class ="form-group">
 
-                 <label for="password_confirmation">Password Confirmation:</label>
+                 <label for="password_confirmation">Password Confirmation</label>
                  <input type="password" class="form-control" id="password_confirmation" name ="password_confirmation" required>
 
                </div>
 
                <br/>
 
-               <div class "form-group">
+               <div class ="form-group">
 
                <button type="submit" class="btn btn-primary">Update</button>
 
@@ -58,16 +59,16 @@
                <!-- Erros .... -->
 
                    @include('layout.errors')
-
-
-
-
-
-
-
              </form>
-           </div>
 
+                @if(Auth::user()->admin)
+
+                    <label>User status: {{$user->blockedToStr()}}</label>
+                    <a class="btn btn-xs btn-danger" href="{{route('users.block', $user->id)}}">Block This user</a>
+                @endif
+
+           </div>
+          
 
       </div>
     </div>

@@ -7,7 +7,7 @@
         <h1>Request Details</h1>
 
         <!-- Table -->
-        <table class="table table-sm">
+        <table class="table table-sm table-bordered">
             <thead>
             <tr>
                 <th>Description</th>

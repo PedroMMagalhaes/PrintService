@@ -24,21 +24,23 @@ class CreateUserPostRequest extends FormRequest
     public function rules()
     {
         return [
-          'email' => 'required|email',
+            'email' => 'required|email',
 
-          'password' => 'required|confirmed',
+            'password' => 'required|confirmed',
 
-          'password_confirmation' => 'required|same:password',
+            'password_confirmation' => 'required|same:password',
 
-          'admin' => 'required',
+            'admin' => 'required',
 
-          'blocked' => 'required',
+            'blocked' => 'required',
 
-          'print_evals' => 'required',
+            'print_evals' => 'required',
 
-          'print_counts' => 'required',
+            'print_counts' => 'required',
 
-          'department_id' => 'required',
+            'department_id' => 'required',
+
+            'phone' => 'required| min:9',
         ];
     }
 }

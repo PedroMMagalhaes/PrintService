@@ -23,10 +23,6 @@
                     <th>Email</th>
                     <th>Department</th>
                     <th>Phone Number</th>
-                    {{--<th>Registered At</th>
-                    <th>Type</th>
-                    <th>Print Evals</th>
-                    <th>Print Count</th>--}}
                 </tr>
                 </thead>
                 <tbody>
@@ -36,10 +32,6 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->departToStr() }}</td>
                         <td>{{ $user->phone }}</td>
-                        {{--<td>{{ $user->created_at }}</td>
-                        <td>{{ $user->typeToStr() }}</td>
-                        <td>{{ $user->print_evals }}</td>
-                        <td>{{ $user->print_counts }}</td>--}}
                         <td>
 
                                 <a class="btn btn-xs btn-primary" href="{{route('showProfile', $user)}}">Profile</a>
@@ -51,9 +43,6 @@
         @else
             <h2>No users found</h2>
         @endif
-
-
-
 
         <div class="text-center">
             {{ $users->links() }}

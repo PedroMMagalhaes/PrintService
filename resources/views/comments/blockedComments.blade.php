@@ -36,7 +36,7 @@
             <h2>No blocked comments found</h2>
         @endif
 
-        <div class="text-center">
+        <div>
             {{ $blockedComments->links() }}
         </div>
 

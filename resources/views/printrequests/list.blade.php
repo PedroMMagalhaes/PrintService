@@ -29,7 +29,7 @@
                 </div>
         </div>
 
-
+        @if(count($requests))
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
@@ -120,9 +120,12 @@
             </tbody>
         </table>
 
-        <div class="pagination">
+        <div class="text-center">
             {{ $requests->links() }}
         </div>
+        @else
+            <h2>No print request found</h2>
+        @endif
 
     </div>
 
