@@ -90,14 +90,25 @@ class PrintRequestsController extends Controller
     }
 
     /*{1}/edit*/
-    public function update(UpdatePrintRequest $request, Request $requestValue)
+    public function update(UpdatePrintRequest $request)
     {
         $printRequest=Request::find($_POST['request_id']);
-        $input=$request->all();
-        if (!$printRequest->fill($input)->save()) {
+        $name= $_FILES["file"]["name"];
+        //dd($name);
+        $tmp_name = $_FILES["file"]["tmp_name"];
+        if($name!=""){
+            $oldFilename=$printRequest->file;
+            $uniqueName=uniqid().".".pathinfo($name, PATHINFO_EXTENSION);
+            $printRequest->file = $uniqueName;
+        }
+        if (!$printRequest->fill($request->all())->save()) {
             $message = ['message_error' => 'Failed to edit request'];
         } else {
             $message = ['message_success' => 'Request successfully edited'];
+            if($name!=""){
+                unlink(storage_path("app/print-jobs/$printRequest->owner_id/")."$oldFilename");
+                move_uploaded_file($tmp_name, storage_path("app/print-jobs/$printRequest->owner_id/")."$uniqueName");
+            }
         }
         return redirect()->route('list')->with($message);
     }
