@@ -47,6 +47,7 @@ class RegistrationController extends Controller
 
       'department_id' => 'required',
 
+
     ]);
 
 
@@ -62,7 +63,9 @@ $user = User::create([
       'blocked' => request('blocked'),
       'print_evals' => request('print_evals'),
       'print_counts' => request('print_counts'),
-      'department_id' => request('department_id')
+      'department_id' => request('department_id'),
+      'presentation' => request('presentation'),
+      'profile_url' => request('profile_url')
 		]);
 //iniciar sess
 

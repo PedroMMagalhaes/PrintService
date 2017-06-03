@@ -19,6 +19,7 @@
 
             {{ csrf_field() }}
 
+            <br/>
             <div class="form-group">
 
               <label for="name">Name:</label>
@@ -96,18 +97,30 @@
                 </div>-->
 
             <div class="form-group">
-
               <label for="phone">Phone:</label>
-              <input type="tel" class="form-control" id="phone" name ="phone">
+              <input type="number" class="form-control" name="phone"  id="phone" min="9">
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="presentation">Presentation:</label>
+              <input type="text" class="form-control" id="presentation" name ="presentation">
 
             </div>
 
+            <div class="form-group">
+
+              <label for="name">Profile Url:</label>
+              <input type="text" class="form-control" id="profile_url" name ="profile_url">
+
+            </div>
 
             <input type="hidden" name="print_evals" value="0" />
 
             <input type="hidden" name="print_counts" value="0" />
 
-          
+
 
             <div class="form-group">
 

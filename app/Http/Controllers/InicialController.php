@@ -18,6 +18,9 @@ class InicialController extends Controller
 
     public function index()
     {
+
+      
+
         //total number of prints
         $closedRequests = Request::where('status',1)->get();
         $totalNumberOfPrints = 0;

@@ -104,11 +104,7 @@ return [
             'expire' => 60,
         ],
 
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'password_resets',
-            'expire' => 15, //tempo que demora o link a expirar
-        ],
+        
     ],
 
 ];

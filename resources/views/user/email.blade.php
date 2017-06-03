@@ -1,11 +1,19 @@
-@extends('layout.master')
+@extends ('layout.master')
+
 
 @section('content')
+
+
+
+<div class = "col-md-8">
+<h1>Reset Password</h1>
+<br />
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+            <div class="panel panel-success">
+
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -13,7 +21,7 @@
                         </div>
                     @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('password/email') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -32,7 +40,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     Send Password Reset Link
                                 </button>
                             </div>
@@ -43,4 +51,9 @@
         </div>
     </div>
 </div>
+</div>
+
+
+
+
 @endsection

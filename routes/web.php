@@ -61,7 +61,7 @@ Route::get('/register/confirm/{token}', 'UserController@confirmEmail')->name('co
 
 Route::get('/index', 'UserController@index')->name('index');
 
-Route::get('/login', 'UserController@login_get');
+Route::get('/login', 'UserController@login_get')->name('login');
 Route::post('/login','UserController@login_post');
 
 Route::get('/logout', 'UserController@logout')->name('logout');;
@@ -91,5 +91,8 @@ Route::get('/users/manageRole/users/givepermissions/{id}','UserController@givePr
 Route::get('/users/manageRole/users/removepermissions/{id}','UserController@removePrivileges')->name('users.removeAdmin');
 
 
-// Password reset routes
-Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// Password Reset Routes...
+Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm');
+Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
+Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm');
+Route::post('password/reset', 'ResetPasswordController@reset');

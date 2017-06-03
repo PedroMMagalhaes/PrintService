@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
+//Notification for user
+use App\Notifications\ResetPasswordNotification;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -139,8 +143,6 @@ class User extends Authenticatable
 // BOOT do modelo
 
 
-
-
   public static function boot()
   {
       parent::boot();
@@ -161,6 +163,10 @@ public function hasVerified()
     $this->save();
 }
 
-
+//Send password reset notification
+  public function sendPasswordResetNotification($token)
+  {
+      $this->notify(new ResetPasswordNotification($token));
+  }
 
 }

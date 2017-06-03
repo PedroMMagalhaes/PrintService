@@ -23,12 +23,12 @@ class UserController extends Controller
 {
 
 
-  public function __contruct()
+  public function __construct()
 
   {
 
-  //  $this->middleware('guest', ['except' => 'destroy']);
-    $this->middleware('guest');
+
+    $this->middleware('auth', ['except' => ['login_get', 'login_post', 'create','store','ConfirmationEmail']]);
 
   }
 
@@ -61,27 +61,26 @@ class UserController extends Controller
       $user = User::create($request->input());
 
       $user->password = password_hash($user->password, PASSWORD_DEFAULT);
-              $message = ['message_success' => 'User created successfully'];
+
       if (!$user->save()) {
-          $message = ['message_error  ' => 'Failed to create user'];
+
       }
 
       Mail::to($user->email)->send(new ConfirmationEmail($user));
 
-// visto ser ativado por email nao iremos autenticar logo pois a conta está bloqueada
-//    auth()->login($user);
+      session()->flash('message', 'Thanks for sign up');
 
-      return redirect()->route('home')->with('status', 'Please confirm your email address');
-      //return home()
+      return redirect()->route('home');
+
   }
 
 
     public function destroy(User $user)
     {
       $this->authorize('delete', $user);
-      $message = ['message_success' => 'User removed successfully'];
+      $message = ['success' => 'User removed successfully'];
       if (!$user->delete()) {
-          $message = ['message_error' => 'Failed to remove user'];
+          $message = ['error' => 'Failed to remove user'];
       }
       return redirect()->route('index')->with($message);
     }
@@ -91,9 +90,14 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         $title = 'Edit user';
+        $message = ['success' => 'User update successfully'];
+        if(!$user->update())
+        {
+          $message = ['error' => 'Failed to update user'];
+        }
         // Já não é necessário quando se usa Route Model Binding
         //$user = User::findOrFail($id);
-        return view('user.edit', compact('title', 'user'));
+        return view('user.edit', compact('title', 'user'))->with($message);
     }
 
 
@@ -127,8 +131,13 @@ class UserController extends Controller
         $user->fill($request->input());
         $user->save();
 
-    	}
-    	return view('user.profile', array('user' => Auth::user()) );
+	     }else{
+
+
+    }
+
+
+    	return view('user.profile', array('user' => Auth::user()))->with('success','Avatar updated successfully!');
     }
 
 
@@ -192,9 +201,21 @@ class UserController extends Controller
 
     { //tentar autenticar o user | + ['blocked' => true]
 
-      $user = User::where('email', '=', $request['email'])->first();
+      if(!isset($request['email']))
+      {
+        return back()->withErrors([
+          'message' => 'Please introduce your credentials and try again.'
+       ]);
+      }
 
+    $user = User::where('email', '=', $request['email'])->first();
 
+      if(!isset($user))
+      {
+        return back()->withErrors([
+          'message' => 'Please check your email and try again.'
+       ]);
+      }
         $credentials = [
             'email' => $request['email'],
             'password' => $request['password'],

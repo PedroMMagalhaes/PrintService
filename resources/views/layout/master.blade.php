@@ -14,15 +14,20 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
   <link rel="stylesheet" href="{{ URL::asset('css/sidebar.css') }}" />
+
 </head>
 
 
 
 <body>
 @include ('layout.nav')
+
+
 @include('layout.sidebar')
 
 <!--<body>-->
+
+@include('layout.flash')
 
 @yield('content')
 
@@ -34,6 +39,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 <script src="js/scripts.js"></script>
+<script src="/js/app.js"></script>
 @yield('scripts')
 
 </body>

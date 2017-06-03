@@ -120,7 +120,7 @@
             </tbody>
         </table>
 
-        <div class="text-center" style="...">
+        <div class="pagination">
             {{ $requests->links() }}
         </div>
 
