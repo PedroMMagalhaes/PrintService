@@ -39,7 +39,7 @@
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ Auth::user()->name }}
   <span class="caret"></span></button>
 
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu dropdown-menu-right">
     <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
     <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
   </ul>

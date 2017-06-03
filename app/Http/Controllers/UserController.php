@@ -27,9 +27,8 @@ class UserController extends Controller
 
   {
 
-  //  $this->middleware('guest', ['except' => 'destroy']);
-    //$this->middleware('auth', ['except' => 'login_get'], ['except' => 'login_post']);
-    $this->middleware('auth', ['except' => ['login_get', 'login_post']]);
+
+    $this->middleware('auth', ['except' => ['login_get', 'login_post', 'create','store','ConfirmationEmail']]);
 
   }
 
@@ -62,18 +61,17 @@ class UserController extends Controller
       $user = User::create($request->input());
 
       $user->password = password_hash($user->password, PASSWORD_DEFAULT);
-              $message = ['message_success' => 'User created successfully'];
+
       if (!$user->save()) {
-          $message = ['message_error  ' => 'Failed to create user'];
+
       }
 
       Mail::to($user->email)->send(new ConfirmationEmail($user));
 
-// visto ser ativado por email nao iremos autenticar logo pois a conta está bloqueada
-//    auth()->login($user);
+      session()->flash('message', 'Thanks for sign up');
 
-      return redirect()->route('home')->with('sucess', 'Please confirm your email address');
-      //return home()
+      return redirect()->route('home');
+
   }
 
 
@@ -135,7 +133,7 @@ class UserController extends Controller
 
 	     }else{
 
-      
+
     }
 
 
