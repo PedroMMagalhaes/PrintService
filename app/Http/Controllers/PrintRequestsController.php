@@ -16,6 +16,7 @@ use File;
 use Mail;
 use Route;
 use Carbon\Carbon;
+use Image;
 
 
 class PrintRequestsController extends Controller
@@ -266,5 +267,14 @@ class PrintRequestsController extends Controller
         }
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
         return view('printrequests.list', compact('requests', 'order', 'criteria','user'));
+    }
+
+    public function showRequestImage($ownerID,$filename)
+    {
+        $image=Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $filename))->resize(64, 64);
+        $extension = File::extension($filename);
+        if($extension=='png'||$extension=='gif'||$extension=='jpg'||$extension=='jpeg'||$extension=='svg'){
+            return Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $filename))->resize(64, 64)->response();
+        }
     }
 }

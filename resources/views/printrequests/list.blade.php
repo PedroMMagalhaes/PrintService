@@ -105,7 +105,7 @@
                     <td>{{ $request->users->departToStr()}}</td>
                     <td>{{ $request->typeToStrState()}}</td>
                     <td>{{ $request->typeToStrPaperType()}}</td>
-                    <td><img src="{{ route('printrequests.displayImage', ['file'=>$request->file,'ownerID'=>$request->owner_id]) }}"></td>
+                    <td><img src="{{ route('printrequests.displayImage', ['ownerID'=>$request->owner_id,'filename'=>$request->file]) }}"></td>
                     <td>
                         <a class="btn btn-success" href="{{ route('printrequests.show', $request->id) }}">Details</a>
                         @if(!$request->status==1  && $request->owner_id == $user->id)
