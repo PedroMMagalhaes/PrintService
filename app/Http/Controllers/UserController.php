@@ -72,7 +72,7 @@ class UserController extends Controller
 // visto ser ativado por email nao iremos autenticar logo pois a conta está bloqueada
 //    auth()->login($user);
 
-      return redirect()->route('home')->with('status', 'Please confirm your email address');
+      return redirect()->route('home')->with('sucess', 'Please confirm your email address');
       //return home()
   }
 
@@ -80,9 +80,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
       $this->authorize('delete', $user);
-      $message = ['message_success' => 'User removed successfully'];
+      $message = ['success' => 'User removed successfully'];
       if (!$user->delete()) {
-          $message = ['message_error' => 'Failed to remove user'];
+          $message = ['error' => 'Failed to remove user'];
       }
       return redirect()->route('index')->with($message);
     }
@@ -92,9 +92,14 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         $title = 'Edit user';
+        $message = ['success' => 'User update successfully'];
+        if(!$user->update())
+        {
+          $message = ['error' => 'Failed to update user'];
+        }
         // Já não é necessário quando se usa Route Model Binding
         //$user = User::findOrFail($id);
-        return view('user.edit', compact('title', 'user'));
+        return view('user.edit', compact('title', 'user'))->with($message);
     }
 
 
@@ -128,8 +133,13 @@ class UserController extends Controller
         $user->fill($request->input());
         $user->save();
 
-    	}
-    	return view('user.profile', array('user' => Auth::user()) );
+	     }else{
+
+      
+    }
+
+
+    	return view('user.profile', array('user' => Auth::user()))->with('success','Avatar updated successfully!');
     }
 
 
