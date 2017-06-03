@@ -4,6 +4,11 @@
 
     <div class="col-sm-8">
 
+        @if(count($errors) > 0)
+            @include('layout.errors')
+        @endif
+        @include('partials.flashmessages')
+
         <h1>Print Requests List</h1>
         <div class="container">
 

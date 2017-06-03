@@ -8,7 +8,10 @@
 
         <!-- Erros .... -->
 
-        @include('layout.errors')
+        @if(count($errors) > 0)
+            @include('layout.errors')
+        @endif
+        @include('partials.flashmessages')
 
         <h1> Edit Request </h1>
 
