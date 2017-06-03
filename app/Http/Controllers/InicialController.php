@@ -50,7 +50,7 @@ class InicialController extends Controller
         $firstDayMonth = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
 
         //Daily average of prints for the current month
-        $monthPrints = Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$firstDayMonth)->get();
+        $monthPrints = Request::where('status',1)->where('updated_at', '<=', $todayDateFormatted )->where('updated_at','>=',$firstDayMonth)->get();
         $prints = 0;
         foreach ($monthPrints as $monthPrint){
             $prints += $monthPrint->quantity;
@@ -61,7 +61,7 @@ class InicialController extends Controller
 
 
         //todays prints
-        $todaysPrintstotal =  Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->get();
+        $todaysPrintstotal =  Request::where('status',1)->where('updated_at', '<=', $todayDateFormatted )->where('updated_at','>=',$startDayDate)->get();
         $todaysPrints = 0;
         foreach ($todaysPrintstotal as $value) {
             $todaysPrints += $value->quantity;
@@ -160,12 +160,12 @@ class InicialController extends Controller
                 $totalNumberOfPrintsColor += $item2->quantity;
             }
 
-            $monthPrintsArray = Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$firstDayMonth)->where('owner_id',$user_id)->get();
+            $monthPrintsArray = Request::where('status',1)->where('updated_at', '<=', $todayDateFormatted )->where('updated_at','>=',$firstDayMonth)->where('owner_id',$user_id)->get();
             foreach ($monthPrintsArray as $item4){
                 $monthPrints += $item4->quantity;
             }
 
-            $todaysPrintsArray = Request::where('status',1)->where('due_date', '<=', $todayDateFormatted )->where('due_date','>=',$startDayDate)->where('owner_id',$user_id)->get();
+            $todaysPrintsArray = Request::where('status',1)->where('updated_at', '<=', $todayDateFormatted )->where('updated_at','>=',$startDayDate)->where('owner_id',$user_id)->get();
             foreach ($todaysPrintsArray as $item3){
                 $todaysPrints += $item3->quantity;
             }
