@@ -13,7 +13,8 @@
         <h1> Edit Request </h1>
 
         <form method="POST" action="{{route('printrequests.update',$request->id)}}" enctype="multipart/form-data" class="form-group">
-            <input type="hidden" name="request_id" value="<?= (int) $request->request_id?>" />
+            <input type="hidden" name="request_id" value="<?php echo $request->id;?>" />
+
 
 
             {{ csrf_field() }}

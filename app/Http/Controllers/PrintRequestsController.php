@@ -92,12 +92,9 @@ class PrintRequestsController extends Controller
     /*{1}/edit*/
     public function update(UpdatePrintRequest $request, Request $requestValue)
     {
-
-        //$this->authorize('update', $requestValue);
-
-        $requestValue->fill($request->all());
-        $requestValue->file = $_FILES["file"]["name"];
-        if (!$requestValue->save()) {
+        $printRequest=Request::find($_POST['request_id']);
+        $input=$request->all();
+        if (!$printRequest->fill($input)->save()) {
             $message = ['message_error' => 'Failed to edit request'];
         } else {
             $message = ['message_success' => 'Request successfully edited'];
