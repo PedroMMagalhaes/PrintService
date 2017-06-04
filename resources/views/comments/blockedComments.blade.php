@@ -1,12 +1,9 @@
-
-
-
 @extends ('layout.master')
 
 @section('content')
 
 
-    <div class = "col-md-8">
+    <div class="col-md-8">
 
 
         <h2> Blocked Comments List</h2>

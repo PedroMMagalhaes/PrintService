@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
-  // redirect path
+    // redirect path
     protected $redirectTo = '/';
 
     //trait for handling reset Password

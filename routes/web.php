@@ -8,6 +8,12 @@ Route::get('/', 'InicialController@index')->name('home');
 //rota detalhes
 Route::get('/list/{id}', 'PrintRequestsController@show')->name('printrequests.show');
 
+Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
+
+Route::post('/list/{id}/complete', 'PrintRequestsController@setComplete')->name('printrequests.complete');
+
+Route::post('/list/{id}/rate', 'PrintRequestsController@setRating')->name('printrequests.setRating');
+
 //rota impressoes
 Route::get('/list','PrintRequestsController@list')->name('list');
 
@@ -23,27 +29,16 @@ Route::post('/list/{request}', 'PrintRequestsController@update')->name('printreq
 Route::delete('/list/{id}', 'PrintRequestsController@destroy')
     ->name('printrequests.destroy');
 
-Route::get('/list/{id}/download', 'PrintRequestsController@download')->name('printrequests.download');
-
-Route::post('/list/{id}/complete', 'PrintRequestsController@setComplete')->name('printrequests.complete');
-
-Route::post('/list/{id}/rate', 'PrintRequestsController@setRating')->name('printrequests.setRating');
-
 //comments
 Route::get('/comments/manageComments','CommentsController@showBlockedComments')->name('manageComments');
 Route::get('/list/{requestID}/block/{commentID}', 'CommentsController@block')->name('comments.block');
 Route::get('/comments/manageComments/{commentID}','CommentsController@unblockComments')->name('comments.unblock');
 
-
 Route::post('/list/{requestID}/create/{commentID?}', 'CommentsController@createComment')->name('comments.create');
-
 Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')->name('printrequests.refuseRequest');
-
 Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');
 Route::get('/index-{criteria}-{order}','UserController@order')->name('contacts.order');
-
 Route::get('image/{ownerID}/{filename}', 'PrintRequestsController@showRequestImage')->name('printrequests.displayImage');
-
 
 //statistics
 Route::get('/departmentStatistics/{id}','InicialController@departmentStatistics')->name('layout.departmentStatistics');
@@ -59,7 +54,7 @@ Route::get('/login', 'UserController@login_get')->name('login');
 Route::post('/login','UserController@login_post');
 
 Route::get('/logout', 'UserController@logout')->name('logout');;
-//Route::get('/home', 'HomeController@index');
+
 
 Route::get('/profile', 'UserController@profile')->name('profile');
 Route::get('/user/profile/{id}', 'UserController@showProfile')->name('showProfile');
@@ -67,14 +62,11 @@ Route::post('/profile_avatar', 'UserController@update_avatar')->name('update_ava
 Route::post('/profile', 'UserController@update_profile')->name('update_profile');
 
 //list
-Route::get('users/{user}/edit', 'UserController@edit')
-    ->name('users.edit');
+Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
 
-Route::delete('users/{user}', 'UserController@destroy')
-    ->name('users.destroy');
+Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
 
-Route::post('users/{user}/edit', 'UserController@update')
-        ->name('users.update');
+Route::post('users/{user}/edit', 'UserController@update')->name('users.update');
 
 Route::get('/users/manage/users','UserController@showBlokedUsers')->name('users.manageblock');
 Route::get('/users/manageBlock/users/block/{id}','UserController@blockUser')->name('users.block');

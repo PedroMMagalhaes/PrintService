@@ -30,23 +30,24 @@ class PrintRequestsController extends Controller
     {
         $keyword = Input::get('search', '');
         $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')
-                        ->join('departments', 'users.department_id', '=', 'departments.id')
-                        ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname', 'requests.*');
+            ->join('departments', 'users.department_id', '=', 'departments.id')
+            ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname',
+                'requests.*');
 
-        $user=Auth::user();
-        if ($user->isPublisher() && Route::currentRouteName()!='printrequests.finished') {
+        $user = Auth::user();
+        if ($user->isPublisher() && Route::currentRouteName() != 'printrequests.finished') {
             $requests->where('users.id', $user->id);
         }
 
-        if (Route::currentRouteName()=='printrequests.finished') {
+        if (Route::currentRouteName() == 'printrequests.finished') {
             $requests->where('status', 1);
         }
         $requests->orderBy('description', 'asc');
 
-        $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
+        $requests = $this->searchByKeyword($requests, $keyword)->paginate(10);
 
-        $order='desc';
-        $criteria='description';
+        $order = 'desc';
+        $criteria = 'description';
 
         return view('printrequests.list', compact('requests', 'order', 'criteria', 'user'));
     }
@@ -59,7 +60,7 @@ class PrintRequestsController extends Controller
 
     public function edit($id)
     {
-        $request= Request::find($id);
+        $request = Request::find($id);
         $title = 'Edit request';
         return view('printrequests.edit', compact('title', 'request'));
     }
@@ -67,11 +68,11 @@ class PrintRequestsController extends Controller
 
     public function store(CreatePrintRequest $request)
     {
-        $name= $_FILES["file"]["name"];
+        $name = $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
         $newRequest = new Request;
         $newRequest->owner_id = Auth::user()->id;
-        $uniqueName=uniqid().".".pathinfo($name, PATHINFO_EXTENSION);
+        $uniqueName = uniqid() . "." . pathinfo($name, PATHINFO_EXTENSION);
         $newRequest->file = $uniqueName;
         $newRequest->fill($request->all());
 
@@ -83,7 +84,7 @@ class PrintRequestsController extends Controller
             if (is_dir(storage_path("app/print-jobs/$newRequest->owner_id/")) === false) {
                 mkdir(storage_path("app/print-jobs/$newRequest->owner_id/"));
             }
-            move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/")."$uniqueName");
+            move_uploaded_file($tmp_name, storage_path("app/print-jobs/$newRequest->owner_id/") . "$uniqueName");
         }
         return redirect()->route('create')->with($message);
     }
@@ -91,21 +92,21 @@ class PrintRequestsController extends Controller
     /*{1}/edit*/
     public function update(UpdatePrintRequest $request)
     {
-        $printRequest=Request::find($_POST['request_id']);
-        $name= $_FILES["file"]["name"];
+        $printRequest = Request::find($_POST['request_id']);
+        $name = $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
-        if ($name!="") {
-            $oldFilename=$printRequest->file;
-            $uniqueName=uniqid().".".pathinfo($name, PATHINFO_EXTENSION);
+        if ($name != "") {
+            $oldFilename = $printRequest->file;
+            $uniqueName = uniqid() . "." . pathinfo($name, PATHINFO_EXTENSION);
             $printRequest->file = $uniqueName;
         }
         if (!$printRequest->fill($request->all())->save()) {
             $message = ['message_error' => 'Failed to edit request'];
         } else {
             $message = ['message_success' => 'Request successfully edited'];
-            if ($name!="") {
-                unlink(storage_path("app/print-jobs/$printRequest->owner_id/")."$oldFilename");
-                move_uploaded_file($tmp_name, storage_path("app/print-jobs/$printRequest->owner_id/")."$uniqueName");
+            if ($name != "") {
+                unlink(storage_path("app/print-jobs/$printRequest->owner_id/") . "$oldFilename");
+                move_uploaded_file($tmp_name, storage_path("app/print-jobs/$printRequest->owner_id/") . "$uniqueName");
             }
         }
         return redirect()->route('list')->with($message);
@@ -140,22 +141,23 @@ class PrintRequestsController extends Controller
 
     public function show($id)
     {
-        $requestData=Request::find($id);
+        $requestData = Request::find($id);
         $userData = User::find(Request::find($id)->owner_id);
-        $comments= Comment::where('request_id', $id)->orderBy('created_at')->paginate(10);
+        $comments = Comment::where('request_id', $id)->orderBy('created_at')->paginate(10);
         $userDepartment = DB::table('departments')->find(User::find(Request::find($id)->owner_id)->department_id);
-        $printers=Printer::distinct()->pluck('name');
+        $printers = Printer::distinct()->pluck('name');
         $user = Auth::user();
 
-        if ($user->isAdmin()||$user->id == $requestData->owner_id) {
-            return view('printrequests.details', compact('requestData', 'userData', 'userDepartment', 'comments', 'printers', 'user'));
+        if ($user->isAdmin() || $user->id == $requestData->owner_id) {
+            return view('printrequests.details',
+                compact('requestData', 'userData', 'userDepartment', 'comments', 'printers', 'user'));
         }
     }
 
 
     public function download($id)
     {
-        $ownerID=Request::find($id)->owner_id;
+        $ownerID = Request::find($id)->owner_id;
         $requestFile = (string)Request::find($id)->file;
         return response()->download(storage_path("app/print-jobs/$ownerID/$requestFile"));
     }
@@ -163,39 +165,39 @@ class PrintRequestsController extends Controller
 
     public function setComplete($id)
     {
-        $admin=Auth::user();
-        Request::where('id', $id)->update(['status'=>1]);
-        Request::where('id', $id)->update(['printer_id'=>Input::get('name')+1]);
-        Request::where('id', $id)->update(['updated_at'=>Carbon::now()]);
-        Request::where('id', $id)->update(['closed_date'=>Carbon::now()]);
-        Request::where('id', $id)->update(['closed_user_id'=>$admin->id]);
-        $request=Request::find($id);
-        $user=$request->users;
+        $admin = Auth::user();
+        Request::where('id', $id)->update(['status' => 1]);
+        Request::where('id', $id)->update(['printer_id' => Input::get('name') + 1]);
+        Request::where('id', $id)->update(['updated_at' => Carbon::now()]);
+        Request::where('id', $id)->update(['closed_date' => Carbon::now()]);
+        Request::where('id', $id)->update(['closed_user_id' => $admin->id]);
+        $request = Request::find($id);
+        $user = $request->users;
         Mail::to($user->email)->send(new CompletionEmail($request));
         return back();
     }
 
     public function setRating($id)
     {
-        Request::where('id', $id)->update(['satisfaction_grade'=>request('satisfaction')]);
+        Request::where('id', $id)->update(['satisfaction_grade' => request('satisfaction')]);
         return back();
     }
 
     public function refuseRequest($id)
     {
-        $admin=Auth::user();
-        Request::where('id', $id)->update(['status'=>2]);
-        Request::where('id', $id)->update(['refused_reason'=>request('refuseReason')]);
-        Request::where('id', $id)->update(['updated_at'=>Carbon::now()]);
-        Request::where('id', $id)->update(['closed_date'=>Carbon::now()]);
-        Request::where('id', $id)->update(['closed_user_id'=>$admin->id]);
+        $admin = Auth::user();
+        Request::where('id', $id)->update(['status' => 2]);
+        Request::where('id', $id)->update(['refused_reason' => request('refuseReason')]);
+        Request::where('id', $id)->update(['updated_at' => Carbon::now()]);
+        Request::where('id', $id)->update(['closed_date' => Carbon::now()]);
+        Request::where('id', $id)->update(['closed_user_id' => $admin->id]);
         return back();
     }
 
     public function searchByKeyword($query, $keyword)
     {
-        $status=Request::strToTypeState($keyword);
-        if (is_null($keyword)==false) {
+        $status = Request::strToTypeState($keyword);
+        if (is_null($keyword) == false) {
             $query->where(function ($query) use ($keyword, $status) {
                 $query->where("requests.description", "like", "%$keyword%")
                     ->orWhere("requests.due_date", "like", "%$keyword%")
@@ -212,8 +214,9 @@ class PrintRequestsController extends Controller
 
         $keyword = Input::get('search', '');
         $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')
-                        ->join('departments', 'users.department_id', '=', 'departments.id')
-                        ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname', 'requests.*');
+            ->join('departments', 'users.department_id', '=', 'departments.id')
+            ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname',
+                'requests.*');
         if ($criteria == "employee") {
             $requests->orderBy('users.name', "$order");
         }
@@ -232,28 +235,29 @@ class PrintRequestsController extends Controller
         if ($criteria == "department") {
             $requests->orderBy('users.department_id', "$order");
         }
-        $user=Auth::user();
+        $user = Auth::user();
         if ($user->isPublisher()) {
             $requests->where('users.id', $user->id);
         }
-        if (Route::currentRouteName()=='printrequests.finished') {
+        if (Route::currentRouteName() == 'printrequests.finished') {
             $requests->where('status', 1);
         }
-        $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
-        if ($order=='asc') {
-            $order='desc';
+        $requests = $this->searchByKeyword($requests, $keyword)->paginate(10);
+        if ($order == 'asc') {
+            $order = 'desc';
         } else {
-            $order='asc';
+            $order = 'asc';
         }
         return view('printrequests.list', compact('requests', 'order', 'criteria', 'user'));
     }
 
     public function showRequestImage($ownerID, $filename)
     {
-        $image=Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $filename))->resize(64, 64);
+        $image = Image::make(storage_path('app/print-jobs/' . $ownerID . '/' . $filename))->resize(64, 64);
         $extension = File::extension($filename);
-        if ($extension=='png'||$extension=='gif'||$extension=='jpg'||$extension=='jpeg'||$extension=='svg') {
-            return Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $filename))->resize(64, 64)->response();
+        if ($extension == 'png' || $extension == 'gif' || $extension == 'jpg' || $extension == 'jpeg' || $extension == 'svg') {
+            return Image::make(storage_path('app/print-jobs/' . $ownerID . '/' . $filename))->resize(64,
+                64)->response();
         }
     }
 }

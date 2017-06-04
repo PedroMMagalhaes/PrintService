@@ -8,27 +8,27 @@
         <div class="container">
 
 
-                <div class="row">
-                    <div clas="col-sm-6">
-                        <form method="get" action="{{ route('list') }}">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" name="search" placeholder="Search..."
-                                       value="{{old('query')}}" required autofocous>
-                                <span class="input-group-btn">
+            <div class="row">
+                <div clas="col-sm-6">
+                    <form method="get" action="{{ route('list') }}">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" name="search" placeholder="Search..."
+                                   value="{{old('query')}}" required autofocous>
+                            <span class="input-group-btn">
                             <button class="btn btn-default-sm" type="submit">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <a class="btn btn-success" href="{{ route('create')}}">Create new</a>
                         </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row">
+                        <a class="btn btn-success" href="{{ route('create')}}">Create new</a>
                     </div>
                 </div>
+            </div>
         </div>
 
 
@@ -36,59 +36,59 @@
             <thead>
             <tr>
                 <th><a href={{ route('printrequests.order',['criteria' => 'description','order' => $order]) }}>Description
-                    @if($criteria=='description')
-                    @if($order=='asc')
-                    ▲
-                    @else
-                    ▼
+                        @if($criteria=='description')
+                            @if($order=='asc')
+                                ▲
+                            @else
+                                ▼
                     @endif
                     @endif
                 </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order]) }}>Due Date
-                    @if($criteria=='date')
-                    @if($order=='asc')
-                    ▲
-                    @else
-                    ▼
+                        @if($criteria=='date')
+                            @if($order=='asc')
+                                ▲
+                            @else
+                                ▼
                     @endif
                     @endif
                 </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'employee','order' => $order]) }}>Employee
-                    @if($criteria=='employee')
-                    @if($order=='asc')
-                    ▲
-                    @else
-                    ▼
+                        @if($criteria=='employee')
+                            @if($order=='asc')
+                                ▲
+                            @else
+                                ▼
                     @endif
                     @endif
                 </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'department','order' => $order]) }}>Department
-                    @if($criteria=='department')
-                    @if($order=='asc')
-                    ▲
-                    @else
-                    ▼
+                        @if($criteria=='department')
+                            @if($order=='asc')
+                                ▲
+                            @else
+                                ▼
                     @endif
                     @endif
-                    </th>
+                </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'status','order' => $order]) }}>Status
-                    @if($criteria=='status')
-                    @if($order=='asc')
-                    ▲
-                    @else
-                    ▼
+                        @if($criteria=='status')
+                            @if($order=='asc')
+                                ▲
+                            @else
+                                ▼
                     @endif
                     @endif
-                    </th>
+                </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'paper','order' => $order]) }}>Paper Type
-                    @if($criteria=='paper')
-                    @if($order=='asc')
-                    ▲
-                    @else
-                    ▼
+                        @if($criteria=='paper')
+                            @if($order=='asc')
+                                ▲
+                            @else
+                                ▼
                     @endif
                     @endif
-                    </th>
+                </th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -105,9 +105,10 @@
                         <a class="btn btn-success" href={{ route('printrequests.show', [$request->id]) }}>Details</a>
                         @if(!$request->status==1)
 
-                                <a class="btn btn-primary" href="{{ route('printrequests.edit', [$request->id]) }}">Edit</a>
+                            <a class="btn btn-primary" href="{{ route('printrequests.edit', [$request->id]) }}">Edit</a>
 
-                            <form action="{{route('printrequests.destroy', [$request->id])}}" method="post" class="inline">
+                            <form action="{{route('printrequests.destroy', [$request->id])}}" method="post"
+                                  class="inline">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
                                     <input type="hidden" name="_method" value="DELETE">

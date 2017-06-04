@@ -1,10 +1,9 @@
-
 @extends ('layout.master')
 
 @section('content')
 
 
-    <div class = "col-md-8">
+    <div class="col-md-8">
 
         <h2> Normal Users List</h2>
         <br/>
@@ -36,7 +35,8 @@
                         <td>{{ $normalUser->print_evals }}</td>
                         <td>{{ $normalUser->print_counts }}</td>
                         <td>
-                            <a class="btn btn-xs btn-success" href="{{route('users.getAdmin', $normalUser->id)}}">Make Admin</a>
+                            <a class="btn btn-xs btn-success" href="{{route('users.getAdmin', $normalUser->id)}}">Make
+                                Admin</a>
                         </td>
                     </tr>
                 @endforeach
@@ -81,7 +81,8 @@
                         <td>{{ $adminUser->print_evals }}</td>
                         <td>{{ $adminUser->print_counts }}</td>
                         <td>
-                            <a class="btn btn-xs btn-danger" href="{{route('users.removeAdmin', $adminUser->id)}}">Remove Privileges</a>
+                            <a class="btn btn-xs btn-danger" href="{{route('users.removeAdmin', $adminUser->id)}}">Remove
+                                Privileges</a>
                         </td>
                     </tr>
                 @endforeach
@@ -93,7 +94,6 @@
         <div class="text-center">
             {{ $adminUsers->links() }}
         </div>
-
 
 
     </div>

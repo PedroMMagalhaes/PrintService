@@ -15,33 +15,36 @@
 
         <h1> Edit Request </h1>
 
-        <form method="POST" action="{{route('printrequests.update',$request->id)}}" enctype="multipart/form-data" class="form-group">
-            <input type="hidden" name="request_id" value="<?php echo $request->id;?>" />
-
+        <form method="POST" action="{{route('printrequests.update',$request->id)}}" enctype="multipart/form-data"
+              class="form-group">
+            <input type="hidden" name="request_id" value="<?php echo $request->id;?>"/>
 
 
             {{ csrf_field() }}
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name ="description" placeholder="Description" value="{{ old('description', $request['description'])}}"/>
+                <input type="text" class="form-control" id="description" name="description" placeholder="Description"
+                       value="{{ old('description', $request['description'])}}"/>
             </div>
 
             <div class="form-group">
                 <label for="due_date">Due date</label>
-                {{ Form::date('due_date', date('Y-m-d',strtotime(old('due_date', $request['due_date']))), ['class' => 'form-control']) }}
-                <!--<input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{date('d/m/Y',strtotime(old('due_date', $request['due_date'])))}}"/>!-->
+            {{ Form::date('due_date', date('Y-m-d',strtotime(old('due_date', $request['due_date']))), ['class' => 'form-control']) }}
+            <!--<input type="date" class="form-control" id="due_date" name ="due_date" placeholder="Due date" value="{{date('d/m/Y',strtotime(old('due_date', $request['due_date'])))}}"/>!-->
             </div>
-            <!--{{date('d/m/Y',strtotime(old('due_date', $request['due_date'])))}}!-->
+        <!--{{date('d/m/Y',strtotime(old('due_date', $request['due_date'])))}}!-->
 
             <div class="form-group">
                 <label for="quantity">Quantity</label>
-                <input type="number" min="1" class="form-control" id="quantity" name ="quantity" placeholder="Quantity" value="{{ old('quantity', $request['quantity'])}}"/>
+                <input type="number" min="1" class="form-control" id="quantity" name="quantity" placeholder="Quantity"
+                       value="{{ old('quantity', $request['quantity'])}}"/>
             </div>
             <div class="form-group">
                 <label for="print_type">Print type</label>
                 <select name="print_type" id="print_type" class="form-control">
-                    <option value="0" @if(old('print_type',$request->print_type)==0) selected @endif>Black/White</option>
+                    <option value="0" @if(old('print_type',$request->print_type)==0) selected @endif>Black/White
+                    </option>
                     <option value="1" @if(old('print_type',$request->print_type)==1) selected @endif>Color</option>
                 </select>
             </div>
@@ -56,7 +59,8 @@
 
             <div class="form-group">
                 <label for="stapled">Paper size</label>
-                <select name="paper_size" id="paper_size" class="form-control" value="{{ old('paper_size', $request->paper_size)}}">
+                <select name="paper_size" id="paper_size" class="form-control"
+                        value="{{ old('paper_size', $request->paper_size)}}">
                     <option value="4" @if(old('paper_size', $request->paper_size)==4) selected @endif>A4</option>
                     <option value="3" @if(old('paper_size', $request->paper_size)==3) selected @endif>A3</option>
                 </select>
@@ -64,10 +68,12 @@
 
             <div class="form-group">
                 <label for="stapled">Paper type</label>
-                <select name="paper_type" id="paper_type" class="form-control" value="{{ old('paper_type', $request->paper_type)}}">
+                <select name="paper_type" id="paper_type" class="form-control"
+                        value="{{ old('paper_type', $request->paper_type)}}">
                     <option value="0" @if(old('paper_type', $request->paper_type)==0) selected @endif>Draft</option>
                     <option value="1" @if(old('paper_type', $request->paper_type)==1) selected @endif>Normal</option>
-                    <option value="2" @if(old('paper_type', $request->paper_type)==2) selected @endif>Photographic</option>
+                    <option value="2" @if(old('paper_type', $request->paper_type)==2) selected @endif>Photographic
+                    </option>
                 </select>
             </div>
 

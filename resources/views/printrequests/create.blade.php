@@ -1,4 +1,3 @@
-
 @extends ('layout.master')
 
 
@@ -22,23 +21,23 @@
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name ="description">
+                <input type="text" class="form-control" id="description" name="description">
             </div>
 
             <div class="form-group">
                 <label for="due_date">Due date</label>
-                <input type="date" class="form-control" id="due_date" name ="due_date">
+                <input type="date" class="form-control" id="due_date" name="due_date">
             </div>
 
             <div class="form-group">
                 <label for="quantity">Quantity</label>
-                <input type="number" min="1" class="form-control" id="quantity" name ="quantity">
+                <input type="number" min="1" class="form-control" id="quantity" name="quantity">
             </div>
 
             <div class="form-group">
                 <label for="colored">Print type</label>
                 <select name="colored" id="colored" class="form-control">
-                    <option disabled selected> -- select an option -- </option>
+                    <option disabled selected> -- select an option --</option>
                     <option value="0">Black/White</option>
                     <option value="1">Color</option>
                 </select>
@@ -47,7 +46,7 @@
             <div class="form-group">
                 <label for="stapled">Staple</label>
                 <select name="stapled" id="stapled" class="form-control">
-                    <option disabled selected> -- select an option -- </option>
+                    <option disabled selected> -- select an option --</option>
                     <option value="1">With</option>
                     <option value="0">Without</option>
                 </select>
@@ -56,7 +55,7 @@
             <div class="form-group">
                 <label for="stapled">Paper size</label>
                 <select name="paper_size" id="paper_size" class="form-control">
-                    <option disabled selected> -- select an option -- </option>
+                    <option disabled selected> -- select an option --</option>
                     <option value="4">A4</option>
                     <option value="3">A3</option>
                 </select>
@@ -65,7 +64,7 @@
             <div class="form-group">
                 <label for="stapled">Paper type</label>
                 <select name="paper_type" id="paper_type" class="form-control">
-                    <option disabled selected> -- select an option -- </option>
+                    <option disabled selected> -- select an option --</option>
                     <option value="0">Draft</option>
                     <option value="1">Normal</option>
                     <option value="2">Photographic</option>

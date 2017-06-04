@@ -1,22 +1,21 @@
-
 @if (count($errors) > 0)
 
-  <div class="form-group">
+    <div class="form-group">
 
-  <div class="alert alert-danger">
+        <div class="alert alert-danger">
 
-      <ul>
+            <ul>
 
-          @foreach ($errors->all() as $error)
+                @foreach ($errors->all() as $error)
 
-              <li>{{ $error }}</li>
+                    <li>{{ $error }}</li>
 
-          @endforeach
+                @endforeach
 
-      </ul>
+            </ul>
 
-  </div>
+        </div>
 
-</div>
+    </div>
 
 @endif

@@ -16,7 +16,9 @@
                 </tr>
                 <tr>
                     <td>Percentage Of Prints By Type</td>
-                    <td>Black/White - {{$data2['printwithoutcolorpercent']}}%     |     Color - {{$data2['printwithcolorpercent']}}%</td>
+                    <td>Black/White - {{$data2['printwithoutcolorpercent']}}% | Color
+                        - {{$data2['printwithcolorpercent']}}%
+                    </td>
                 </tr>
                 <tr>
                     <td>Today's Number of Prints</td>

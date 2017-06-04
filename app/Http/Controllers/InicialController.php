@@ -19,30 +19,28 @@ class InicialController extends Controller
     public function index()
     {
 
-      
-
         //total number of prints
-        $closedRequests = Request::where('status',1)->get();
+        $closedRequests = Request::where('status', 1)->get();
         $totalNumberOfPrints = 0;
-        foreach ($closedRequests as $closed){
+        foreach ($closedRequests as $closed) {
             $totalNumberOfPrints += $closed->quantity;
         }
 
         //percentage of colored prints
-        $printwithcolor = Request::where('status',1)->where('colored',1)->get();
-        $totalNumberOfPrintsColor=0;
-        foreach ($printwithcolor as $color){
+        $printwithcolor = Request::where('status', 1)->where('colored', 1)->get();
+        $totalNumberOfPrintsColor = 0;
+        foreach ($printwithcolor as $color) {
             $totalNumberOfPrintsColor += $color->quantity;
         }
-        $printwithcolorpercent = round(($totalNumberOfPrintsColor/$totalNumberOfPrints)* 100,2);
+        $printwithcolorpercent = round(($totalNumberOfPrintsColor / $totalNumberOfPrints) * 100, 2);
 
         //percentage of black/white prints
-        $printwithoutcolor = Request::where('status',1)->where('colored',0)->get();
-        $totalNumberOfPrintsWithoutColor=0;
-        foreach ($printwithoutcolor as $nocolor){
+        $printwithoutcolor = Request::where('status', 1)->where('colored', 0)->get();
+        $totalNumberOfPrintsWithoutColor = 0;
+        foreach ($printwithoutcolor as $nocolor) {
             $totalNumberOfPrintsWithoutColor += $nocolor->quantity;
         }
-        $printwithoutcolorpercent = round(($totalNumberOfPrintsWithoutColor/$totalNumberOfPrints)* 100,2);
+        $printwithoutcolorpercent = round(($totalNumberOfPrintsWithoutColor / $totalNumberOfPrints) * 100, 2);
 
         $todayDate = Carbon::now();
         $today = $todayDate->day;
@@ -50,18 +48,20 @@ class InicialController extends Controller
         $firstDayMonth = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
 
         //Daily average of prints for the current month
-        $monthPrints = Request::where('status',1)->where('updated_at', '<=', $todayDateFormatted )->where('updated_at','>=',$firstDayMonth)->get();
+        $monthPrints = Request::where('status', 1)->where('updated_at', '<=', $todayDateFormatted)->where('updated_at',
+            '>=', $firstDayMonth)->get();
         $prints = 0;
-        foreach ($monthPrints as $monthPrint){
+        foreach ($monthPrints as $monthPrint) {
             $prints += $monthPrint->quantity;
         }
-        $averageRequestsDay = round(($prints / $today),2);
+        $averageRequestsDay = round(($prints / $today), 2);
 
         $startDayDate = $todayDate->startOfDay();
 
 
         //todays prints
-        $todaysPrintstotal =  Request::where('status',1)->where('updated_at', '<=', $todayDateFormatted )->where('updated_at','>=',$startDayDate)->get();
+        $todaysPrintstotal = Request::where('status', 1)->where('updated_at', '<=',
+            $todayDateFormatted)->where('updated_at', '>=', $startDayDate)->get();
         $todaysPrints = 0;
         foreach ($todaysPrintstotal as $value) {
             $todaysPrints += $value->quantity;
@@ -72,16 +72,15 @@ class InicialController extends Controller
         $count = 0;
         $i = 0;
         $departmentsArray = Department::all();
-        foreach($departmentsArray as $value)
-        {
+        foreach ($departmentsArray as $value) {
             $departments = Department::find($value->id)->users->pluck('id');
-            foreach( $departments as $depart) {
-                $requestsCount = Request::where('status',1)->where('owner_id',$depart)->get();
-                foreach ($requestsCount as $request){
-                    $count+= $request->quantity;
+            foreach ($departments as $depart) {
+                $requestsCount = Request::where('status', 1)->where('owner_id', $depart)->get();
+                foreach ($requestsCount as $request) {
+                    $count += $request->quantity;
                 }
                 $numUsers = count($departments);
-                if(++$i === $numUsers) {
+                if (++$i === $numUsers) {
                     $countRequests->push(['number_of_prints' => $count, 'department_name' => $value->name]);
                     $i = 0;
                     $count = 0;
@@ -89,7 +88,7 @@ class InicialController extends Controller
             }
         }
 
-        $totalNumberOfActiveUsers = User::where('blocked',0)->count();
+        $totalNumberOfActiveUsers = User::where('blocked', 0)->count();
 
         $data = [
             'totalNumberOfPrints' => $totalNumberOfPrints,
@@ -129,58 +128,61 @@ class InicialController extends Controller
         $today = $todayDate->day;
         $todayDateFormatted = $todayDate->format('Y-m-d h:i:s');
         $firstDayMonth = Carbon::now()->startOfMonth()->format('Y-m-d h:i:s');
-        $startDayDate = $todayDate->setTime(0,0,0);
+        $startDayDate = $todayDate->setTime(0, 0, 0);
         $monthPrints = 0;
         $todaysPrints = 0;
 
-        $closedRequests = Request::where('status',1)->get();
+        $closedRequests = Request::where('status', 1)->get();
         $totalNumberOfPrints = 0;
-        foreach ($closedRequests as $closed){
+        foreach ($closedRequests as $closed) {
             $totalNumberOfPrints += $closed->quantity;
         }
 
 
-        foreach($users as $user_id){
+        foreach ($users as $user_id) {
 
             //total prints
-            $totalPrintsArray = Request::where('status',1)->where('owner_id',$user_id)->get();
+            $totalPrintsArray = Request::where('status', 1)->where('owner_id', $user_id)->get();
             foreach ($totalPrintsArray as $item) {
                 $totalPrints += $item->quantity;
             }
 
             //P.b
-            $totalNumberOfPrintsBlackArray = Request::where('status',1)->where('colored',0)->where('owner_id',$user_id)->get();
+            $totalNumberOfPrintsBlackArray = Request::where('status', 1)->where('colored', 0)->where('owner_id',
+                $user_id)->get();
             foreach ($totalNumberOfPrintsBlackArray as $item1) {
                 $totalNumberOfPrintsBlack += $item1->quantity;
             }
 
             //Cores
-            $totalNumberOfPrintsColorArray = Request::where('status',1)->where('colored',1)->where('owner_id',$user_id)->get();
-            foreach ($totalNumberOfPrintsColorArray as $item2){
+            $totalNumberOfPrintsColorArray = Request::where('status', 1)->where('colored', 1)->where('owner_id',
+                $user_id)->get();
+            foreach ($totalNumberOfPrintsColorArray as $item2) {
                 $totalNumberOfPrintsColor += $item2->quantity;
             }
 
-            $monthPrintsArray = Request::where('status',1)->where('updated_at', '<=', $todayDateFormatted )->where('updated_at','>=',$firstDayMonth)->where('owner_id',$user_id)->get();
-            foreach ($monthPrintsArray as $item4){
+            $monthPrintsArray = Request::where('status', 1)->where('updated_at', '<=',
+                $todayDateFormatted)->where('updated_at', '>=', $firstDayMonth)->where('owner_id', $user_id)->get();
+            foreach ($monthPrintsArray as $item4) {
                 $monthPrints += $item4->quantity;
             }
 
-            $todaysPrintsArray = Request::where('status',1)->where('updated_at', '<=', $todayDateFormatted )->where('updated_at','>=',$startDayDate)->where('owner_id',$user_id)->get();
-            foreach ($todaysPrintsArray as $item3){
+            $todaysPrintsArray = Request::where('status', 1)->where('updated_at', '<=',
+                $todayDateFormatted)->where('updated_at', '>=', $startDayDate)->where('owner_id', $user_id)->get();
+            foreach ($todaysPrintsArray as $item3) {
                 $todaysPrints += $item3->quantity;
             }
         }
 
-        if($totalPrints == 0) {
+        if ($totalPrints == 0) {
             $printwithcolorpercent = "No prints found";
             $printwithoutcolorpercent = "No prints found";
-        }
-        else{
-            $printwithcolorpercent = round(($totalNumberOfPrintsColor/$totalPrints)* 100,2);
-            $printwithoutcolorpercent = round(($totalNumberOfPrintsBlack/$totalPrints)* 100,2);
+        } else {
+            $printwithcolorpercent = round(($totalNumberOfPrintsColor / $totalPrints) * 100, 2);
+            $printwithoutcolorpercent = round(($totalNumberOfPrintsBlack / $totalPrints) * 100, 2);
         }
 
-        $averageRequestsDay = round(($monthPrints / $today),2);
+        $averageRequestsDay = round(($monthPrints / $today), 2);
 
         $data2 = [
             'department' => $department,
@@ -191,8 +193,7 @@ class InicialController extends Controller
             'averageRequestsDay' => $averageRequestsDay
         ];
 
-        return view('layout.statistics',compact('data2'));
+        return view('layout.statistics', compact('data2'));
     }
-
 
 }

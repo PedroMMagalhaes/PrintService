@@ -1,6 +1,5 @@
-
 @include('layout.nav')
 
-    @yield('content')
+@yield('content')
 
 @include ('layout.footer')

@@ -1,12 +1,9 @@
-
-
-
 @extends ('layout.master')
 
 @section('content')
 
 
-    <div class = "col-md-8">
+    <div class="col-md-8">
 
 
         <h2> Blocked Users List</h2>
@@ -84,7 +81,8 @@
                         <td>{{ $unblockedUser->print_evals }}</td>
                         <td>{{ $unblockedUser->print_counts }}</td>
                         <td>
-                            <a class="btn btn-xs btn-danger" href="{{route('users.block', $unblockedUser->id)}}">Block</a>
+                            <a class="btn btn-xs btn-danger"
+                               href="{{route('users.block', $unblockedUser->id)}}">Block</a>
                         </td>
                     </tr>
                 @endforeach
@@ -96,8 +94,6 @@
         <div class="text-center">
             {{ $unblockedUsers->links() }}
         </div>
-
-
 
 
     </div>

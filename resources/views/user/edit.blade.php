@@ -23,7 +23,7 @@
             <label for="phone">Phone Number</label>
             <input
                     type="number" min="9" class="form-control"
-                    name ="phone" id="phone"
+                    name="phone" id="phone"
                     placeholder="Phone Number" value="{{ old('phone', $user->phone)}}"/>
         </div>
 
@@ -31,15 +31,15 @@
             <label for="profile_url">Profile url</label>
             <input
                     type="text" class="form-control"
-                   name="profile_url" id="profile_url"
-                   placeholder="Profile url" value="{{ old('profile_url', $user->profile_url)}}"/>
+                    name="profile_url" id="profile_url"
+                    placeholder="Profile url" value="{{ old('profile_url', $user->profile_url)}}"/>
         </div>
         <div class="form-group">
             <label for="presentation">Presentation</label>
             <input
                     type="text" class="form-control"
-                   name="presentation" id="presentation"
-                   placeholder="Presentation" value="{{ old('presentation', $user->presentation)}}"/>
+                    name="presentation" id="presentation"
+                    placeholder="Presentation" value="{{ old('presentation', $user->presentation)}}"/>
         </div>
 
 
