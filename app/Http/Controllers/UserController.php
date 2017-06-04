@@ -28,7 +28,7 @@ class UserController extends Controller
   {
 
 
-    $this->middleware('auth', ['except' => ['login_get', 'login_post', 'create','store','ConfirmationEmail']]);
+    $this->middleware('auth', ['except' => ['index','login_get', 'login_post', 'create','store','ConfirmationEmail','searchByKeyword','showProfile']]);
 
   }
 
@@ -110,7 +110,6 @@ class UserController extends Controller
 
   public function showProfile($id)
   {
-      //tem de mostrar o user que está na mesma linha da tabela e quando aparecer, mostra so informaçoes sem dar para editar
       $user= User::find($id);
 
       return view('user.profile', compact('user'));
@@ -134,7 +133,6 @@ class UserController extends Controller
         $user->save();
 
 	     }else{
-
 
     }
 

@@ -31,7 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id', 'profile_photo', 'phone'
+        'name', 'email', 'password', 'admin', 'blocked', 'print_evals', 'print_counts', 'department_id', 'profile_photo', 'phone', 'profile_url', 'presentation'
     ];
 
 
@@ -66,9 +66,9 @@ class User extends Authenticatable
     {
         switch ($this->blocked) {
             case 1:
-                return 'Bloqueado';
+                return 'Bloqued';
             case 0:
-                return 'Sem bloqueio';
+                return 'Unblocked';
         }
 
         return 'Unknown';

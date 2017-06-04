@@ -17,6 +17,8 @@
                 <thead>
                 <tr>
                     <th>Blocked Comments</th>
+                    <th>Created at</th>
+                    <th>Employee</th>
                 </tr>
                 </thead>
                 <tbody>

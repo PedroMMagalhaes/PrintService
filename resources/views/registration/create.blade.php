@@ -63,7 +63,7 @@
 
                 <div class="form-group">
 
-                  <label for="department_id">Department:</label>
+                  <label for="department_id">Department</label>
                   <!--<input type="number" class="form-control" id="department_id" name ="department_id" required> -->
 
                     <select name="department_id" class="form-control">
@@ -111,7 +111,7 @@
 
             <div class="form-group">
 
-              <label for="name">Profile Url:</label>
+              <label for="name">Profile Url</label>
               <input type="text" class="form-control" id="profile_url" name ="profile_url">
 
             </div>

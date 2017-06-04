@@ -79,9 +79,7 @@
                         <td>{{ $user->departToStr() }}</td>
                         <td>{{ $user->phone }}</td>
                         <td>
-
                                 <a class="btn btn-xs btn-primary" href="{{route('showProfile', $user)}}">Profile</a>
-
                         </td>
                     </tr>
                 @endforeach
