@@ -18,7 +18,6 @@ use Route;
 use Carbon\Carbon;
 use Image;
 
-
 class PrintRequestsController extends Controller
 {
     public function __construct()
@@ -35,12 +34,12 @@ class PrintRequestsController extends Controller
                         ->select('users.id as usersID', 'users.name', 'departments.id as depID', 'departments.name as dname', 'requests.*');
 
         $user=Auth::user();
-        if($user->isPublisher() && Route::currentRouteName()!='printrequests.finished'){
-            $requests->where('users.id',$user->id);
+        if ($user->isPublisher() && Route::currentRouteName()!='printrequests.finished') {
+            $requests->where('users.id', $user->id);
         }
 
-        if(Route::currentRouteName()=='printrequests.finished'){
-            $requests->where('status',1);
+        if (Route::currentRouteName()=='printrequests.finished') {
+            $requests->where('status', 1);
         }
         $requests->orderBy('description', 'ASC');
 
@@ -49,7 +48,7 @@ class PrintRequestsController extends Controller
         $order='asc';
         $criteria='description';
 
-        return view('printrequests.list', compact('requests', 'order', 'criteria','user'));
+        return view('printrequests.list', compact('requests', 'order', 'criteria', 'user'));
     }
 
 
@@ -61,8 +60,6 @@ class PrintRequestsController extends Controller
     public function edit($id)
     {
         $request= Request::find($id);
-
-        //$this->authorize('update', $request);
         $title = 'Edit request';
         return view('printrequests.edit', compact('title', 'request'));
     }
@@ -70,7 +67,6 @@ class PrintRequestsController extends Controller
 
     public function store(CreatePrintRequest $request)
     {
-
         $name= $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
         $newRequest = new Request;
@@ -98,7 +94,7 @@ class PrintRequestsController extends Controller
         $printRequest=Request::find($_POST['request_id']);
         $name= $_FILES["file"]["name"];
         $tmp_name = $_FILES["file"]["tmp_name"];
-        if($name!=""){
+        if ($name!="") {
             $oldFilename=$printRequest->file;
             $uniqueName=uniqid().".".pathinfo($name, PATHINFO_EXTENSION);
             $printRequest->file = $uniqueName;
@@ -107,7 +103,7 @@ class PrintRequestsController extends Controller
             $message = ['message_error' => 'Failed to edit request'];
         } else {
             $message = ['message_success' => 'Request successfully edited'];
-            if($name!=""){
+            if ($name!="") {
                 unlink(storage_path("app/print-jobs/$printRequest->owner_id/")."$oldFilename");
                 move_uploaded_file($tmp_name, storage_path("app/print-jobs/$printRequest->owner_id/")."$uniqueName");
             }
@@ -119,39 +115,18 @@ class PrintRequestsController extends Controller
     public function destroy($id)
     {
         $currentRequest = Request::findOrFail($id);
-        $comments = $currentRequest->comments->where('parent_id',null);
+        $comments = $currentRequest->comments->where('parent_id', null);
 
-        foreach($comments as $comment){
-            $commentsWithParent = $currentRequest->comments->where('parent_id',$comment['id']);
-            foreach($commentsWithParent as $commentsParent){
-                if($commentsWithParent->count() == 0){
+        foreach ($comments as $comment) {
+            $commentsWithParent = $currentRequest->comments->where('parent_id', $comment['id']);
+            foreach ($commentsWithParent as $commentsParent) {
+                if ($commentsWithParent->count() == 0) {
                     $comment->delete();
-                }
-                else{
+                } else {
                     $commentsParent->delete();
                 }
             }
         }
-
-
-        /*foreach($commentsOfRequest as $commentRequest){
-            $commentsOfRequestWithParent = Comment::where('request_id', $id)->where('parent_id',$commentRequest['id'])->get();
-            if($commentsOfRequestWithParent->count() == 0) {
-                $commentRequest->delete();
-            }
-            else{
-                foreach ($commentsOfRequestWithParent as $commentRequestWithParent){
-                    $commentRequestWithParent->delete();
-                    if($commentsOfRequestWithParent->count() == 0) {
-                        $commentRequest->delete();
-                    }
-                }
-            }
-
-        }*/
-
-
-        //$currentRequest->delete();
 
         if (!$currentRequest->delete()) {
             $message = ['message_error' => 'Failed to delete request'];
@@ -261,21 +236,21 @@ class PrintRequestsController extends Controller
             $requests->orderBy('users.department_id', "$order");
         }
         $user=Auth::user();
-        if($user->isPublisher()){
-            $requests->where('users.id',$user->id);
+        if ($user->isPublisher()) {
+            $requests->where('users.id', $user->id);
         }
-        if(Route::currentRouteName()=='printrequests.finished'){
-            $requests->where('status',1);
+        if (Route::currentRouteName()=='printrequests.finished') {
+            $requests->where('status', 1);
         }
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
-        return view('printrequests.list', compact('requests', 'order', 'criteria','user'));
+        return view('printrequests.list', compact('requests', 'order', 'criteria', 'user'));
     }
 
-    public function showRequestImage($ownerID,$filename)
+    public function showRequestImage($ownerID, $filename)
     {
         $image=Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $filename))->resize(64, 64);
         $extension = File::extension($filename);
-        if($extension=='png'||$extension=='gif'||$extension=='jpg'||$extension=='jpeg'||$extension=='svg'){
+        if ($extension=='png'||$extension=='gif'||$extension=='jpg'||$extension=='jpeg'||$extension=='svg') {
             return Image::make(storage_path('app/print-jobs/'.$ownerID.'/'. $filename))->resize(64, 64)->response();
         }
     }
