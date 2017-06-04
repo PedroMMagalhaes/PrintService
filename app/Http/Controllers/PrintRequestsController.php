@@ -169,7 +169,7 @@ class PrintRequestsController extends Controller
         $requestData=Request::find($id);
         //$requestData = DB::table('requests')->find($id);
         $userData = User::find(Request::find($id)->owner_id);
-        $comments= Comment::where('request_id', $id)->orderBy('created_at')->paginate(5);
+        $comments= Comment::where('request_id', $id)->orderBy('created_at')->paginate(10);
         $userDepartment = DB::table('departments')->find(User::find(Request::find($id)->owner_id)->department_id);
         $printers=DB::table('printers')->distinct()->pluck('name');
         $user = Auth::user();
