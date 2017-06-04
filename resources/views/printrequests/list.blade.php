@@ -41,54 +41,54 @@
                 <th><a href={{ route('printrequests.order',['criteria' => 'description','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Description</a>
                     @if($criteria=='description')
                         @if($order=='asc')
-                            ▲
-                        @else
                             ▼
+                        @else
+                            ▲
                         @endif
                     @endif
                 </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'date','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Due Date</a>
                     @if($criteria=='date')
                         @if($order=='asc')
-                            ▲
-                        @else
                             ▼
+                        @else
+                            ▲
                         @endif
                     @endif
                 </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'employee','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Employee</a>
                     @if($criteria=='employee')
                         @if($order=='asc')
-                            ▲
-                        @else
                             ▼
+                        @else
+                            ▲
                         @endif
                     @endif
                 </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'department','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Department</a>
                     @if($criteria=='department')
                         @if($order=='asc')
-                            ▲
-                        @else
                             ▼
+                        @else
+                            ▲
                         @endif
                     @endif
                     </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'status','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Status</a>
                     @if($criteria=='status')
                         @if($order=='asc')
-                            ▲
-                        @else
                             ▼
+                        @else
+                            ▲
                         @endif
                     @endif
                     </th>
                 <th><a href={{ route('printrequests.order',['criteria' => 'paper','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Paper Type</a>
                     @if($criteria=='paper')
                         @if($order=='asc')
-                            ▲
-                        @else
                             ▼
+                        @else
+                            ▲
                         @endif
                     @endif
                     </th>

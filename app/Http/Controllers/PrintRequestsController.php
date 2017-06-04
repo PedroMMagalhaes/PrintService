@@ -41,11 +41,11 @@ class PrintRequestsController extends Controller
         if (Route::currentRouteName()=='printrequests.finished') {
             $requests->where('status', 1);
         }
-        $requests->orderBy('description', 'ASC');
+        $requests->orderBy('description', 'asc');
 
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
 
-        $order='asc';
+        $order='desc';
         $criteria='description';
 
         return view('printrequests.list', compact('requests', 'order', 'criteria', 'user'));
@@ -152,6 +152,7 @@ class PrintRequestsController extends Controller
         }
     }
 
+
     public function download($id)
     {
         $ownerID=Request::find($id)->owner_id;
@@ -208,11 +209,7 @@ class PrintRequestsController extends Controller
 
     public function order($criteria, $order)
     {
-        if ($order=='asc') {
-            $order='desc';
-        } else {
-            $order='asc';
-        }
+
         $keyword = Input::get('search', '');
         $requests = Request::join('users', 'users.id', '=', 'requests.owner_id')
                         ->join('departments', 'users.department_id', '=', 'departments.id')
@@ -243,6 +240,11 @@ class PrintRequestsController extends Controller
             $requests->where('status', 1);
         }
         $requests=$this->searchByKeyword($requests, $keyword)->paginate(10);
+        if ($order=='asc') {
+            $order='desc';
+        } else {
+            $order='asc';
+        }
         return view('printrequests.list', compact('requests', 'order', 'criteria', 'user'));
     }
 

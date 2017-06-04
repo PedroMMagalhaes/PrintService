@@ -40,6 +40,7 @@ Route::post('/list/{requestID}/create/{commentID?}', 'CommentsController@createC
 Route::post('/list/{id}/refuseRequest', 'PrintRequestsController@refuseRequest')->name('printrequests.refuseRequest');
 
 Route::get('/list-{criteria}-{order}','PrintRequestsController@order')->name('printrequests.order');
+Route::get('/index-{criteria}-{order}','UserController@order')->name('contacts.order');
 
 Route::get('image/{ownerID}/{filename}', 'PrintRequestsController@showRequestImage')->name('printrequests.displayImage');
 

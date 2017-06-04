@@ -13,16 +13,62 @@
                 <a class="btn btn-primary" href="{{route('register')}}">Add user</a>
             </div>
         @endcan
+        <div class="container">
+
+                <div class="row">
+                    <div clas="col-sm-6">
+                        <form method="get" action="{{ route('contacts.order',['criteria' => $criteria,'order' => $order]) }}">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" name="search" placeholder="Search..."
+                                       value="{{old('query')}}" required autofocous>
+                                <span class="input-group-btn">
+                            <button class="btn btn-default-sm" type="submit" value="search">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
 
 
         @if(count($users))
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Department</th>
-                    <th>Phone Number</th>
+                    <th><a href={{ route('contacts.order',['criteria' => 'name','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Name
+                        @if($criteria=='name')
+                            @if($order=='asc')
+                                ▼
+                            @else
+                                ▲
+                            @endif
+                        @endif</th>
+                    <th><a href={{ route('contacts.order',['criteria' => 'email','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Email
+                        @if($criteria=='email')
+                        @if($order=='asc')
+                            ▼
+                        @else
+                            ▲
+                        @endif
+                    @endif</th>
+                    <th><a href={{ route('contacts.order',['criteria' => 'department_id','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Department
+                        @if($criteria=='department_id')
+                            @if($order=='asc')
+                                ▼
+                            @else
+                                ▲
+                            @endif
+                        @endif</th>
+                    <th><a href={{ route('contacts.order',['criteria' => 'phone','order' => $order,'search' => Request::input('search'),'page' => Request::input('page')]) }}>Phone Number
+                        @if($criteria=='phone')
+                        @if($order=='asc')
+                            ▼
+                        @else
+                            ▲
+                        @endif
+                    @endif</th>
                 </tr>
                 </thead>
                 <tbody>

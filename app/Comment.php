@@ -18,6 +18,11 @@ class Comment extends Model
 
   public function comments()
   {
+    return $this->hasMany('App\Comment','parent_id','id');
+  }
+
+  public function subcomments()
+  {
     return $this->belongsTo('App\Comment','parent_id');
   }
 }

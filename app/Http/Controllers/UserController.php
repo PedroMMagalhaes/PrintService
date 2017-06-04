@@ -36,10 +36,11 @@ class UserController extends Controller
   //list users
   public function index()
     {
-        $users = User::paginate(10);
+        $users = User::orderBy('name')->paginate(10);
         $title = 'List users';
-
-        return view('user.index', compact('users'));
+        $order='desc';
+        $criteria='name';
+        return view('user.index', compact('users','order','criteria'));
         //return view('user.edit', compact('title', 'user'));
     }
 
@@ -296,21 +297,21 @@ class UserController extends Controller
 
     public function order($criteria, $order)
     {
+        $keyword = Input::get('search', '');
+        $users = User::orderBy("$criteria", "$order");
+        $users=$this->searchByKeyword($users, $keyword)->paginate(10);
         if ($order=='asc') {
             $order='desc';
         } else {
             $order='asc';
         }
-        $keyword = Input::get('search', '');
-        $contacts = User::orderBy('department', "$order");
-        $contacts=$this->searchByKeyword($requests, $keyword)->paginate(10);
-        return view('printrequests.list', compact('contacts', 'order', 'criteria'));
+        return view('user.index', compact('users', 'order', 'criteria'));
     }
 
     public function searchByKeyword($query, $keyword)
     {
         if (is_null($keyword)==false) {
-            $query->where(function ($query) use ($keyword, $status) {
+            $query->where(function ($query) use ($keyword) {
                 $query->where("name", "like", "%$keyword%")
                     ->orWhere("department_id", "like", "%$keyword%");
             });
