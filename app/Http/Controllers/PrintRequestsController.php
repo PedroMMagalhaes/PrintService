@@ -97,7 +97,6 @@ class PrintRequestsController extends Controller
     {
         $printRequest=Request::find($_POST['request_id']);
         $name= $_FILES["file"]["name"];
-        //dd($name);
         $tmp_name = $_FILES["file"]["tmp_name"];
         if($name!=""){
             $oldFilename=$printRequest->file;
@@ -167,11 +166,10 @@ class PrintRequestsController extends Controller
     public function show($id)
     {
         $requestData=Request::find($id);
-        //$requestData = DB::table('requests')->find($id);
         $userData = User::find(Request::find($id)->owner_id);
         $comments= Comment::where('request_id', $id)->orderBy('created_at')->paginate(10);
         $userDepartment = DB::table('departments')->find(User::find(Request::find($id)->owner_id)->department_id);
-        $printers=DB::table('printers')->distinct()->pluck('name');
+        $printers=Printer::distinct()->pluck('name');
         $user = Auth::user();
 
         if ($user->isAdmin()||$user->id == $requestData->owner_id) {
@@ -190,11 +188,11 @@ class PrintRequestsController extends Controller
     public function setComplete($id)
     {
         $admin=Auth::user();
-        DB::table('requests')->where('id', $id)->update(['status'=>1]);
-        DB::table('requests')->where('id', $id)->update(['printer_id'=>Input::get('name')+1]);
-        DB::table('requests')->where('id', $id)->update(['updated_at'=>Carbon::now()]);
-        DB::table('requests')->where('id', $id)->update(['closed_date'=>Carbon::now()]);
-        DB::table('requests')->where('id', $id)->update(['closed_user_id'=>$admin->id]);
+        Request::where('id', $id)->update(['status'=>1]);
+        Request::where('id', $id)->update(['printer_id'=>Input::get('name')+1]);
+        Request::where('id', $id)->update(['updated_at'=>Carbon::now()]);
+        Request::where('id', $id)->update(['closed_date'=>Carbon::now()]);
+        Request::where('id', $id)->update(['closed_user_id'=>$admin->id]);
         $request=Request::find($id);
         $user=$request->users;
         Mail::to($user->email)->send(new CompletionEmail($request));
@@ -203,14 +201,18 @@ class PrintRequestsController extends Controller
 
     public function setRating($id)
     {
-        DB::table('requests')->where('id', $id)->update(['satisfaction_grade'=>request('satisfaction')]);
+        Request::where('id', $id)->update(['satisfaction_grade'=>request('satisfaction')]);
         return back();
     }
 
     public function refuseRequest($id)
     {
-        DB::table('requests')->where('id', $id)->update(['refused_reason'=>request('refuseReason')]);
-        DB::table('requests')->where('id', $id)->update(['status'=>2]);
+        $admin=Auth::user();
+        Request::where('id', $id)->update(['status'=>2]);
+        Request::where('id', $id)->update(['refused_reason'=>request('refuseReason')]);
+        Request::where('id', $id)->update(['updated_at'=>Carbon::now()]);
+        Request::where('id', $id)->update(['closed_date'=>Carbon::now()]);
+        Request::where('id', $id)->update(['closed_user_id'=>$admin->id]);
         return back();
     }
 
